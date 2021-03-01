@@ -18,13 +18,13 @@ public class User {
 
   private String acronym;
 
-  private enum Role {
+  public enum UserRole {
     PROJECT_MANAGER,
     ANALIST,
     DEVELOPER
       }
 
-  private Role role;
+  private UserRole role;
 
   private String email;
 
@@ -62,11 +62,11 @@ public class User {
       this.acronym = acronym;
   }
 
-  public Role getRole() {
+  public UserRole getUserRole() {
     return this.role;
   }
 
-  public void setRole(Role role) {
+  public void setUserRole(UserRole role) {
     this.role = role;
   }
 
