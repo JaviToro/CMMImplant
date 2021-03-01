@@ -1,6 +1,4 @@
-package com.palmatoro.cmmimplant.User;
-
-import com.palmatoro.cmmimplant.Project.Project;
+package com.palmatoro.cmmimplant.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +9,6 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;
 
     private String name;
@@ -32,7 +29,7 @@ public class User {
 
     private String password;
 
-    private Project project;
+    //private Project project;
 
     public Integer getId() {
         return this.id;
@@ -90,11 +87,11 @@ public class User {
         this.password = password;
     }
 
-    public Project getProject() {
+    /*public Project getProject() {
         return this.project;
     }
 
     public void setProject(Project project) {
         this.project = project;
-    }
+    }*/
 }

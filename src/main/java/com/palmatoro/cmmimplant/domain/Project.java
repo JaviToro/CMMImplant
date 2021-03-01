@@ -1,7 +1,4 @@
-package com.palmatoro.cmmimplant.Project;
-
-import com.palmatoro.cmmimplant.User.User;
-import org.aspectj.lang.annotation.Before;
+package com.palmatoro.cmmimplant.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +27,7 @@ public class Project {
 
     private Date endDate;
 
-    private List<User> users;
+    //private List<User> users;
 
     public Integer getId() {
         return this.id;
@@ -72,11 +69,11 @@ public class Project {
         this.endDate = endDate;
     }
 
-    public List<User> getUsers() {
+    /*public List<User> getUsers() {
         return this.users;
     }
 
     public void setUsers(List<User> users) {
         this.users = users;
-    }
+    }*/
 }

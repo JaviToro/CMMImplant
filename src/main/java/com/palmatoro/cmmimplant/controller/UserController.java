@@ -1,13 +1,10 @@
-package com.palmatoro.cmmimplant.User;
+package com.palmatoro.cmmimplant.controller;
 
-import com.palmatoro.cmmimplant.Project.Project;
+import com.palmatoro.cmmimplant.domain.Project;
+import com.palmatoro.cmmimplant.domain.User;
+import com.palmatoro.cmmimplant.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -20,20 +17,10 @@ public class UserController {
         return "Greetings from CMMImplant, using Spring Boot!";
     }
 
-    @PostMapping(path = "(/add")
+    @PostMapping(path = "/add")
     public @ResponseBody
-    String addNewUser(@RequestParam String name, @RequestParam String surname, @RequestParam String acronym, @RequestParam User.UserRole userRole, @RequestParam String email, @RequestParam String password, @RequestParam Project project) {
-
-        User u = new User();
-        u.setName(name);
-        u.setSurname(surname);
-        u.setAcronym(acronym);
-        u.setUserRole(userRole);
-        u.setEmail(email);
-        u.setPassword(password);
-        u.setProject(project);
-        userRepository.save(u);
-        return "Saved.";
+    User addNewUser(@RequestBody User user) {
+        return userRepository.save(user);
     }
 
     @GetMapping(path = "/all")
