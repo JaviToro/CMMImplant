@@ -1,6 +1,7 @@
 package com.palmatoro.cmmimplant.Project;
 
 import com.palmatoro.cmmimplant.User.User;
+import org.aspectj.lang.annotation.Before;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
