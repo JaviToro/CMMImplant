@@ -1,4 +1,4 @@
-package com.palmatoro.cmmimplant;
+package com.palmatoro.cmmimplant.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

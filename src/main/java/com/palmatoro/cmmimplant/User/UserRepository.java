@@ -1,8 +1,6 @@
-package com.palmatoro.cmmimplant;
+package com.palmatoro.cmmimplant.User;
 
 import org.springframework.data.repository.CrudRepository;
-
-import com.palmatoro.cmmimplant.User;
 
 public interface UserRepository extends CrudRepository<User, Integer>{
 
