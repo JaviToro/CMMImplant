@@ -20,12 +20,13 @@ public class UserController {
 	}
 
     @PostMapping(path = "(/add")
-    public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String surname, @RequestParam String acronym, @RequestParam String email, @RequestParam String password) {
+    public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String surname, @RequestParam String acronym, @RequestParam Role role, @RequestParam String email, @RequestParam String password) {
 
         User u = new User();
         u.setName(name);
         u.setSurname(surname);
         u.setAcronym(acronym);
+        u.setRole(role);
         u.setEmail(email);
         u.setPassword(password);
         userRepository.save(u);
@@ -36,5 +37,4 @@ public class UserController {
     public @ResponseBody Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
-    
 }

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 public class User {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
+
   private Integer id;
 
   private String name;
@@ -16,6 +17,14 @@ public class User {
   private String surname;
 
   private String acronym;
+
+  private enum Role {
+    PROJECT_MANAGER,
+    ANALIST,
+    DEVELOPER
+      }
+
+  private Role role;
 
   private String email;
 
@@ -30,7 +39,7 @@ public class User {
   }
 
   public String getName() {
-    return name;
+    return this.name;
   }
 
   public void setName(String name) {
@@ -38,23 +47,31 @@ public class User {
   }
 
   public String getSurname() {
-    return surname;
+    return this.surname;
   }
 
   public void setSurname(String surname) {
     this.surname = surname;
   }
 
-  public String acronym() {
-      return acronym;
+  public String getAcronym() {
+      return this.acronym;
   }
 
   public void setAcronym(String acronym) {
       this.acronym = acronym;
   }
 
+  public Role getRole() {
+    return this.role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
   public String getEmail() {
-    return email;
+    return this.email;
   }
 
   public void setEmail(String email) {
@@ -62,7 +79,7 @@ public class User {
   }
 
   public String password() {
-      return password;
+      return this.password;
   }
 
   public void setPassword(String password) {
