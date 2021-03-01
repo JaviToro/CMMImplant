@@ -1,5 +1,7 @@
 package com.palmatoro.cmmimplant.User;
 
+import com.palmatoro.cmmimplant.Project.Project;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,82 +9,92 @@ import javax.persistence.Id;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
-  @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
-  private Integer id;
+    private Integer id;
 
-  private String name;
+    private String name;
 
-  private String surname;
+    private String surname;
 
-  private String acronym;
+    private String acronym;
 
-  public enum UserRole {
-    PROJECT_MANAGER,
-    ANALIST,
-    DEVELOPER
-      }
+    public enum UserRole {
+        PROJECT_MANAGER,
+        ANALIST,
+        DEVELOPER
+    }
 
-  private UserRole role;
+    private UserRole userRole;
 
-  private String email;
+    private String email;
 
-  private String password;
+    private String password;
 
-  public Integer getId() {
-    return id;
-  }
+    private Project project;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public Integer getId() {
+        return this.id;
+    }
 
-  public String getName() {
-    return this.name;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getName() {
+        return this.name;
+    }
 
-  public String getSurname() {
-    return this.surname;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void setSurname(String surname) {
-    this.surname = surname;
-  }
+    public String getSurname() {
+        return this.surname;
+    }
 
-  public String getAcronym() {
-      return this.acronym;
-  }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-  public void setAcronym(String acronym) {
-      this.acronym = acronym;
-  }
+    public String getAcronym() {
+        return this.acronym;
+    }
 
-  public UserRole getUserRole() {
-    return this.role;
-  }
+    public void setAcronym(String acronym) {
+        this.acronym = acronym;
+    }
 
-  public void setUserRole(UserRole role) {
-    this.role = role;
-  }
+    public UserRole getUserRole() {
+        return this.userRole;
+    }
 
-  public String getEmail() {
-    return this.email;
-  }
+    public void setUserRole(UserRole role) {
+        this.userRole = role;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public String getEmail() {
+        return this.email;
+    }
 
-  public String password() {
-      return this.password;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public void setPassword(String password) {
-      this.password = password;
-  }
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Project getProject() {
+        return this.project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 }
