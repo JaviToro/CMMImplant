@@ -32,7 +32,7 @@ public class Improvement {
     private Double percentage;
     private String estimatedEffort;
     private String realEffort;
-    private Date recepcionDate;
+    private Date receptionDate;
     private Date approvalDate;
     private Date estimatedImplementation;
     private Date realImplementation;
@@ -122,12 +122,12 @@ public class Improvement {
         this.realEffort = realEffort;
     }
 
-    public Date getRecepcionDate() {
-        return recepcionDate;
+    public Date getReceptionDate() {
+        return receptionDate;
     }
 
-    public void setRecepcionDate(Date recepcionDate) {
-        this.recepcionDate = recepcionDate;
+    public void setReceptionDate(Date receptionDate) {
+        this.receptionDate = receptionDate;
     }
 
     public Date getApprovalDate() {
