@@ -49,7 +49,7 @@ public class RiskAndOpportunity {
     private Date identificationDate;
     private RiskProbability probability;
     private Impact impact;
-    private String treshold;
+    private String threshold;
     private String consequences;
     private String actionPlan;
     private Status status;
@@ -132,12 +132,12 @@ public class RiskAndOpportunity {
         this.impact = impact;
     }
 
-    public String getTreshold() {
-        return treshold;
+    public String getThreshold() {
+        return threshold;
     }
 
-    public void setTreshold(String treshold) {
-        this.treshold = treshold;
+    public void setThreshold(String threshold) {
+        this.threshold = threshold;
     }
 
     public String getConsequences() {
