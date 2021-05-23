@@ -4,6 +4,7 @@ import com.palmatoro.cmmimplant.domain.Project;
 import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class UserController {
         return "Greetings from CMMImplant, using Spring Boot!";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping(path = "/add")
     public @ResponseBody
     User addNewUser(@RequestBody User user) {
