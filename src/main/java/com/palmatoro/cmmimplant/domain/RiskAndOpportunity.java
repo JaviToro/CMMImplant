@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import java.util.Date;
 
 @Entity
@@ -58,6 +61,14 @@ public class RiskAndOpportunity {
     private Date closeDate;
     private String observations;
     private Priority priority;
+
+    // Relationships
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
+
+    // Getters and Setters
 
 
     public Integer getId() {
@@ -220,6 +231,14 @@ public class RiskAndOpportunity {
         }else{
             this.setPriority(Priority.LOW);
         }
+    }
+
+    public Project getProject(){
+        return project;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
     }
 
     

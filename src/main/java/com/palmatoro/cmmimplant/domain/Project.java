@@ -1,9 +1,13 @@
 package com.palmatoro.cmmimplant.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +31,14 @@ public class Project {
 
     private Date endDate;
 
+    // Relationships
+
     //private List<User> users;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RiskAndOpportunity> risksAndOpportunities;
+
+    // Getters and Setters
 
     public Integer getId() {
         return this.id;
@@ -76,4 +87,12 @@ public class Project {
     public void setUsers(List<User> users) {
         this.users = users;
     }*/
+
+    public List<RiskAndOpportunity> getRisksAndOpportunities(){
+        return this.risksAndOpportunities;
+    }
+
+    public void setRisksAndOpportunities(List<RiskAndOpportunity> risksAndOpportunities){
+        this.risksAndOpportunities = risksAndOpportunities;
+    }
 }
