@@ -1,9 +1,7 @@
 package com.palmatoro.cmmimplant.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
@@ -29,7 +27,12 @@ public class User {
 
     private String password;
 
-    //private Project project;
+    // Relationships
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Project> projects;
+
+    // Getters and Setters
 
     public Integer getId() {
         return this.id;
@@ -87,11 +90,13 @@ public class User {
         this.password = password;
     }
 
-    /*public Project getProject() {
-        return this.project;
+    // Relationships
+
+    public List<Project> getProjects(){
+        return this.projects;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
-    }*/
+    public void setProjects(List<Project> projects){
+        this.projects = projects;
+    }
 }

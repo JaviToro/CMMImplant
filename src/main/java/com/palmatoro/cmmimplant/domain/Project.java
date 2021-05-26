@@ -1,12 +1,6 @@
 package com.palmatoro.cmmimplant.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import java.util.Date;
 import java.util.List;
@@ -52,6 +46,16 @@ public class Project {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LessonLearnt> lessonsLearnt;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Metric> metrics;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ReusableObject> reusableObjects;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_User")
+    private User user;
 
     // Getters and Setters
 
@@ -157,5 +161,32 @@ public class Project {
 
     public void setLessonsLearnt(List<LessonLearnt> lessonsLearnt){
         this.lessonsLearnt = lessonsLearnt;
+    }
+
+    // Metric
+    public List<Metric> getMetrics(){
+        return this.metrics;
+    }
+
+    public void setMetrics(List<Metric> metrics){
+        this.metrics = metrics;
+    }
+
+    // ReusableObject
+    public List<ReusableObject> getReusableObjects(){
+        return this.reusableObjects;
+    }
+
+    public void setReusableObjects(List<ReusableObject> reusableObjects){
+        this.reusableObjects = reusableObjects;
+    }
+
+    // User
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
     }
 }

@@ -1,9 +1,6 @@
 package com.palmatoro.cmmimplant.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -21,6 +18,14 @@ public class ReusableObject {
     private Date receptionDate;
     private String link;
     private String observations;
+
+    // Relationships
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -84,5 +89,15 @@ public class ReusableObject {
 
     public void setObservations(String observations) {
         this.observations = observations;
+    }
+
+    // Relationships
+
+    public Project getProject(){
+        return project;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
     }
 }

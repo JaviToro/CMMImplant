@@ -1,10 +1,7 @@
 package com.palmatoro.cmmimplant.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Value {
@@ -17,6 +14,14 @@ public class Value {
 
     private String moment;
     private Double value;
+
+    // Relationships
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Metric")
+    private Metric metric;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -41,6 +46,16 @@ public class Value {
     }
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    // Relationships
+
+    public Metric getMetric(){
+        return metric;
+    }
+
+    public void setMetric(Metric metric){
+        this.metric = metric;
     }
      
 }

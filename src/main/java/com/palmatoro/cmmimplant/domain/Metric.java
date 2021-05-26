@@ -1,16 +1,14 @@
 package com.palmatoro.cmmimplant.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Metric {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;
 
     private String identifier;
@@ -22,6 +20,17 @@ public class Metric {
     private Double lowerLimit;
     private User responsable;
     private String observations;
+
+    // Relationships
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
+
+    @OneToMany(mappedBy = "metric", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Value> values;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -76,5 +85,25 @@ public class Metric {
     }
     public void setObservations(String observations) {
         this.observations = observations;
-    }  
+    }
+
+    // Relationships
+
+    // Project (*..1)
+    public Project getProject(){
+        return project;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
+    }
+
+    // Value (1..*)
+    public List<Value> getValues(){
+        return this.values;
+    }
+
+    public void setValues(List<Value> values){
+        this.values = values;
+    }
 }
