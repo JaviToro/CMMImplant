@@ -1,6 +1,5 @@
 package com.palmatoro.cmmimplant.controller;
 
-import com.palmatoro.cmmimplant.domain.Project;
 import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

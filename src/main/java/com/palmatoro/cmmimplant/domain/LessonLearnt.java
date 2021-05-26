@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import java.util.Date;
 
 @Entity
@@ -21,6 +24,14 @@ public class LessonLearnt {
     private Date communicationDate;
     private String link;
     private String observations;
+
+    // Relationships
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -84,5 +95,15 @@ public class LessonLearnt {
 
     public void setObservations(String observations) {
         this.observations = observations;
+    }
+
+    // Relationships
+
+    public Project getProject(){
+        return project;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
     }
 }

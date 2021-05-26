@@ -233,6 +233,8 @@ public class RiskAndOpportunity {
         }
     }
 
+    // Relationships
+
     public Project getProject(){
         return project;
     }

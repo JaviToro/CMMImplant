@@ -38,6 +38,21 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RiskAndOpportunity> risksAndOpportunities;
 
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Analysis> analysis;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Audit> audits;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Document> documents;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Improvement> improvements;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<LessonLearnt> lessonsLearnt;
+
     // Getters and Setters
 
     public Integer getId() {
@@ -88,11 +103,59 @@ public class Project {
         this.users = users;
     }*/
 
+    // Relationships
+
+    // RiskAndOpportunity
     public List<RiskAndOpportunity> getRisksAndOpportunities(){
         return this.risksAndOpportunities;
     }
 
     public void setRisksAndOpportunities(List<RiskAndOpportunity> risksAndOpportunities){
         this.risksAndOpportunities = risksAndOpportunities;
+    }
+
+    // Analysis
+    public List<Analysis> getAnalysis(){
+        return this.analysis;
+    }
+
+    public void setAnalysis(List<Analysis> analysis){
+        this.analysis = analysis;
+    }
+
+    // Audit
+    public List<Audit> getAudits(){
+        return this.audits;
+    }
+
+    public void setAudits(List<Audit> audits){
+        this.audits = audits;
+    }
+
+    // Document
+    public List<Document> getDocuments(){
+        return this.documents;
+    }
+
+    public void setDocuments(List<Document> documents){
+        this.documents = documents;
+    }
+
+    // Improvement
+    public List<Improvement> getImprovements(){
+        return this.improvements;
+    }
+
+    public void setImprovements(List<Improvement> improvements){
+        this.improvements = improvements;
+    }
+
+    // LessonLearnt
+    public List<LessonLearnt> getLessonsLearnt(){
+        return this.lessonsLearnt;
+    }
+
+    public void setLessonsLearnt(List<LessonLearnt> lessonsLearnt){
+        this.lessonsLearnt = lessonsLearnt;
     }
 }

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Audit {
@@ -33,7 +35,13 @@ public class Audit {
     private String direction;
     private String observations;
 
+    // Relationships
 
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
+
+    // Getters and Setters
     
     public Integer getId() {
         return id;
@@ -108,5 +116,14 @@ public class Audit {
         this.observations = observations;
     }
 
+    // Relationships
+
+    public Project getProject(){
+        return project;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
+    }
   
 }

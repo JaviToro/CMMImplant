@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Document {
@@ -19,6 +21,14 @@ public class Document {
     private String direction;
     private String practiceAreas;
     private String observations;
+
+    // Relationships
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -57,5 +67,14 @@ public class Document {
         this.observations = observations;
     }
 
+    // Relationships
+
+    public Project getProject(){
+        return project;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
+    }
   
 }
