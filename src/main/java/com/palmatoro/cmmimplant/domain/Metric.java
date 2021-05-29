@@ -18,7 +18,6 @@ public class Metric {
     private Period period;
     private Double upperLimit;
     private Double lowerLimit;
-    private User responsable;
     private String observations;
 
     // Relationships
@@ -27,8 +26,14 @@ public class Metric {
     @JoinColumn(name = "FK_Project")
     private Project project;
 
+    @ManyToOne
+    @JoinColumn(name = "FK_ResponsableMetric")
+    private User responsable;
+
     @OneToMany(mappedBy = "metric", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Value> values;
+
+
 
     // Getters and Setters
 
@@ -74,12 +79,7 @@ public class Metric {
     public void setLowerLimit(Double lowerLimit) {
         this.lowerLimit = lowerLimit;
     }
-    public User getResponsable() {
-        return responsable;
-    }
-    public void setResponsable(User responsable) {
-        this.responsable = responsable;
-    }
+
     public String getObservations() {
         return observations;
     }
@@ -87,7 +87,7 @@ public class Metric {
         this.observations = observations;
     }
 
-    // Relationships
+    // Relationships ---------------------------------------------------------------------
 
     // Project (*..1)
     public Project getProject(){
@@ -96,6 +96,14 @@ public class Metric {
 
     public void setProject(Project project){
         this.project = project;
+    }
+
+    // User (*..1)
+    public User getResponsable() {
+        return responsable;
+    }
+    public void setResponsable(User responsable) {
+        this.responsable = responsable;
     }
 
     // Value (1..*)

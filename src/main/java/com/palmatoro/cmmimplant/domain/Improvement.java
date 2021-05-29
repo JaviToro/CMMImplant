@@ -29,7 +29,6 @@ public class Improvement {
 
     private String title;
     private String description;
-    private User responsable;
     private ImprovementStatus status;
     private Impact impact;
     private Double percentage;
@@ -50,6 +49,10 @@ public class Improvement {
     @ManyToOne
     @JoinColumn(name = "FK_Project")
     private Project project;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_ResponsableImporvement")
+    private User responsable;
 
     // Getters and Setters
 
@@ -83,14 +86,6 @@ public class Improvement {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public User getResponsable() {
-        return responsable;
-    }
-
-    public void setResponsable(User responsable) {
-        this.responsable = responsable;
     }
 
     public ImprovementStatus getStatus() {
@@ -215,14 +210,25 @@ public class Improvement {
         }
     }
 
-    // Relationships
+    // Relationships --------------------------------------------------
 
+    // Project (*..1)
     public Project getProject(){
         return project;
     }
 
     public void setProject(Project project){
         this.project = project;
+    }
+
+
+    // User (*..1)
+    public User getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(User responsable) {
+        this.responsable = responsable;
     }
 
 }

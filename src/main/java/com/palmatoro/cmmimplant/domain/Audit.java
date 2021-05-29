@@ -27,8 +27,6 @@ public class Audit {
     private AuditType type;
     private String auditIdentifier;
     private Date auditDate;
-    private User auditor;
-    private User audited;
     private Status status;
     private Integer initialErrors;
     private Integer actualErrors;
@@ -40,6 +38,14 @@ public class Audit {
     @ManyToOne
     @JoinColumn(name = "FK_Project")
     private Project project;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Auditor")
+    private User auditor;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Audited")
+    private User audited;
 
     // Getters and Setters
     
@@ -73,18 +79,7 @@ public class Audit {
     public void setAuditDate(Date auditDate) {
         this.auditDate = auditDate;
     }
-    public User getAuditor() {
-        return auditor;
-    }
-    public void setAuditor(User auditor) {
-        this.auditor = auditor;
-    }
-    public User getAudited() {
-        return audited;
-    }
-    public void setAudited(User audited) {
-        this.audited = audited;
-    }
+
     public Status getStatus() {
         return status;
     }
@@ -116,14 +111,29 @@ public class Audit {
         this.observations = observations;
     }
 
-    // Relationships
+    // Relationships -----------------------------------------------------------
 
+    // Project
     public Project getProject(){
         return project;
     }
 
     public void setProject(Project project){
         this.project = project;
+    }
+
+    // User
+    public User getAuditor() {
+        return auditor;
+    }
+    public void setAuditor(User auditor) {
+        this.auditor = auditor;
+    }
+    public User getAudited() {
+        return audited;
+    }
+    public void setAudited(User audited) {
+        this.audited = audited;
     }
   
 }

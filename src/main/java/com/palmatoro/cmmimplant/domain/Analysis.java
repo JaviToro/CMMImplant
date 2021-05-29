@@ -32,7 +32,6 @@ public class Analysis {
     private AnalysisType type;
     private String analysisIdentifier;
     private AnalysisStatus status;
-    private User responsable;
     private String direction;
     private Date date;
     private Date evaluationDate;
@@ -43,6 +42,10 @@ public class Analysis {
     @ManyToOne
     @JoinColumn(name = "FK_Project")
     private Project project;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_ResponsableAnalysis")
+    private User responsable;
 
     // Getters and Setters
 
@@ -76,12 +79,7 @@ public class Analysis {
     public void setStatus(AnalysisStatus status) {
         this.status = status;
     }
-    public User getResponsable() {
-        return responsable;
-    }
-    public void setResponsable(User responsable) {
-        this.responsable = responsable;
-    }
+
     public String getDirection() {
         return direction;
     }
@@ -107,14 +105,23 @@ public class Analysis {
         this.observations = observations;
     }    
 
-    // Relationships
+    // Relationships ----------------------------------------
 
+    // Project
     public Project getProject(){
         return project;
     }
 
     public void setProject(Project project){
         this.project = project;
+    }
+
+    // User
+    public User getResponsable() {
+        return responsable;
+    }
+    public void setResponsable(User responsable) {
+        this.responsable = responsable;
     }
   
 }
