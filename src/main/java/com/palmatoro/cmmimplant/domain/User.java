@@ -5,6 +5,7 @@ import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -27,12 +28,12 @@ public class User {
 
     private String password;
 
-    // Relationships
+    // Relationships ----------------------------------------------
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Project> projects;
 
-    // Getters and Setters
+    // Getters and Setters ----------------------------------------
 
     public Integer getId() {
         return this.id;
@@ -99,4 +100,17 @@ public class User {
     public void setProjects(List<Project> projects){
         this.projects = projects;
     }
+
+    // Constructors --------------------------
+
+    public User(Integer id, String name, String surname, String acronym, UserRole userRole, String email, String password){
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.acronym = acronym;
+        this.userRole = userRole;
+        this.email = email;
+        this.password = password;
+    }
+
 }
