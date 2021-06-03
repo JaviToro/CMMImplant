@@ -1,7 +1,6 @@
 package com.palmatoro.cmmimplant.domain;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
@@ -30,8 +29,9 @@ public class User {
 
     // Relationships ----------------------------------------------
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Project> projects;
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
 
     // Getters and Setters ----------------------------------------
 
@@ -93,12 +93,12 @@ public class User {
 
     // Relationships
 
-    public List<Project> getProjects(){
-        return this.projects;
+    public Project getProject(){
+        return project;
     }
 
-    public void setProjects(List<Project> projects){
-        this.projects = projects;
+    public void setProject(Project project){
+        this.project = project;
     }
 
     // Constructors --------------------------

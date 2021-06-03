@@ -27,7 +27,8 @@ public class Project {
 
     // Relationships
 
-    //private List<User> users;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<User> users;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RiskAndOpportunity> risksAndOpportunities;
@@ -99,15 +100,16 @@ public class Project {
         this.endDate = endDate;
     }
 
-    /*public List<User> getUsers() {
+    // Relationships
+
+    // User
+    public List<User> getUsers(){
         return this.users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<User> users){
         this.users = users;
-    }*/
-
-    // Relationships
+    }
 
     // RiskAndOpportunity
     public List<RiskAndOpportunity> getRisksAndOpportunities(){
@@ -188,5 +190,15 @@ public class Project {
 
     public void setUser(User user){
         this.user = user;
+    }
+
+    // Constructors ---------------------------------------
+
+    public Project(Integer id, String name, ProjectType projectType, Date startDate, Date endDate){
+        this.id = id;
+        this.name = name;
+        this.projectType = projectType;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 }

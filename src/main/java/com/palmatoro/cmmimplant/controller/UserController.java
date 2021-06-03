@@ -23,13 +23,6 @@ public class UserController {
     }
 
     @Secured("ROLE_RP")
-    @PostMapping(path = "/add")
-    public @ResponseBody
-    User addNewUser(@RequestBody User user) {
-        return userService.addNewUser(user);
-    }
-
-    @Secured("ROLE_RP")
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<User> getAllUsers() {
@@ -42,6 +35,13 @@ public class UserController {
     public @ResponseBody
     User getUserById(@PathVariable Integer id) throws ResourceNotFoundException {
         return userService.getUserById(id);
+    }
+
+    @Secured("ROLE_RP")
+    @PostMapping(path = "/add")
+    public @ResponseBody
+    User addNewUser(@RequestBody User user) {
+        return userService.addNewUser(user);
     }
 
     @Secured("ROLE_RP")

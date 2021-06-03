@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public User getUserById(Integer id){
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No superhero found on ID: " + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No user found on ID: " + id));
         return user;
     }
 
@@ -34,7 +34,7 @@ public class UserService {
 
     @Transactional
     public User editUser(Integer id, String name, String surname, String acronym, UserRole userRole, String email, String password){
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No superhero found on ID: " + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No user found on ID: " + id));
 
         user.setName(name);
         user.setSurname(surname);
@@ -48,7 +48,7 @@ public class UserService {
 
     @Transactional
     public void deleteUserById(Integer id){
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No superhero found on ID: " + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No user found on ID: " + id));
         userRepository.delete(user);
     }
     
