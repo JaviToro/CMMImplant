@@ -54,9 +54,8 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ReusableObject> reusableObjects;
 
-    @ManyToOne
-    @JoinColumn(name = "FK_User")
-    private User user;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Adaptation> adaptations;
 
     // Getters and Setters
 
@@ -181,15 +180,6 @@ public class Project {
 
     public void setReusableObjects(List<ReusableObject> reusableObjects){
         this.reusableObjects = reusableObjects;
-    }
-
-    // User
-    public User getUser(){
-        return user;
-    }
-
-    public void setUser(User user){
-        this.user = user;
     }
 
     // Constructors ---------------------------------------

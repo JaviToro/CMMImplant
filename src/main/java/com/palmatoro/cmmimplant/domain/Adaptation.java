@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Adaptation {
@@ -15,8 +17,16 @@ public class Adaptation {
     private String identifier;
 
     private String practiceArea;
-    private String adaptation;
+    private String arrangement;
     private String observations;
+
+    // Relationships ---------------------
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -42,12 +52,12 @@ public class Adaptation {
         this.practiceArea = practiceArea;
     }
 
-    public String getAdaptation() {
-        return adaptation;
+    public String getArrangement() {
+        return arrangement;
     }
 
-    public void setAdaptation(String adaptation) {
-        this.adaptation = adaptation;
+    public void setArrangement(String arrangement) {
+        this.arrangement = arrangement;
     }
 
     public String getObservations() {
@@ -55,6 +65,26 @@ public class Adaptation {
     }
 
     public void setObservations(String observations) {
+        this.observations = observations;
+    }
+
+    // Relationships --------------------------------
+
+    public Project getProject(){
+        return project;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
+    }
+
+    // Constructors ---------------------------------
+
+    public Adaptation(Integer id, String identifier, String practiceArea, String arrangement, String observations){
+        this.id = id;
+        this. identifier = identifier;
+        this.practiceArea = practiceArea;
+        this.arrangement = arrangement;
         this.observations = observations;
     }
 }
