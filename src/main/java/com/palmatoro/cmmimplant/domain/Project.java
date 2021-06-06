@@ -57,6 +57,9 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Adaptation> adaptations;
 
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Alert> alerts;
+
     // Getters and Setters
 
     public Integer getId() {
@@ -180,6 +183,24 @@ public class Project {
 
     public void setReusableObjects(List<ReusableObject> reusableObjects){
         this.reusableObjects = reusableObjects;
+    }
+
+    // Adaptation
+    public List<Adaptation> getAdaptations(){
+        return this.adaptations;
+    }
+
+    public void setAdaptations(List<Adaptation> adaptations){
+        this.adaptations = adaptations;
+    }
+
+    // Adaptation
+    public List<Alert> getAlerts(){
+        return this.alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts){
+        this.alerts = alerts;
     }
 
     // Constructors ---------------------------------------

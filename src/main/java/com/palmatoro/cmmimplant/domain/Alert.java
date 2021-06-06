@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import java.util.Date;
 
 @Entity
@@ -17,6 +20,14 @@ public class Alert {
 
     private String area;
     private Date date;
+
+    // Relationships ---------------------
+
+    @ManyToOne
+    @JoinColumn(name = "FK_Project")
+    private Project project;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -47,6 +58,25 @@ public class Alert {
     }
 
     public void setDate(Date date) {
+        this.date = date;
+    }
+
+    // Relationships --------------------------------
+
+    public Project getProject(){
+        return project;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
+    }
+
+    // Constructors ---------------------------------
+
+    public Alert(Integer id, String identifier, String area, Date date){
+        this.id = id;
+        this. identifier = identifier;
+        this.area = area;
         this.date = date;
     }
 }

@@ -43,6 +43,7 @@ public class AdaptationController {
     public @ResponseBody
     Adaptation addNewAdaptation(@RequestBody Adaptation adaptation) {
         return adaptationService.addNewAdaptation(adaptation);
+    }
 
     @Secured("ROLE_USER")
     @DeleteMapping("/delete/{id}")
