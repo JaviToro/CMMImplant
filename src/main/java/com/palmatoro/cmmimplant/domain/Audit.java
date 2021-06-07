@@ -129,11 +129,27 @@ public class Audit {
     public void setAuditor(User auditor) {
         this.auditor = auditor;
     }
+    
     public User getAudited() {
         return audited;
     }
     public void setAudited(User audited) {
         this.audited = audited;
+    }
+
+    // Constructors ------------------------------------
+
+    public Audit(Integer id, String identifier, AuditType type, String auditIdentifier, Date auditDate, Status status, Integer initialErrors, Integer actualErrors, String direction, String observations){
+        this.id = id;
+        this.identifier = identifier;
+        this.type = type;
+        this.auditIdentifier = auditIdentifier;
+        this.auditDate = auditDate;
+        this.status = status;
+        this.initialErrors = initialErrors;
+        this.actualErrors = actualErrors;
+        this.direction = direction;
+        this.observations = observations;
     }
   
 }
