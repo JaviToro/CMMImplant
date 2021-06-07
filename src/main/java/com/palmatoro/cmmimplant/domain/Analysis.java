@@ -124,4 +124,16 @@ public class Analysis {
         this.responsable = responsable;
     }
   
+    // Constructors ---------------------------------
+
+    public Analysis(Integer id, String identifier, AnalysisType type, String analysisIdentifier, AnalysisStatus status, String direction, Date date, Date evaluationDate, String observations){
+        this.id = id;
+        this.identifier = identifier;
+        this.type = type;
+        this.analysisIdentifier = analysisIdentifier;
+        this.status = status;
+        this.direction = direction;
+        this.date = date;
+        this.evaluationDate = evaluationDate;
+    }
 }

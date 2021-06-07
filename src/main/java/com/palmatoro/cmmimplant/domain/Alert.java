@@ -75,7 +75,7 @@ public class Alert {
 
     public Alert(Integer id, String identifier, String area, Date date){
         this.id = id;
-        this. identifier = identifier;
+        this.identifier = identifier;
         this.area = area;
         this.date = date;
     }
