@@ -22,13 +22,13 @@ public class Document {
     private String practiceAreas;
     private String observations;
 
-    // Relationships
+    // Relationships -------------------------------------------
 
     @ManyToOne
     @JoinColumn(name = "FK_Project")
     private Project project;
 
-    // Getters and Setters
+    // Getters and Setters --------------------------------------
 
     public Integer getId() {
         return id;
@@ -67,7 +67,7 @@ public class Document {
         this.observations = observations;
     }
 
-    // Relationships
+    // Relationships ----------------------------------------
 
     public Project getProject(){
         return project;
@@ -75,6 +75,17 @@ public class Document {
 
     public void setProject(Project project){
         this.project = project;
+    }
+
+    // Constructors -----------------------------------------
+
+    public Document(Integer id, String identifier, String title, String direction, String practiceAreas, String observations){
+        this.id = id;
+        this.identifier = identifier;
+        this.title = title;
+        this.direction = direction;
+        this.practiceAreas = practiceAreas;
+        this.observations = observations;
     }
   
 }

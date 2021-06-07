@@ -37,7 +37,7 @@ public class AuditController {
         return auditService.getAuditById(id);
     }
 
-    @Secured("ROLE_USER")
+    @Secured("ROLE_RP")
     @PostMapping(path = "/add")
     public @ResponseBody
     Audit addNewAudit(@RequestBody Audit audit) {
