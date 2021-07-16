@@ -44,7 +44,7 @@ public class Improvement {
 
     private Priority priority;
 
-    // Relationships
+    // Relationships --------------------------------------
 
     @ManyToOne
     @JoinColumn(name = "FK_Project")
@@ -54,7 +54,7 @@ public class Improvement {
     @JoinColumn(name = "FK_ResponsableImporvement")
     private User responsable;
 
-    // Getters and Setters
+    // Getters and Setters ---------------------------------
 
     public Integer getId() {
         return id;
@@ -229,6 +229,27 @@ public class Improvement {
 
     public void setResponsable(User responsable) {
         this.responsable = responsable;
+    }
+
+    // Constructors -------------------------------------
+
+    public Improvement(Integer id, String title, String description, ImprovementStatus status, Impact impact, Double percentage, String estimatedEffort, String realEffort, 
+        Date receptionDate, Date approvalDate, Date estimatedImplementation, Date realImplementation, Date evaluationDate, Double score, String observations){
+            this.id = id;
+            this.title = title;
+            this.description = description;
+            this.status = status;
+            this.impact = impact;
+            this.percentage = percentage;
+            this.estimatedEffort = estimatedEffort;
+            this.realEffort = realEffort;
+            this.receptionDate = receptionDate;
+            this.approvalDate = approvalDate;
+            this.estimatedEffort = estimatedEffort;
+            this.realImplementation = realImplementation;
+            this.evaluationDate = evaluationDate;
+            this.score = score;
+            this.observations = observations;
     }
 
 }
