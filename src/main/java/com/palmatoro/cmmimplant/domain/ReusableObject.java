@@ -19,13 +19,13 @@ public class ReusableObject {
     private String link;
     private String observations;
 
-    // Relationships
+    // Relationships ----------------------------------------
 
     @ManyToOne
     @JoinColumn(name = "FK_Project")
     private Project project;
 
-    // Getters and Setters
+    // Getters and Setters ----------------------------------------
 
     public Integer getId() {
         return id;
@@ -91,13 +91,27 @@ public class ReusableObject {
         this.observations = observations;
     }
 
-    // Relationships
+    // Relationships ----------------------------------------
 
+    // Project (*..1)
     public Project getProject(){
         return project;
     }
 
     public void setProject(Project project){
         this.project = project;
+    }
+
+    // Constructors ----------------------------------------
+
+    public ReusableObject(Integer id, String identifier, String title, String description, String objectType, Date receptionDate, String link, String observations){
+        this.id = id;
+        this.identifier = identifier;
+        this.title = title;
+        this.description = description;
+        this.objectType = objectType;
+        this.receptionDate = receptionDate;
+        this.link = link;
+        this.observations = observations;
     }
 }
