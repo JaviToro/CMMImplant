@@ -25,13 +25,13 @@ public class LessonLearnt {
     private String link;
     private String observations;
 
-    // Relationships
+    // Relationships ----------------------------------------
 
     @ManyToOne
     @JoinColumn(name = "FK_Project")
     private Project project;
 
-    // Getters and Setters
+    // Getters and Setters ----------------------------------------
 
     public Integer getId() {
         return id;
@@ -97,13 +97,27 @@ public class LessonLearnt {
         this.observations = observations;
     }
 
-    // Relationships
+    // Relationships ----------------------------------------
 
+    // Project (*..1)
     public Project getProject(){
         return project;
     }
 
     public void setProject(Project project){
         this.project = project;
+    }
+
+    // Constructors ----------------------------------------
+
+    public LessonLearnt(Integer id, String identifier, String title, String description, Date receptionDate, Date communicationDate, String link, String observations){
+        this.id = id;
+        this.identifier = identifier;
+        this.title = title;
+        this.description = description;
+        this.receptionDate = receptionDate;
+        this.communicationDate = communicationDate;
+        this.link = link;
+        this.observations = observations;
     }
 }

@@ -50,3 +50,4 @@ public class ImprovementController {
     void deleteImprovementById(@PathVariable Integer id) {
         improvementService.deleteImprovementById(id);
     }
+}
