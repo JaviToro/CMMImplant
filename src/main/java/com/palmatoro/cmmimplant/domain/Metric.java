@@ -20,7 +20,7 @@ public class Metric {
     private Double lowerLimit;
     private String observations;
 
-    // Relationships
+    // Relationships ----------------------------------------
 
     @ManyToOne
     @JoinColumn(name = "FK_Project")
@@ -34,8 +34,7 @@ public class Metric {
     private List<Value> values;
 
 
-
-    // Getters and Setters
+    // Getters and Setters ----------------------------------------
 
     public Integer getId() {
         return id;
@@ -113,5 +112,18 @@ public class Metric {
 
     public void setValues(List<Value> values){
         this.values = values;
+    }
+
+    // Constructors ----------------------------------------
+
+    public Metric(Integer id, String identifier, String name, String formula, Period period, Double upperLimit, Double lowerLimit, String observations){
+        this.id = id;
+        this.identifier = identifier;
+        this.name = name;
+        this.formula = formula;
+        this.period = period;
+        this.upperLimit = upperLimit;
+        this.lowerLimit = lowerLimit;
+        this.observations = observations;
     }
 }
