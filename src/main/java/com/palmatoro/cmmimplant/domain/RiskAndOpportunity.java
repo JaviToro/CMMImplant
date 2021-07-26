@@ -62,13 +62,13 @@ public class RiskAndOpportunity {
     private String observations;
     private Priority priority;
 
-    // Relationships
+    // Relationships ----------------------------------------
 
     @ManyToOne
     @JoinColumn(name = "FK_Project")
     private Project project;
 
-    // Getters and Setters
+    // Getters and Setters ----------------------------------------
 
 
     public Integer getId() {
@@ -233,8 +233,9 @@ public class RiskAndOpportunity {
         }
     }
 
-    // Relationships
+    // Relationships ----------------------------------------
 
+    // Project (*..1)
     public Project getProject(){
         return project;
     }
@@ -243,5 +244,27 @@ public class RiskAndOpportunity {
         this.project = project;
     }
 
-    
+    // Constructors ----------------------------------------
+
+    public RiskAndOpportunity(Integer id, String identifier, RiskType type, RiskCategory category, String title, String description, Date identificationDate, RiskProbability probability, Impact impact, String threshold, String consequences,
+        String actionPlan, Status status, RiskMonitorization monitorization, Date lastRevisionDate, Date closeDate, String observations, Priority priority){
+        this.id = id;
+        this.identifier = identifier;
+        this.type = type;
+        this.category = category;
+        this.title = title;
+        this.description = description;
+        this.identificationDate = identificationDate;
+        this.probability = probability;
+        this.impact = impact;
+        this.threshold = threshold;
+        this.consequences = consequences;
+        this.actionPlan = actionPlan;
+        this.status = status;
+        this.monitorization = monitorization;
+        this.lastRevisionDate = lastRevisionDate;
+        this.closeDate = closeDate;
+        this.observations = observations;
+        this.priority = priority;
+    }
 }
