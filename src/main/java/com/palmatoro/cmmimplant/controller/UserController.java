@@ -24,14 +24,14 @@ public class UserController {
         return "Greetings from CMMImplant, using Spring Boot!";
     }
 
-    @Secured("ROLE_RP")
+    @Secured("ROLE_PM")
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @Secured("ROLE_RP")
+    @Secured("ROLE_PM")
     @Cacheable("user")
     @GetMapping("/{id}")
     public @ResponseBody
@@ -39,14 +39,14 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @Secured("ROLE_RP")
+    @Secured("ROLE_PM")
     @PostMapping(path = "/add")
     public @ResponseBody
     User addNewUser(@RequestBody User user) {
         return userService.addNewUser(user);
     }
 
-    @Secured("ROLE_RP")
+    @Secured("ROLE_PM")
     @DeleteMapping("/delete/{id}")
     public @ResponseBody
     void deleteUserById(@PathVariable Integer id) {

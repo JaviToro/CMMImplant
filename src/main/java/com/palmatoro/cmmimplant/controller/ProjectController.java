@@ -23,14 +23,14 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @Secured("ROLE_RP")
+    @Secured("ROLE_PM")
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<Project> getAllProjects() {
         return projectService.getAllProjects();
     }
 
-    @Secured("ROLE_RP")
+    @Secured("ROLE_PM")
     @Cacheable("project")
     @GetMapping("/{id}")
     public @ResponseBody
@@ -38,14 +38,14 @@ public class ProjectController {
         return projectService.getProjectById(id);
     }
 
-    @Secured("ROLE_RP")
+    @Secured("ROLE_PM")
     @PostMapping(path = "/add")
     public @ResponseBody
     Project addNewProject(@RequestBody Project project) {
         return projectService.addNewProject(project);
     }
 
-    @Secured("ROLE_RP")
+    @Secured("ROLE_PM")
     @DeleteMapping("/delete/{id}")
     public @ResponseBody
     void deleteProjectById(@PathVariable Integer id) {

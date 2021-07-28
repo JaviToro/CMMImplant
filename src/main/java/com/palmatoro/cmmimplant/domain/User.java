@@ -16,9 +16,9 @@ public class User {
     private String acronym;
 
     public enum UserRole {
-        PROJECT_MANAGER,
-        ANALIST,
-        DEVELOPER
+        ADMIN,
+        PM,
+        USER
     }
 
     private UserRole userRole;
