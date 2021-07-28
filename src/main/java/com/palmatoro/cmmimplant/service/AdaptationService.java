@@ -4,6 +4,7 @@ import com.palmatoro.cmmimplant.domain.Adaptation;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.AdaptationRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdaptationService {
 
     private AdaptationRepository adaptationRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public AdaptationService(AdaptationRepository adaptationRepository){
         this.adaptationRepository = adaptationRepository;
@@ -28,6 +33,7 @@ public class AdaptationService {
 
     @Transactional
     public Adaptation addNewAdaptation(Adaptation adaptation){
+        adaptation.setProject(projectService.getProjectByPrincipal());
         return adaptationRepository.save(adaptation);
     }
 

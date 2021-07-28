@@ -1,5 +1,7 @@
 package com.palmatoro.cmmimplant.controller;
 
+import java.security.Principal;
+
 import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.UserService;
@@ -49,6 +51,14 @@ public class UserController {
     public @ResponseBody
     void deleteUserById(@PathVariable Integer id) {
         userService.deleteUserById(id);
+    }
+
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public User getPrincipal(Principal principal) {
+        User result = userService.getUserByEmail(principal.getName());
+
+        return result;
     }
 
 }

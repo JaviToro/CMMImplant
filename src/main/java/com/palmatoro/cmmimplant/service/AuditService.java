@@ -3,11 +3,12 @@ package com.palmatoro.cmmimplant.service;
 import java.util.Date;
 
 import com.palmatoro.cmmimplant.domain.Audit;
-import com.palmatoro.cmmimplant.domain.Status;
 import com.palmatoro.cmmimplant.domain.Audit.AuditType;
+import com.palmatoro.cmmimplant.domain.Status;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.AuditRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuditService {
 
     private AuditRepository auditRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public AuditService(AuditRepository auditRepository){
         this.auditRepository = auditRepository;
@@ -32,6 +37,7 @@ public class AuditService {
 
     @Transactional
     public Audit addNewAudit(Audit audit){
+        audit.setProject(projectService.getProjectByPrincipal());
         return auditRepository.save(audit);
     }
 

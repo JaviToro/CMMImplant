@@ -103,7 +103,7 @@ public class User {
 
     // Constructors --------------------------
 
-    public User(Integer id, String name, String surname, String acronym, UserRole userRole, String email, String password){
+    public User(Integer id, String name, String surname, String acronym, UserRole userRole, String email, String password, Project project){
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -111,6 +111,7 @@ public class User {
         this.userRole = userRole;
         this.email = email;
         this.password = password;
+        this.project = project;
     }
 
 }

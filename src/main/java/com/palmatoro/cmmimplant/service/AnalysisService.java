@@ -8,6 +8,7 @@ import com.palmatoro.cmmimplant.domain.Analysis.AnalysisType;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.AnalysisRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class AnalysisService {
 
     private AnalysisRepository analysisRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public AnalysisService(AnalysisRepository analysisRepository){
         this.analysisRepository = analysisRepository;
@@ -32,6 +37,7 @@ public class AnalysisService {
 
     @Transactional
     public Analysis addNewAnalysis(Analysis analysis){
+        analysis.setProject(projectService.getProjectByPrincipal());
         return analysisRepository.save(analysis);
     }
 

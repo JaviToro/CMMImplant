@@ -4,6 +4,7 @@ import com.palmatoro.cmmimplant.domain.Document;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.DocumentRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class DocumentService {
 
     private DocumentRepository documentRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public DocumentService(DocumentRepository documentRepository){
         this.documentRepository = documentRepository;
@@ -28,6 +33,7 @@ public class DocumentService {
 
     @Transactional
     public Document addNewDocument(Document document){
+        document.setProject(projectService.getProjectByPrincipal());
         return documentRepository.save(document);
     }
 

@@ -3,10 +3,14 @@ package com.palmatoro.cmmimplant.service;
 import java.util.Date;
 
 import com.palmatoro.cmmimplant.domain.Project;
+import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.domain.Project.ProjectType;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.ProjectRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProjectService {
 
     private ProjectRepository projectRepository;
+
+    // Auxiliary Services ----------------------------------------
+    @Autowired
+    private UserService userService;
 
     public ProjectService(ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
@@ -50,6 +58,17 @@ public class ProjectService {
     public void deleteProjectById(Integer id){
         Project project = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No project found on ID: " + id));
         projectRepository.delete(project);
+    }
+
+    // Auxiliary methods -------------------------------------------------------
+
+    public Project getProjectByPrincipal(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+
+        User u = userService.getUserByEmail(currentPrincipalName);
+
+        return u.getProject();
     }
     
 }

@@ -5,14 +5,15 @@ import java.util.Date;
 import com.palmatoro.cmmimplant.domain.Impact;
 import com.palmatoro.cmmimplant.domain.Priority;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity;
-import com.palmatoro.cmmimplant.domain.Status;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity.RiskCategory;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity.RiskMonitorization;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity.RiskProbability;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity.RiskType;
+import com.palmatoro.cmmimplant.domain.Status;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.RiskAndOpportunityRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class RiskAndOpportunityService {
 
     private RiskAndOpportunityRepository riskAndOpportunityRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public RiskAndOpportunityService(RiskAndOpportunityRepository riskAndOpportunityRepository){
         this.riskAndOpportunityRepository = riskAndOpportunityRepository;
@@ -37,6 +42,7 @@ public class RiskAndOpportunityService {
 
     @Transactional
     public RiskAndOpportunity addNewRiskAndOpportunity(RiskAndOpportunity riskAndOpportunity){
+        riskAndOpportunity.setProject(projectService.getProjectByPrincipal());
         return riskAndOpportunityRepository.save(riskAndOpportunity);
     }
 

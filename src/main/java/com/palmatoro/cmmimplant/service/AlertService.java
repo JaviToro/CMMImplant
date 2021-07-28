@@ -6,6 +6,7 @@ import com.palmatoro.cmmimplant.domain.Alert;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.AlertRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class AlertService {
 
     private AlertRepository alertRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
+    
 
     public AlertService(AlertRepository alertRepository){
         this.alertRepository = alertRepository;
@@ -30,6 +36,7 @@ public class AlertService {
 
     @Transactional
     public Alert addNewAlert(Alert alert){
+        alert.setProject(projectService.getProjectByPrincipal());
         return alertRepository.save(alert);
     }
 

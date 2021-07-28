@@ -194,7 +194,7 @@ public class Project {
         this.adaptations = adaptations;
     }
 
-    // Adaptation
+    // Alert
     public List<Alert> getAlerts(){
         return this.alerts;
     }

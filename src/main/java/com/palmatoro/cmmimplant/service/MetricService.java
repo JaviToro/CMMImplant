@@ -5,6 +5,7 @@ import com.palmatoro.cmmimplant.domain.Period;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.MetricRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class MetricService {
 
     private MetricRepository metricRepository;
+    
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public MetricService(MetricRepository metricRepository){
         this.metricRepository = metricRepository;
@@ -29,6 +34,7 @@ public class MetricService {
 
     @Transactional
     public Metric addNewMetric(Metric metric){
+        metric.setProject(projectService.getProjectByPrincipal());
         return metricRepository.save(metric);
     }
 

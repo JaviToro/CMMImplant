@@ -27,6 +27,18 @@ public class UserService {
         return user;
     }
 
+    public User getUserByEmail(String email){
+
+        User user;
+        try {
+            user = userRepository.findByEmail(email);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("No user found on Email: " + email);
+        }
+
+        return user;
+    }
+
     @Transactional
     public User addNewUser(User user){
         return userRepository.save(user);

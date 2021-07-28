@@ -6,6 +6,7 @@ import com.palmatoro.cmmimplant.domain.ReusableObject;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.ReusableObjectRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReusableObjectService {
 
     private ReusableObjectRepository reusableObjectRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public ReusableObjectService(ReusableObjectRepository reusableObjectRepository){
         this.reusableObjectRepository = reusableObjectRepository;
@@ -30,6 +35,7 @@ public class ReusableObjectService {
 
     @Transactional
     public ReusableObject addNewReusableObject(ReusableObject reusableObject){
+        reusableObject.setProject(projectService.getProjectByPrincipal());
         return reusableObjectRepository.save(reusableObject);
     }
 

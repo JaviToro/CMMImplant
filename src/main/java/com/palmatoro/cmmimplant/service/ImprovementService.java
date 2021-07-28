@@ -8,6 +8,7 @@ import com.palmatoro.cmmimplant.domain.Improvement.ImprovementStatus;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.ImprovementRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ImprovementService {
 
     private ImprovementRepository improvementRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public ImprovementService(ImprovementRepository improvementRepository){
         this.improvementRepository = improvementRepository;
@@ -32,6 +37,7 @@ public class ImprovementService {
 
     @Transactional
     public Improvement addNewImprovement(Improvement improvement){
+        improvement.setProject(projectService.getProjectByPrincipal());
         return improvementRepository.save(improvement);
     }
 

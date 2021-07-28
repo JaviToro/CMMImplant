@@ -4,6 +4,7 @@ import com.palmatoro.cmmimplant.domain.Value;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.ValueRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ValueService {
 
     private ValueRepository valueRepository;
+
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    MetricService metricService;
 
     public ValueService(ValueRepository valueRepository){
         this.valueRepository = valueRepository;
@@ -27,7 +32,8 @@ public class ValueService {
     }
 
     @Transactional
-    public Value addNewValue(Value value){
+    public Value addNewValue(Value value, int metricId){
+        value.setMetric(metricService.getMetricById(metricId));
         return valueRepository.save(value);
     }
 

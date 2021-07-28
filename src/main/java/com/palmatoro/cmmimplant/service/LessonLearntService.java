@@ -6,6 +6,7 @@ import com.palmatoro.cmmimplant.domain.LessonLearnt;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.LessonLearntRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class LessonLearntService {
 
     private LessonLearntRepository lessonLearntRepository;
+    
+    // Auxiliary Services --------------------------------------------
+    @Autowired
+    ProjectService projectService;
 
     public LessonLearntService(LessonLearntRepository lessonLearntRepository){
         this.lessonLearntRepository = lessonLearntRepository;
@@ -30,6 +35,7 @@ public class LessonLearntService {
 
     @Transactional
     public LessonLearnt addNewLessonLearnt(LessonLearnt lessonLearnt){
+        lessonLearnt.setProject(projectService.getProjectByPrincipal());
         return lessonLearntRepository.save(lessonLearnt);
     }
 
