@@ -11,9 +11,9 @@ import java.util.Date;
 
 @Entity
 public class Alert {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;
 
     private String identifier;

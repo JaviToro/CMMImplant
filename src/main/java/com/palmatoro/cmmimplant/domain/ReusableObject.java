@@ -5,9 +5,9 @@ import java.util.Date;
 
 @Entity
 public class ReusableObject {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;
 
     private String identifier;

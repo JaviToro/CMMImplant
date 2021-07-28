@@ -11,9 +11,9 @@ import java.util.Date;
 
 @Entity
 public class Improvement {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;
 
     public enum ImprovementStatus{

@@ -11,9 +11,9 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Audit {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;
 
     private String identifier;

@@ -10,9 +10,9 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Document {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;
 
     private String identifier;

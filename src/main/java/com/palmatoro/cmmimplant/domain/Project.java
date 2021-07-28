@@ -7,9 +7,9 @@ import java.util.List;
 
 @Entity
 public class Project {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;
 
     private String name;
