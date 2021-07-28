@@ -39,8 +39,8 @@ public class ValueController {
     @Secured("ROLE_USER")
     @PostMapping(path = "/add")
     public @ResponseBody
-    Value addNewValue(@RequestBody Value value) {
-        return valueService.addNewValue(value);
+    Value addNewValue(@RequestBody Value value, @PathVariable Integer metricId) {
+        return valueService.addNewValue(value, metricId);
     }
 
     @Secured("ROLE_USER")
