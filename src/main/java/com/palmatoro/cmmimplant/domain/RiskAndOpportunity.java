@@ -28,7 +28,8 @@ public class RiskAndOpportunity {
         CONTRACTUAL,
         MANAGING,
         PROCESS,
-        TEMPLATE
+        TEMPLATE,
+        OTHER
     }
 
     public enum RiskProbability{
