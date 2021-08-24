@@ -27,7 +27,7 @@ public class CmmimplantApplication {
 			for (String beanName : beanNames) {
 				System.out.println(beanName);
 			}
-			System.out.println("Project loaded.");
+			System.out.println("Project finished loading.");
 		};
 	}
 
