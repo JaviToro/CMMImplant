@@ -42,7 +42,7 @@ public class User {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -50,7 +50,7 @@ public class User {
     }
 
     public String getSurname() {
-        return this.surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
@@ -58,7 +58,7 @@ public class User {
     }
 
     public String getAcronym() {
-        return this.acronym;
+        return acronym;
     }
 
     public void setAcronym(String acronym) {
@@ -66,7 +66,7 @@ public class User {
     }
 
     public UserRole getUserRole() {
-        return this.userRole;
+        return userRole;
     }
 
     public void setUserRole(UserRole role) {
@@ -74,7 +74,7 @@ public class User {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -82,7 +82,7 @@ public class User {
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password) {
