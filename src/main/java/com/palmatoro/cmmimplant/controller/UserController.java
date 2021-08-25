@@ -2,10 +2,15 @@ package com.palmatoro.cmmimplant.controller;
 
 import java.security.Principal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.palmatoro.cmmimplant.domain.User;
+import com.palmatoro.cmmimplant.domain.Project;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.SecurityService;
 import com.palmatoro.cmmimplant.service.UserService;
+import com.palmatoro.cmmimplant.service.ProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -25,6 +30,9 @@ public class UserController {
 
     @Autowired
     private SecurityService securityService;
+
+    @Autowired
+    private ProjectService projectService;
 
     @Autowired
     private UserValidator userValidator;
@@ -67,19 +75,24 @@ public class UserController {
         return result;
     }
 
+    @Secured("ROLE_ANONYMOUS")
     @GetMapping("/registration")
     public String registration(Model model) {
         if (securityService.isAuthenticated()) {
-            return "registration";
+            return "redirect:/index";
         }
 
+        List<Project> project = new ArrayList<>();
+        List<Project> projects = projectService.getAllProjectsAsList();
         model.addAttribute("userForm", new User());
+        model.addAttribute("project", project);
+        model.addAttribute("projects", projects);
 
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("userForm") User user, @ModelAttribute("userRole") String userRole, @ModelAttribute("project") String project, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {

@@ -23,7 +23,7 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @Secured("ROLE_PM")
+    @Secured("ROLE_ANONYMOUS")
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<Project> getAllProjects() {

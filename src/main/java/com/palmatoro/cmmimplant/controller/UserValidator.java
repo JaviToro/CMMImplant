@@ -23,14 +23,18 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         User user = (User) o;
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "surname", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "acronym", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userRole", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "project", "NotEmpty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty");
-        if (!(user.getEmail().contains("@"))) {
-            errors.rejectValue("email", "El email debe contener un @.");
+        if (!(user.getEmail().contains("@") && user.getEmail().contains("."))) {
+            errors.rejectValue("email", "EmailFormat");
         }
         if (userService.getUserByEmail(user.getEmail()) != null) {
-            errors.rejectValue("email", "El email indicado ya está registrado.");
+            errors.rejectValue("email", "DuplicatedEmail");
         }
-
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
     }
 
