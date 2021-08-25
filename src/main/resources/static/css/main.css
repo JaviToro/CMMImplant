@@ -18,6 +18,7 @@ body {
     overflow: hidden;
     font-weight: 600;
     align-items: center;
+    justify-content: space-between;
   }
 
   .navbar-button {
@@ -59,6 +60,24 @@ body {
     display: flex;
     align-items: center;
     margin: 0;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+
+  .navbar-register {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    color: #FFFFFF;
+    margin-right: 60px;
+    background-color: #376DBE;
+    height: 50px;
+    padding: 0px 10px;
+    border-radius: 10px;
   }
 
   .navbar-logo {
