@@ -42,11 +42,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .anonymous()
-                    .authorities("ROLE_ANONYMOUS")
+                http
+                    .anonymous()
+                        .authorities("ROLE_ANONYMOUS");
+                http.authorizeRequests()
+                        .and()
+                        .formLogin()
+                        .loginPage("/user/login")
+                        .defaultSuccessUrl("/index")
+                        .usernameParameter("email")
+                        .permitAll()
                     .and()
-                .headers()
-                    .cacheControl();
+                        .logout()
+                            .permitAll();
+
     }
 }
