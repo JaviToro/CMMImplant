@@ -82,17 +82,16 @@ public class UserController {
             return "redirect:/index";
         }
 
-        List<Project> project = new ArrayList<>();
         List<Project> projects = projectService.getAllProjectsAsList();
         model.addAttribute("userForm", new User());
-        model.addAttribute("project", project);
+        model.addAttribute("project", new Project());
         model.addAttribute("projects", projects);
 
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User user, @ModelAttribute("userRole") String userRole, @ModelAttribute("project") String project, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("userForm") User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -102,6 +101,21 @@ public class UserController {
         userService.addNewUser(user);
 
         return "redirect:/index";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model, String error, String logout) {
+        if (securityService.isAuthenticated()) {
+            return "redirect:/index";
+        }
+
+        if (error != null)
+            model.addAttribute("error", error.toString());
+
+        if (logout != null)
+            model.addAttribute("message", "Has cerrado sesión correctamente.");
+
+        return "login";
     }
 
 }

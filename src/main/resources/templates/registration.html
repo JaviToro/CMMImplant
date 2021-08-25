@@ -13,7 +13,7 @@
                 <div class="navbar-logo">
                     <p>CMMImplant</p>
                 </div>
-                <div class="navbar-button-active">
+                <div class="navbar-button">
                     <span class="material-icons">home</span>
                     <a href="/index">Inicio</a>
                 </div>
@@ -28,6 +28,12 @@
                 <div class="navbar-button">
                     <span class="material-icons">work</span>
                     <a href="/project">Proyecto</a>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-register">
+                    <span class="material-icons">person_add</span>
+                    <a href="/user/registration">Registrarse</a>
                 </div>
             </div>
         </div>
@@ -51,13 +57,13 @@
                     <select th:field="*{userRole}" class="form-control" placeholder="Rol">
                         <option value="0">Elige un rol</option>
                         <option th:value="ADMIN" th:text="Administrador"></option>
-                        <option th:value="USER" th:text="Usuario"></option>
                         <option th:value="PM" th:text="'Project Manager'"></option>
+                        <option th:value="USER" th:text="Usuario"></option>
                     </select>
                     <span class="has-error" th:if="${#fields.hasErrors('userRole')}" th:errors="*{userRole}"></span>
                 </div>
                 <div class="form-group">
-                    <select th:field="${project}" class="form-control"  placeholder="Proyecto">
+                    <select th:field="*{project}" class="form-control" placeholder="Proyecto">
                         <option value="0">Elige un proyecto</option>
                         <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"></option>
                     </select>
