@@ -16,9 +16,7 @@ public class User {
     private String acronym;
 
     public enum UserRole {
-        ADMIN,
-        PM,
-        USER
+        ADMIN, PM, USER
     }
 
     private UserRole userRole;
@@ -93,17 +91,22 @@ public class User {
 
     // Relationships
 
-    public Project getProject(){
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(Project project){
+    public void setProject(Project project) {
         this.project = project;
     }
 
     // Constructors --------------------------
 
-    public User(Integer id, String name, String surname, String acronym, UserRole userRole, String email, String password, Project project){
+    public User() {
+
+    }
+
+    public User(Integer id, String name, String surname, String acronym, UserRole userRole, String email,
+            String password, Project project) {
         this.id = id;
         this.name = name;
         this.surname = surname;
