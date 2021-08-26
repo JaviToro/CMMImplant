@@ -104,20 +104,4 @@ public class UserController {
         return "redirect:/index";
     }
 
-    @Secured("ROLE_ANONYMOUS")
-    @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (securityService.isAuthenticated()) {
-            return "redirect:/index";
-        }
-
-        if (error != null)
-            model.addAttribute("error", error.toString());
-
-        if (logout != null)
-            model.addAttribute("message", "Has cerrado sesión correctamente.");
-
-        return "login";
-    }
-
 }
