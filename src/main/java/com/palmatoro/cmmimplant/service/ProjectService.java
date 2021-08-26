@@ -1,6 +1,8 @@
 package com.palmatoro.cmmimplant.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.Project;
 import com.palmatoro.cmmimplant.domain.User;
@@ -30,6 +32,14 @@ public class ProjectService {
 
     public Iterable<Project> getAllProjects(){
         return projectRepository.findAll();
+    }
+
+    public List<Project> getAllProjectsAsList(){
+        List<Project> projects = new ArrayList<>();
+        for (Project project : projectRepository.findAll()) {
+            projects.add(project);
+        }
+        return projects;
     }
 
     public Project getProjectById(Integer id){

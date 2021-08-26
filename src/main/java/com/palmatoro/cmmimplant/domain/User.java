@@ -16,9 +16,7 @@ public class User {
     private String acronym;
 
     public enum UserRole {
-        ADMIN,
-        PM,
-        USER
+        ADMIN, PM, USER
     }
 
     private UserRole userRole;
@@ -44,7 +42,7 @@ public class User {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -52,7 +50,7 @@ public class User {
     }
 
     public String getSurname() {
-        return this.surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
@@ -60,7 +58,7 @@ public class User {
     }
 
     public String getAcronym() {
-        return this.acronym;
+        return acronym;
     }
 
     public void setAcronym(String acronym) {
@@ -68,7 +66,7 @@ public class User {
     }
 
     public UserRole getUserRole() {
-        return this.userRole;
+        return userRole;
     }
 
     public void setUserRole(UserRole role) {
@@ -76,7 +74,7 @@ public class User {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -84,7 +82,7 @@ public class User {
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password) {
@@ -93,17 +91,22 @@ public class User {
 
     // Relationships
 
-    public Project getProject(){
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(Project project){
+    public void setProject(Project project) {
         this.project = project;
     }
 
     // Constructors --------------------------
 
-    public User(Integer id, String name, String surname, String acronym, UserRole userRole, String email, String password, Project project){
+    public User() {
+
+    }
+
+    public User(Integer id, String name, String surname, String acronym, UserRole userRole, String email,
+            String password, Project project) {
         this.id = id;
         this.name = name;
         this.surname = surname;

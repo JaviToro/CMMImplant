@@ -5,6 +5,7 @@ import com.palmatoro.cmmimplant.domain.User.UserRole;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.UserRepository;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,20 +15,22 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository){
+    private ProjectService projectService;
+
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public Iterable<User> getAllUsers(){
+    public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User getUserById(Integer id){
+    public User getUserById(Integer id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No user found on ID: " + id));
         return user;
     }
 
-    public User getUserByEmail(String email){
+    public User getUserByEmail(String email) {
 
         User user;
         try {
@@ -40,12 +43,18 @@ public class UserService {
     }
 
     @Transactional
-    public User addNewUser(User user){
+    public User addNewUser(User user) {
         return userRepository.save(user);
     }
 
     @Transactional
-    public User editUser(Integer id, String name, String surname, String acronym, UserRole userRole, String email, String password){
+    public User addNewUser(User user, Integer projectId) {
+        user.setProject(projectService.getProjectById(projectId));
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public User editUser(Integer id, String name, String surname, String acronym, UserRole userRole, String email, String password) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No user found on ID: " + id));
 
         user.setName(name);
@@ -59,9 +68,9 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUserById(Integer id){
+    public void deleteUserById(Integer id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No user found on ID: " + id));
         userRepository.delete(user);
     }
-    
+
 }
