@@ -19,7 +19,10 @@ public class Alert {
     private String identifier;
 
     private String area;
+
     private Date date;
+
+    private String observation;
 
     // Relationships ---------------------
 
@@ -61,22 +64,35 @@ public class Alert {
         this.date = date;
     }
 
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
     // Relationships --------------------------------
 
-    public Project getProject(){
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(Project project){
+    public void setProject(Project project) {
         this.project = project;
     }
 
     // Constructors ---------------------------------
 
-    public Alert(Integer id, String identifier, String area, Date date){
+    public Alert() {
+
+    }
+
+    public Alert(Integer id, String identifier, String area, Date date, String observation) {
         this.id = id;
         this.identifier = identifier;
         this.area = area;
         this.date = date;
+        this.observation = observation;
     }
 }
