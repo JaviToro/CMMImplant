@@ -2,7 +2,6 @@ package com.palmatoro.cmmimplant.controller;
 
 import java.security.Principal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.User;
@@ -12,6 +11,7 @@ import com.palmatoro.cmmimplant.service.SecurityService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.service.ProjectService;
 
+import com.palmatoro.cmmimplant.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.annotation.Secured;
@@ -90,6 +90,7 @@ public class UserController {
         return "registration";
     }
 
+    @Secured("ROLE_ANONYMOUS")
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
@@ -101,21 +102,6 @@ public class UserController {
         userService.addNewUser(user);
 
         return "redirect:/index";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (securityService.isAuthenticated()) {
-            return "redirect:/index";
-        }
-
-        if (error != null)
-            model.addAttribute("error", error.toString());
-
-        if (logout != null)
-            model.addAttribute("message", "Has cerrado sesión correctamente.");
-
-        return "login";
     }
 
 }
