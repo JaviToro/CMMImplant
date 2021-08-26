@@ -1,4 +1,4 @@
-package com.palmatoro.cmmimplant.controller;
+package com.palmatoro.cmmimplant.validator;
 
 import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.service.UserService;
