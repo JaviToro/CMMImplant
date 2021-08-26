@@ -42,6 +42,18 @@ public class ProjectService {
         return projects;
     }
 
+    public Project getProjectByName(String name) {
+
+        Project project;
+        try {
+            project = projectRepository.findByName(name);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("No se ha encontrado un proyecto con el nombre " + name);
+        }
+
+        return project;
+    }
+
     public Project getProjectById(Integer id){
         Project project = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No project found on ID: " + id));
         return project;
