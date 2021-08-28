@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
     <head>
         <meta charset="UTF-8">
         <title>CMMImplant</title>
@@ -30,10 +32,14 @@
                     <a href="/project/all">Proyecto</a>
                 </div>
             </div>
-            <div class="navbar-right">
+            <div class="navbar-right" sec:authorize="isAnonymous()">
                 <div class="navbar-register">
                     <span class="material-icons">person</span>
                     <a href="/login">Iniciar sesión</a>
+                </div>
+                <div class="navbar-register" sec:authorize="!isAnonymous()">
+                    <span class="material-icons">person</span>
+                    <a href="javascript: document.logoutForm.submit()" role="menuitem"> Cerrar sesión</a>
                 </div>
             </div>
         </div>
@@ -43,6 +49,9 @@
             <p th:text=${project_message}></p>
             <p th:text=${conclusion_message}></p>
         </div>
+        <form name="logoutForm" th:action="@{/logout}" method="POST" th:hidden="true">
+            <input hidden type="submit" value="Cerrar sesión"/>
+        </form>
         <div class="footer">
             <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
         </div>

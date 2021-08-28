@@ -30,13 +30,25 @@ public class UserService {
         return user;
     }
 
+    public User getUserByUsername(String username) {
+
+        User user;
+        try {
+            user = userRepository.findByUsername(username);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("No se ha encontrado el usuario " + username);
+        }
+
+        return user;
+    }
+
     public User getUserByEmail(String email) {
 
         User user;
         try {
             user = userRepository.findByEmail(email);
         } catch (Exception e) {
-            throw new ResourceNotFoundException("No user found on Email: " + email);
+            throw new ResourceNotFoundException("No se ha encontrado el usuario con email " + email);
         }
 
         return user;

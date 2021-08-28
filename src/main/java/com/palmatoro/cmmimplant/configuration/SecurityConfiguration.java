@@ -11,10 +11,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    public SpringSecurityDialect securityDialect() {
+        return new SpringSecurityDialect();
+    }
 
     @Override
     @Bean
@@ -51,7 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                 .loginPage("/login")
-                .usernameParameter("email")
                 .permitAll()
                 .and()
                 .logout()

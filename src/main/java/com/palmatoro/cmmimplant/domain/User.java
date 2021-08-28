@@ -13,6 +13,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    private String username;
+
     private String name;
 
     private String surname;
@@ -36,6 +38,15 @@ public class User implements UserDetails {
     private Project project;
 
     // Getters and Setters ----------------------------------------
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Integer getId() {
         return this.id;
@@ -95,11 +106,6 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
     public boolean isAccountNonExpired() {
         return false;
     }
@@ -139,9 +145,10 @@ public class User implements UserDetails {
 
     }
 
-    public User(Integer id, String name, String surname, String acronym, UserRole userRole, String email,
-            String password, Project project) {
+    public User(Integer id, String username, String name, String surname, String acronym, UserRole userRole, String email,
+                String password, Project project) {
         this.id = id;
+        this.username = username;
         this.name = name;
         this.surname = surname;
         this.acronym = acronym;
