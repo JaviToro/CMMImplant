@@ -5,6 +5,7 @@ import com.palmatoro.cmmimplant.domain.User.UserRole;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.UserRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserService {
 
+    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -56,11 +62,13 @@ public class UserService {
 
     @Transactional
     public User addNewUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Transactional
     public User addNewUser(User user, Integer projectId) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setProject(projectService.getProjectById(projectId));
         return userRepository.save(user);
     }

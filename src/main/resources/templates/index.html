@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8">
         <title>CMMImplant</title>
@@ -37,10 +37,10 @@
                     <span class="material-icons">person</span>
                     <a href="/login">Iniciar sesión</a>
                 </div>
-                <div class="navbar-register" sec:authorize="!isAnonymous()">
+            </div>
+            <div class="navbar-register" sec:authorize="isAuthenticated()">
                     <span class="material-icons">person</span>
                     <a href="javascript: document.logoutForm.submit()" role="menuitem"> Cerrar sesión</a>
-                </div>
             </div>
         </div>
         <div class="info-text">

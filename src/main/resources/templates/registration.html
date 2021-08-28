@@ -74,6 +74,11 @@
                     <span class="has-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                 </div>
                 <div class="form-group">
+                    <input type="text" th:field="*{username}" class="form-control" placeholder="Nombre de usuario"
+                           autofocus="true">
+                    <span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                </div>
+                <div class="form-group">
                     <input type="password" th:field="*{password}" class="form-control" placeholder="Contraseña">
                     <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                 </div>
