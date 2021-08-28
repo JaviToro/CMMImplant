@@ -35,7 +35,7 @@ public class ProjectController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
     }
 
-    @Secured("ROLE_ANONYMOUS")
+    @Secured("ROLE_ADMIN")
     @GetMapping(path = "/all")
     public String allProjects(Model model) {
        List<Project> projects = projectService.getAllProjectsAsList();
