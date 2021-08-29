@@ -37,7 +37,7 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="form-container">
     <form method="POST" class="form-signin" th:object="${projectForm}" th:action="@{/project/add}">
       <h2 th:if="${id == null}" class="form-signin-heading">Crear un nuevo proyecto</h2>
       <h2 th:if="${id != null}" class="form-signin-heading">Editar el proyecto</h2>

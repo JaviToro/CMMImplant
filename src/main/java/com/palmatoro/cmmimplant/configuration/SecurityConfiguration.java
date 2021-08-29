@@ -38,21 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new UserDetailsServiceImpl();
     }
 
-    /*protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .logout()
-                .permitAll()
-                .and()
-                .httpBasic();
-        http
-                .anonymous()
-                .authorities("ROLE_ANONYMOUS");
-        http
-                .authorizeRequests();
-
-    }*/
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
