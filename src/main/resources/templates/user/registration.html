@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Registro de usuario</title>
-        <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+        <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
@@ -56,9 +56,9 @@
                 <div class="form-group">
                     <select th:field="*{userRole}" class="form-control" placeholder="Rol">
                         <option value="0">Elige un rol</option>
-                        <option th:value="ADMIN" th:text="Administrador"></option>
-                        <option th:value="PM" th:text="'Project Manager'"></option>
-                        <option th:value="USER" th:text="Usuario"></option>
+                        <option th:value="ROLE_ADMIN" th:text="Administrador"></option>
+                        <option th:value="ROLE_PM" th:text="'Project Manager'"></option>
+                        <option th:value="ROLE_USER" th:text="Usuario"></option>
                     </select>
                     <span class="has-error" th:if="${#fields.hasErrors('userRole')}" th:errors="*{userRole}"></span>
                 </div>
