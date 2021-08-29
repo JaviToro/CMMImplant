@@ -87,5 +87,7 @@ public class Document {
         this.practiceAreas = practiceAreas;
         this.observations = observations;
     }
+    public Document() {
+    }
   
 }
