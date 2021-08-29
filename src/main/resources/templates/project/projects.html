@@ -38,31 +38,31 @@
         </div>
     </div>
     <span class="has-error" th:text="${error}"></span>
-    <table style="width: 100%">
+    <table class="list" style="width: 100%">
         <thead>
         <tr>
+            <th></th>
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Fecha de inicio</th>
             <th>Fecha de fin</th>
             <th></th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="project : ${projects}">
+            <td><a class="list-see" th:href="@{/project/{id}(id=${project.id})}">Ver</a></td>
             <td th:text="${project.name}">Nombre</td>
             <td th:text="${project.projectType}">Tipo</td>
             <td th:text="${#dates.format(project.startDate, 'dd/MM/yyyy')}">Fecha de inicio</td>
             <td th:text="${#dates.format(project.endDate, 'dd/MM/yyyy')}">Fecha de fin</td>
-            <td><a th:href="@{/project/{id}(id=${project.id})}">Ver</a></td>
-            <td><a th:href="@{/project/add/{id}(id=${project.id})}">Editar</a></td>
-            <td><a th:href="@{/project/delete/{id}(id=${project.id})}">Eliminar</a></td>
+            <td><a class="list-edit"th:href="@{/project/add/{id}(id=${project.id})}">Editar</a></td>
+            <td><a class="list-remove"th:href="@{/project/delete/{id}(id=${project.id})}">Eliminar</a></td>
         </tr>
         </tbody>
     </table>
-    <td><a href="/project/add">Crear nuevo proyecto</a></td>
+    <td><a class="button-create" href="/project/add">Crear nuevo proyecto</a></td>
     <div class="footer">
         <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
     </div>

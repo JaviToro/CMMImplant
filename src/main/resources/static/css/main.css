@@ -19,7 +19,7 @@ body {
     font-weight: 600;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .navbar-button {
@@ -168,4 +168,60 @@ body {
   .button-submit:hover {
     transform: translate(0px, -2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .button-create {
+    color: white;
+    background-color: #376DBE;
+    font-size: 22px;
+    border-radius:10px;
+    border: 0;
+    padding: 6px 20px;
+    text-decoration: none;
+    margin-left: 40px;
+  }
+
+  .button-create:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .list {
+    text-align: center;
+    border-spacing: 0 30px;
+    margin-bottom: 20px;
+  }
+
+  .list th {
+    text-transform: uppercase;
+    padding-bottom: 20px;
+  }
+
+  .list td {
+  }
+
+  .list-see {
+    color: #FFFFFF;
+    background-color: #376DBE;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 6px 20px;
+    border-radius: 8px;
+  }
+
+  .list-edit {
+    color: #FFFFFF;
+    background-color: #00D6A1;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 6px 20px;
+    border-radius: 8px;
+  }
+
+  .list-remove {
+    color: #FFFFFF;
+    background-color: #DB6257;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 6px 20px;
+    border-radius: 8px;
   }
