@@ -7,6 +7,7 @@ import com.palmatoro.cmmimplant.domain.Adaptation;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.AdaptationService;
 import com.palmatoro.cmmimplant.service.UserService;
+import com.palmatoro.cmmimplant.validator.AdaptationValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
