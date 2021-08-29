@@ -151,5 +151,7 @@ public class Audit {
         this.direction = direction;
         this.observations = observations;
     }
+    public Audit() {
+    }
   
 }
