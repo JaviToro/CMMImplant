@@ -37,6 +37,7 @@
       </div>
     </div>
   </div>
+  <button class="button-back" onclick="window.history.back()"><span class="material-icons">arrow_back</span>&nbsp;Volver atrás</button>
   <div class="form-container">
     <form method="POST" class="form-signin" th:object="${projectForm}" th:action="@{/project/add}">
       <h2 th:if="${id == null}" class="form-signin-heading">Crear un nuevo proyecto</h2>
@@ -63,10 +64,9 @@
         <input type="date" th:field="*{endDate}" class="form-control" placeholder="Fecha de fin (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
       </div>
-      <button th:if="${id == null}" type="submit">Crear</button>
-      <button th:if="${id != null}" type="submit">Editar</button>
+      <button class="button-submit" th:if="${id == null}" type="submit"><span class="material-icons">add</span>&nbsp;Crear</button>
+      <button class="button-submit" th:if="${id != null}" type="submit">Editar</button>
     </form>
-    <button onclick="window.history.back()">Volver</button>
   </div>
   <div class="footer">
     <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>

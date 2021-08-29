@@ -156,12 +156,14 @@ body {
   }
 
   .button-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
     background-color: #376DBE;
     font-size: 18px;
     border-radius:6px;
-    width: 80px;
-    height: 40px;
+    padding: 10px 10px;
     border: 0;
   }
 
@@ -171,9 +173,14 @@ body {
   }
 
   .button-create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
     background-color: #376DBE;
-    font-size: 22px;
+    max-width: fit-content;
+    width: auto;
+    font-size: 20px;
     border-radius:10px;
     border: 0;
     padding: 6px 20px;
@@ -184,6 +191,29 @@ body {
   .button-create:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
+
+  .button-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #212121;
+    background-color: #FFFFFF;
+    font-size: 24px;
+    padding: 10px 10px 10px 40px;
+    border: 0;
+  }
+
+.button-back:hover{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #212121;
+  background-color: #FFFFFF;
+  font-size: 24px;
+  padding: 10px 10px 10px 40px;
+  border: 0;
+  transform: translate(0px, -2px);
+}
 
   .list {
     text-align: center;
