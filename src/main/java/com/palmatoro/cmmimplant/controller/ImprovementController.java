@@ -41,7 +41,7 @@ public class ImprovementController {
     @GetMapping(path = "/list")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @RequestMapping(value = {"/all", "/all/error/{code}"}, method = RequestMethod.GET)
-    public String allRisks(Model model, @PathVariable(value = "code", required = false) Integer errorCode) {
+    public String list(Model model, @PathVariable(value = "code", required = false) Integer errorCode) {
 
         if (errorCode != null){
             model.addAttribute("error", "Se ha producido un error");
