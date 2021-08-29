@@ -1,5 +1,7 @@
 package com.palmatoro.cmmimplant.service;
 
+import java.util.List;
+
 import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.domain.User.UserRole;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
@@ -91,6 +93,28 @@ public class UserService {
     public void deleteUserById(Integer id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No user found on ID: " + id));
         userRepository.delete(user);
+    }
+
+    @Transactional
+    public List<User> getAllPM(Integer projectId){
+        List<User> result = (List<User>) this.getAllUsers();
+        for(User u: result){
+            if(u.getUserRole().equals(UserRole.ROLE_PM)==false || u.getProject().getId() != projectId){
+                result.remove(u);
+            }
+        }
+        return result;
+    }
+
+    @Transactional
+    public List<User> getAllUsersByProjectId(Integer projectId){
+        List<User> result = (List<User>) this.getAllUsers();
+        for(User u: result){
+            if(u.getProject().getId() != projectId){
+                result.remove(u);
+            }
+        }
+        return result;
     }
 
 }

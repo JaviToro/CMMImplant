@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.Audit;
+import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.AuditService;
 import com.palmatoro.cmmimplant.service.UserService;
@@ -77,10 +78,19 @@ public class AuditController {
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "id", required = false) Integer id) {
 
+        User principal = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        List<User> pms = this.userService.getAllPM(principal.getProject().getId());
+        List<User> users = this.userService.getAllUsersByProjectId(principal.getProject().getId());
+
         if (id != null) {
             model.addAttribute("result", auditService.getAuditById(id));
+            model.addAttribute("pms", pms);
+            model.addAttribute("users", users);
         } else {
             model.addAttribute("result", new Audit());
+            model.addAttribute("pms", pms);
+            model.addAttribute("users", users);
         }
 
         return "audit/add";

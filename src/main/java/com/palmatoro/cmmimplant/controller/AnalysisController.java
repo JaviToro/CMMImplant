@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.Analysis;
+import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.AnalysisService;
 import com.palmatoro.cmmimplant.service.UserService;
@@ -77,10 +78,16 @@ public class AnalysisController {
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "id", required = false) Integer id) {
 
+        User principal = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        List<User> pms = this.userService.getAllPM(principal.getProject().getId());
+
         if (id != null) {
             model.addAttribute("result", analysisService.getAnalysisById(id));
+            model.addAttribute("pms", pms);
         } else {
             model.addAttribute("result", new Analysis());
+            model.addAttribute("pms", pms);
         }
 
         return "analysis/add";
