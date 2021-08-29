@@ -1,8 +1,8 @@
 package com.palmatoro.cmmimplant.validator;
 
-import com.palmatoro.cmmimplant.domain.Audit;
+import com.palmatoro.cmmimplant.domain.Analysis;
 import com.palmatoro.cmmimplant.domain.User;
-import com.palmatoro.cmmimplant.service.AuditService;
+import com.palmatoro.cmmimplant.service.AnalysisService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class AuditValidator implements Validator {
+public class AnalysisValidator implements Validator {
 
     @Autowired
-    private AuditService auditService;
+    private AnalysisService analysisService;
 
     @Override
     public boolean supports(Class<?> aclass) {
@@ -22,12 +22,19 @@ public class AuditValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        Audit result = (Audit) o;
+        Analysis result = (Analysis) o;
 
-        for(Audit a: auditService.getAllAudits()){
+        for(Analysis a: analysisService.getAllAnalysiss()){
             if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
+            if(a.getAnalysisIdentifier().equals(result.getAnalysisIdentifier()) && result.getId()!=null){
+                errors.rejectValue("analysisIdentifier", "DuplicatedIdentifier");
+            }
+        }
+
+        if(result.getEvaluationDate().before(result.getDate())){
+            errors.rejectValue("evaluationDate", "CloseDateBefore");
         }
     }
 }
