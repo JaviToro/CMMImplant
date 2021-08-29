@@ -35,7 +35,7 @@ public class RiskAndOpportunityController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/list")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @RequestMapping(value = {"/all", "/all/error/{code}"}, method = RequestMethod.GET)
     public String allRisks(Model model, @PathVariable(value = "code", required = false) Integer errorCode) {
@@ -62,9 +62,18 @@ public class RiskAndOpportunityController {
 
         return "riskAndOpportunity/list";
     }
+
+    @GetMapping("/{id}")
+    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
+    public String getResultById(Model model, @PathVariable(value = "id") Integer id) {
+
+        model.addAttribute("result", riskAndOpportunityService.getRiskAndOpportunityById(id));
+
+        return "riskAndOpportunity/view";
+    }
     
-    @RequestMapping(value = {"/add", "/add/{id}"}, method = RequestMethod.GET)
-    
+    @RequestMapping(value = {"/add", "/add/{id}"}, method = RequestMethod.GET)    
+    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "id", required = false) Integer id) {
 
         if (id != null) {
