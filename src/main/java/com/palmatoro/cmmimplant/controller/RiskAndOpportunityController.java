@@ -37,7 +37,7 @@ public class RiskAndOpportunityController {
 
     @GetMapping(path = "/list")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    @RequestMapping(value = {"/all", "/all/error/{code}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/error/{code}"}, method = RequestMethod.GET)
     public String allRisks(Model model, @PathVariable(value = "code", required = false) Integer errorCode) {
 
         if (errorCode != null){

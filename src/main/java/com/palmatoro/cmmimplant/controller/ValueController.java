@@ -63,6 +63,7 @@ public class ValueController {
         }
 
         model.addAttribute("results", results);
+        model.addAttribute("metricId", metricId);
 
         return "value/list";
     }
