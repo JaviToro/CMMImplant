@@ -38,9 +38,8 @@ public class LessonLearntController {
     private UserService userService;
 
 
-    @GetMapping(path = "/list")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    @RequestMapping(value = {"/error/{code}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/list", "/list/error/{code}"}, method = RequestMethod.GET)
     public String list(Model model, @PathVariable(value = "code", required = false) Integer errorCode) {
 
         if (errorCode != null){
@@ -56,7 +55,7 @@ public class LessonLearntController {
         
         
         if(isAdmin==true){
-            results = (List<LessonLearnt>) lessonLearntService.getAllLessonLearnts();
+            lessonLearntService.getAllLessonLearnts().forEach(results::add);
         }else{
             results = userService.getUserByUsername(authentication.getName()).getProject().getLessonsLearnt();
         }

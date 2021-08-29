@@ -39,9 +39,8 @@ public class AlertController {
     private UserService userService;
 
 
-    @GetMapping(path = "/list")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    @RequestMapping(value = {"/error/{code}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/list", "/list/error/{code}"}, method = RequestMethod.GET)
     public String list(Model model, @PathVariable(value = "code", required = false) Integer errorCode) {
 
         if (errorCode != null){
@@ -57,7 +56,7 @@ public class AlertController {
         
         
         if(isAdmin==true){
-            results = (List<Alert>) alertService.getAllAlerts();
+            alertService.getAllAlerts().forEach(results::add);
         }else{
             results = userService.getUserByUsername(authentication.getName()).getProject().getAlerts();
         }
@@ -75,7 +74,7 @@ public class AlertController {
     }
 
     @RequestMapping(value = {"/add", "/add/{id}"}, method = RequestMethod.GET)    
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
+    @Secured({"ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "id", required = false) Integer id) {
 
         if (id != null) {
@@ -88,7 +87,7 @@ public class AlertController {
     }
 
     @PostMapping("/add")
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
+    @Secured({"ROLE_PM", "ROLE_ADMIN"})
     public String addNew(@ModelAttribute("projectForm") Alert result, BindingResult bindingResult) {
         alertValidator.validate(result, bindingResult);
 
@@ -106,7 +105,7 @@ public class AlertController {
     }
 
     @RequestMapping("/delete/{id}")
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
+    @Secured({"ROLE_PM", "ROLE_ADMIN"})
     public String deleteById(@PathVariable(value = "id") Integer id) {
 
         try {
