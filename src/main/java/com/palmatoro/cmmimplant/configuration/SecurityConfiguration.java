@@ -67,6 +67,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth
+                .inMemoryAuthentication()
+                .withUser("admin")
+                .password(bCryptPasswordEncoder().encode("admin"))
+                .roles("ROLE_ADMIN");
     }
 
 }
