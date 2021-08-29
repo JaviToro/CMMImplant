@@ -1,8 +1,8 @@
 package com.palmatoro.cmmimplant.validator;
 
-import com.palmatoro.cmmimplant.domain.Document;
+import com.palmatoro.cmmimplant.domain.Adaptation;
 import com.palmatoro.cmmimplant.domain.User;
-import com.palmatoro.cmmimplant.service.DocumentService;
+import com.palmatoro.cmmimplant.service.AdaptationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class DocumentValidator implements Validator {
+public class AdaptationValidator implements Validator {
 
     @Autowired
-    private DocumentService documentService;
+    private AdaptationService adaptationService;
 
     @Override
     public boolean supports(Class<?> aclass) {
@@ -22,10 +22,10 @@ public class DocumentValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        Document result = (Document) o;
+        Adaptation result = (Adaptation) o;
 
-        for(Document d: documentService.getAllDocuments()){
-            if(d.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+        for(Adaptation a: adaptationService.getAllAdaptations()){
+            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }
