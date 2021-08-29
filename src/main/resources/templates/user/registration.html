@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="form-container">
             <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/user/registration}">
                 <h2 class="form-signin-heading">Crear un nuevo usuario</h2>
                 <div class="form-group">
@@ -82,7 +82,7 @@
                     <input type="password" th:field="*{password}" class="form-control" placeholder="Contraseña">
                     <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
+                <button class="button-submit" type="submit">Enviar</button>
             </form>
         </div>
         <div class="footer">
