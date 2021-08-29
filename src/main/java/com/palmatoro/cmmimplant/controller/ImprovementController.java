@@ -11,7 +11,6 @@ import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.validator.ImprovementValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -66,8 +65,7 @@ public class ImprovementController {
         return "improvement/list";
     }
 
-    @Secured("ROLE_USER")
-    @Cacheable("improvement")
+    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
     public @ResponseBody
     Improvement getImprovementById(@PathVariable Integer id) throws ResourceNotFoundException {

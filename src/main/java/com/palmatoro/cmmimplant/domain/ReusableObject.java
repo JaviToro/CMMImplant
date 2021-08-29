@@ -114,4 +114,7 @@ public class ReusableObject {
         this.link = link;
         this.observations = observations;
     }
+
+    public ReusableObject() {
+    }
 }
