@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 @Service
 @Transactional
@@ -66,7 +67,7 @@ public class ProjectService {
 
     @Transactional
     public Project editProject(Integer id, String name, ProjectType projectType, Date startDate, Date endDate){
-        Project project = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No project found on ID: " + id));
+        Project project = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado un proyecto con el ID: " + id));
 
         project.setName(name);
         project.setProjectType(projectType);
@@ -77,8 +78,11 @@ public class ProjectService {
     }
 
     @Transactional
-    public void deleteProjectById(Integer id){
-        Project project = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No project found on ID: " + id));
+    public void deleteProjectById(Integer id) throws Exception {
+        Project project = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado un proyecto con el ID: " + id));
+        if(getProjectByPrincipal().getId().equals(id)) {
+            throw new Exception("No puedes eliminar el proyecto al que perteneces.");
+        }
         projectRepository.delete(project);
     }
 
@@ -88,7 +92,7 @@ public class ProjectService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
 
-        User u = userService.getUserByEmail(currentPrincipalName);
+        User u = userService.getUserByUsername(currentPrincipalName);
 
         return u.getProject();
     }

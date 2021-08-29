@@ -72,7 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/index")
-                .failureUrl("/login?error=ERROR")
+                .failureUrl("/login?error=Ha habido un error con sus credenciales.")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and()

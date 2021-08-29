@@ -86,7 +86,7 @@ public class UserController {
         model.addAttribute("project", new Project());
         model.addAttribute("projects", projects);
 
-        return "registration";
+        return "user/registration";
     }
 
     @Secured("ROLE_ANONYMOUS")
@@ -95,7 +95,7 @@ public class UserController {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "user/registration";
         }
 
         userService.addNewUser(user);
@@ -115,7 +115,7 @@ public class UserController {
         if (logout != null)
             model.addAttribute("message", "Has cerrado sesión correctamente.");
 
-        return "login";
+        return "user/login";
     }
 
 }

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Lista de proyectos</title>
-        <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+        <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
@@ -37,6 +37,7 @@
             </div>
         </div>
     </div>
+    <span class="has-error" th:text="${error}"></span>
     <table style="width: 100%">
         <thead>
         <tr>
@@ -44,6 +45,7 @@
             <th>Tipo</th>
             <th>Fecha de inicio</th>
             <th>Fecha de fin</th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -54,8 +56,9 @@
             <td th:text="${project.projectType}">Tipo</td>
             <td th:text="${#dates.format(project.startDate, 'dd/MM/yyyy')}">Fecha de inicio</td>
             <td th:text="${#dates.format(project.endDate, 'dd/MM/yyyy')}">Fecha de fin</td>
-            <td><a href="">Editar</a></td>
-            <td><a href="">Eliminar</a></td>
+            <td><a th:href="@{/project/{id}(id=${project.id})}">Ver</a></td>
+            <td><a th:href="@{/project/add/{id}(id=${project.id})}">Editar</a></td>
+            <td><a th:href="@{/project/delete/{id}(id=${project.id})}">Eliminar</a></td>
         </tr>
         </tbody>
     </table>
