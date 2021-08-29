@@ -29,5 +29,9 @@ public class ProjectValidator implements Validator {
         if (projectService.getProjectByName(project.getName()) != null) {
             errors.rejectValue("name", "DuplicatedProjectName");
         }
+
+        if(project.getEndDate().before(project.getStartDate())){
+            errors.rejectValue("endDate", "CloseDateBefore");
+        }
     }
 }

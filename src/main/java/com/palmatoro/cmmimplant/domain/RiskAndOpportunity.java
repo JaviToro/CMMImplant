@@ -268,4 +268,8 @@ public class RiskAndOpportunity {
         this.observations = observations;
         this.priority = priority;
     }
+
+    public RiskAndOpportunity(){
+        
+    }
 }
