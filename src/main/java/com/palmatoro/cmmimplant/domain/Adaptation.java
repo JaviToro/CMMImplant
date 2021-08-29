@@ -87,4 +87,7 @@ public class Adaptation {
         this.arrangement = arrangement;
         this.observations = observations;
     }
+
+    public Adaptation() {
+    }
 }

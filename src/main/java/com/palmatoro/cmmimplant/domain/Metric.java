@@ -126,4 +126,6 @@ public class Metric {
         this.lowerLimit = lowerLimit;
         this.observations = observations;
     }
+    public Metric() {
+    }
 }

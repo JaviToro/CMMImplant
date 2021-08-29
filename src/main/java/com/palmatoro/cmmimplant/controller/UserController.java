@@ -7,7 +7,7 @@ import java.util.List;
 import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.domain.Project;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
-import com.palmatoro.cmmimplant.service.SecurityService;
+import com.palmatoro.cmmimplant.service.SecurityServiceImpl;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.service.ProjectService;
 
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @RequestMapping(path = "/user")
 public class UserController {
 
@@ -29,7 +28,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private SecurityService securityService;
+    private SecurityServiceImpl securityService;
 
     @Autowired
     private ProjectService projectService;
@@ -87,7 +86,7 @@ public class UserController {
         model.addAttribute("project", new Project());
         model.addAttribute("projects", projects);
 
-        return "registration";
+        return "user/registration";
     }
 
     @Secured("ROLE_ANONYMOUS")
@@ -96,12 +95,27 @@ public class UserController {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "user/registration";
         }
 
         userService.addNewUser(user);
 
         return "redirect:/index";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model, String error, String logout) {
+        if (securityService.isAuthenticated()) {
+            return "redirect:/index";
+        }
+
+        if (error != null)
+            model.addAttribute("error", error.toString());
+
+        if (logout != null)
+            model.addAttribute("message", "Has cerrado sesión correctamente.");
+
+        return "user/login";
     }
 
 }

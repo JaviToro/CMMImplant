@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Inicio de sesión</title>
-        <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+        <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
@@ -37,20 +37,19 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="form-container">
             <form class="form-signin" method="POST" th:action="@{/login}">
-              <h2 class="form-heading">Inicio de sesión</h2>
-      
+              <h2 class="form-signin-heading">Inicio de sesión</h2>
+              <span th:text="${message}"></span>
               <div class="form-group">
-                  <span th:text="${message}"></span>
-                  <input name="email" type="email" class="form-control" placeholder="Email"
+                  <input name="username" type="text" class="form-control" placeholder="Usuario"
                          autofocus="true"/>
               </div>
               <div class="form-group">
                   <input name="password" type="password" class="form-control" placeholder="Contraseña"/>
                   <span class="has-error" th:text="${error}"></span>
               </div>
-              <button type="submit">Entrar</button>
+              <button class="button-submit" type="submit">Entrar</button>
             </form>
           </div>
         <div class="footer">

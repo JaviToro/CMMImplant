@@ -1,6 +1,10 @@
 package com.palmatoro.cmmimplant.configuration;
 
 import com.palmatoro.cmmimplant.service.UserDetailsServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,18 +12,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
+    @Qualifier("userDetailsServiceImpl")
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SpringSecurityDialect securityDialect() {
+        return new SpringSecurityDialect();
     }
 
     @Bean
@@ -28,39 +39,39 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder encoder =
-                PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth
-                .inMemoryAuthentication()
-                .withUser("user")
-                .password(encoder.encode("user"))
-                .roles("USER")
-                .and()
-                .withUser("pm")
-                .password(encoder.encode("pm"))
-                .roles("pm")
-                .and()
-                .withUser("admin")
-                .password(encoder.encode("admin"))
-                .roles("ADMIN");
-
-    }
-
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
+                .cors()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/**", "user/login", "/login", "/login/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
                 .loginPage("/login")
-                .usernameParameter("email")
                 .permitAll()
+                .defaultSuccessUrl("/index")
+                .failureUrl("/login?error=Ha habido un error con sus credenciales.")
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .and()
                 .logout()
                 .permitAll();
-        http
-                .anonymous()
-                .authorities("ROLE_ANONYMOUS");
-        http
-                .authorizeRequests();
-
     }
+
+    @Bean
+    public AuthenticationManager customAuthenticationManager() throws Exception {
+        return authenticationManager();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth
+                .inMemoryAuthentication()
+                .withUser("admin")
+                .password(bCryptPasswordEncoder().encode("admin"))
+                .roles("ADMIN");
+    }
+
 }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Crear nuevo proyecto</title>
-    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
@@ -37,11 +37,14 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <button class="button-back" onclick="window.history.back()"><span class="material-icons">arrow_back</span>&nbsp;Volver atrás</button>
+  <div class="form-container">
     <form method="POST" class="form-signin" th:object="${projectForm}" th:action="@{/project/add}">
-      <h2 class="form-signin-heading">Crear un nuevo proyecto</h2>
+      <h2 th:if="${id == null}" class="form-signin-heading">Crear un nuevo proyecto</h2>
+      <h2 th:if="${id != null}" class="form-signin-heading">Editar el proyecto</h2>
+      <input type="hidden" th:field="*{id}" id="id" class="form-control" placeholder="Id"/>
       <div class="form-group">
-        <input type="text" th:field="*{name}" class="form-control" placeholder="Nombre"
+        <input type="text" th:field="*{name}" id="name" class="form-control" placeholder="Nombre"
                autofocus="true">
         <span class="has-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
       </div>
@@ -61,8 +64,8 @@
         <input type="date" th:field="*{endDate}" class="form-control" placeholder="Fecha de fin (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
       </div>
-      <button type="submit">Crear</button>
-      <button type="submit">Volver</button>
+      <button class="button-submit" th:if="${id == null}" type="submit"><span class="material-icons">add</span>&nbsp;Crear</button>
+      <button class="button-submit" th:if="${id != null}" type="submit">Editar</button>
     </form>
   </div>
   <div class="footer">

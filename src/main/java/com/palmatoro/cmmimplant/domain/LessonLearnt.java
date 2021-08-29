@@ -120,4 +120,7 @@ public class LessonLearnt {
         this.link = link;
         this.observations = observations;
     }
+
+    public LessonLearnt() {
+    }
 }

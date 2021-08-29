@@ -136,4 +136,6 @@ public class Analysis {
         this.date = date;
         this.evaluationDate = evaluationDate;
     }
+    public Analysis() {
+    }
 }

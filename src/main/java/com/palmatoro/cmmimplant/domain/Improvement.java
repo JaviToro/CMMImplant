@@ -252,4 +252,7 @@ public class Improvement {
             this.observations = observations;
     }
 
+    public Improvement() {
+    }
+
 }
