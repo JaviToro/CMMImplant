@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity;
-import com.palmatoro.cmmimplant.repository.RiskAndOpportunityRepository;
 import com.palmatoro.cmmimplant.service.RiskAndOpportunityService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.validator.RiskAndOpportunityValidator;
