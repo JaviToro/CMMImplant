@@ -25,7 +25,7 @@ public class DocumentValidator implements Validator {
         Document result = (Document) o;
 
         for(Document d: documentService.getAllDocuments()){
-            if(d.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(d.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }

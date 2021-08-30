@@ -87,7 +87,7 @@ public class DocumentController {
 
     @PostMapping("/add")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") Document result, BindingResult bindingResult) {
+    public String addNew(@ModelAttribute("result") Document result, BindingResult bindingResult) {
         documentValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {
