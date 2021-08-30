@@ -205,25 +205,7 @@ public class Improvement {
     }
 
     public void setPriority(Priority priority) {
-        if(this.getPercentage()>=75.0 && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.INMEDIATLY);
-        }else if(this.getPercentage()>=75.0 && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.HIGH);
-        }else if(this.getPercentage()<75.0 && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.HIGH);
-        }else if(this.getPercentage()>=75.0 && this.getImpact()==Impact.LOW){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(this.getPercentage()<=50.0 && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(this.getPercentage()<75.0 && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.MID);
-        }else if(this.getPercentage()<75.0 && this.getImpact()==Impact.LOW){
-            this.setPriority(Priority.MIDLOW);
-        }else if(this.getPercentage()<=50.0 && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.MIDLOW);
-        }else{
-            this.setPriority(Priority.LOW);
-        }
+        this.priority = priority;
     }
 
     // Relationships --------------------------------------------------
@@ -266,6 +248,26 @@ public class Improvement {
             this.evaluationDate = evaluationDate;
             this.score = score;
             this.observations = observations;
+
+            if(percentage>=75.0 && impact==Impact.HIGH){
+                this.setPriority(Priority.INMEDIATLY);
+            }else if(percentage>=75.0 && impact==Impact.MID){
+                this.setPriority(Priority.HIGH);
+            }else if(percentage<75.0 && impact==Impact.HIGH){
+                this.setPriority(Priority.HIGH);
+            }else if(percentage>=75.0 && impact==Impact.LOW){
+                this.setPriority(Priority.MIDHIGH);
+            }else if(percentage<=50.0 && impact==Impact.HIGH){
+                this.setPriority(Priority.MIDHIGH);
+            }else if(percentage<75.0 && impact==Impact.MID){
+                this.setPriority(Priority.MID);
+            }else if(percentage<75.0 && impact==Impact.LOW){
+                this.setPriority(Priority.MIDLOW);
+            }else if(percentage<=50.0 && impact==Impact.MID){
+                this.setPriority(Priority.MIDLOW);
+            }else{
+                this.setPriority(Priority.LOW);
+            }
     }
 
     public Improvement() {

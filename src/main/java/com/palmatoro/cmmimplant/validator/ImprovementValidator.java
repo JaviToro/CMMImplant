@@ -25,7 +25,7 @@ public class ImprovementValidator implements Validator {
         Improvement result = (Improvement) o;
 
         for(Improvement i: improvementService.getAllImprovements()){
-            if(i.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(i.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }

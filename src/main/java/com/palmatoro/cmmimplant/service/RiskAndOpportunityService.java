@@ -3,7 +3,6 @@ package com.palmatoro.cmmimplant.service;
 import java.util.Date;
 
 import com.palmatoro.cmmimplant.domain.Impact;
-import com.palmatoro.cmmimplant.domain.Priority;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity.RiskCategory;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity.RiskMonitorization;

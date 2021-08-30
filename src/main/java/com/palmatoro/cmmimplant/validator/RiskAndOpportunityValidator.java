@@ -25,7 +25,7 @@ public class RiskAndOpportunityValidator implements Validator {
         RiskAndOpportunity result = (RiskAndOpportunity) o;
 
         for(RiskAndOpportunity ro: riskAndOpportunityService.getAllRiskAndOpportunitys()){
-            if(ro.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(ro.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }

@@ -5,6 +5,7 @@ import java.util.Date;
 import com.palmatoro.cmmimplant.domain.Impact;
 import com.palmatoro.cmmimplant.domain.Improvement;
 import com.palmatoro.cmmimplant.domain.Improvement.ImprovementStatus;
+import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.repository.ImprovementRepository;
 
@@ -43,7 +44,7 @@ public class ImprovementService {
 
     @Transactional
     public Improvement editImprovement(Integer id, String title, String description, ImprovementStatus status, Impact impact, Double percentage, String estimatedEffort, String realEffort, 
-    Date receptionDate, Date approvalDate, Date estimatedImplementation, Date realImplementation, Date evaluationDate, Double score, String observations){
+    Date receptionDate, Date approvalDate, Date estimatedImplementation, Date realImplementation, Date evaluationDate, Double score, String observations, User responsable){
         Improvement improvement = improvementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No improvement found on ID: " + id));
 
         improvement.setTitle(title);
@@ -60,6 +61,7 @@ public class ImprovementService {
         improvement.setEvaluationDate(evaluationDate);
         improvement.setScore(score);
         improvement.setObservations(observations);
+        improvement.setResponsable(responsable);
 
         return improvementRepository.save(improvement);
     }

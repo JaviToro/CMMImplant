@@ -115,7 +115,7 @@ public class ImprovementController {
         if (result.getId() != null) {
             improvementService.editImprovement(result.getId(), result.getTitle(), result.getDescription(), result.getStatus(), result.getImpact(),
              result.getPercentage(), result.getEstimatedEffort(), result.getRealEffort(), result.getReceptionDate(), result.getApprovalDate(), result.getEstimatedImplementation(),
-              result.getRealImplementation(), result.getEvaluationDate(), result.getScore(), result.getObservations());
+              result.getRealImplementation(), result.getEvaluationDate(), result.getScore(), result.getObservations(), result.getResponsable());
         } else {
             improvementService.addNewImprovement(result);
         }
