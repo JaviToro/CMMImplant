@@ -47,8 +47,8 @@
                 <th>Área</th>
                 <th>Fecha</th>
                 <th>Observaciones</th>
-                <th></th>
-                <th></th>
+                <th sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_PM')"></th>
+                <th sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_PM')"></th>
             </tr>
             </thead>
             <tbody>
@@ -58,12 +58,12 @@
                 <td th:text="${res.area}">Área</td>
                 <td th:text="${#dates.format(res.date, 'dd/MM/yyyy')}">Fecha</td>
                 <td th:text="${res.observation}">Observaciones</td>
-                <td><a class="list-edit" th:href="@{/alert/add/{id}(id=${res.id})}">Editar</a></td>
-                <td><a class="list-remove" th:href="@{/alert/delete/{id}(id=${res.id})}">Eliminar</a></td>
+                <td><a class="list-edit" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_PM')" th:href="@{/alert/add/{id}(id=${res.id})}">Editar</a></td>
+                <td><a class="list-remove" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_PM')" th:href="@{/alert/delete/{id}(id=${res.id})}">Eliminar</a></td>
             </tr>
             </tbody>
         </table>
-        <td><a class="button-create" href="/alert/add">Crear nuevo registro</a></td>
+        <td><a class="button-create" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_PM')" href="/alert/add">Crear nuevo registro</a></td>
     </div>
     <div class="footer">
         <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
