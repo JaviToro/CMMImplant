@@ -88,7 +88,7 @@ public class MetricController {
 
     @PostMapping("/add")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") Metric result, BindingResult bindingResult) {
+    public String addNew(@ModelAttribute("result") Metric result, BindingResult bindingResult) {
         metricValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {
