@@ -8,154 +8,156 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
-  <div class="navbar">
-    <div class="navbar-left">
-      <div class="navbar-logo">
-        <p>CMMImplant</p>
+    <div class="navbar">
+      <div class="navbar-left">
+        <div class="navbar-logo">
+          <p>CMMImplant</p>
+        </div>
+        <div class="navbar-button">
+          <span class="material-icons">home</span>
+          <a href="/index">Inicio</a>
+        </div>
+        <div class="navbar-button">
+          <span class="material-icons">track_changes</span>
+          <a href="/tracking">Seguimiento</a>
+        </div>
+        <div class="navbar-button">
+          <span class="material-icons">search</span>
+          <a href="/revision">Revisión</a>
+        </div>
+        <div class="navbar-button-active">
+          <span class="material-icons">work</span>
+          <a href="/project/all">Proyecto</a>
+        </div>
       </div>
-      <div class="navbar-button">
-        <span class="material-icons">home</span>
-        <a href="/index">Inicio</a>
-      </div>
-      <div class="navbar-button">
-        <span class="material-icons">track_changes</span>
-        <a href="/tracking">Seguimiento</a>
-      </div>
-      <div class="navbar-button">
-        <span class="material-icons">search</span>
-        <a href="/revision">Revisión</a>
-      </div>
-      <div class="navbar-button-active">
-        <span class="material-icons">work</span>
-        <a href="/project/all">Proyecto</a>
+      <div class="navbar-right">
+        <div class="navbar-register">
+          <span class="material-icons">person_add</span>
+          <a href="/user/registration">Registrarse</a>
+        </div>
       </div>
     </div>
-    <div class="navbar-right">
-      <div class="navbar-register">
-        <span class="material-icons">person_add</span>
-        <a href="/user/registration">Registrarse</a>
+    <div class="content">
+      <button class="button-back" onclick="window.history.back()"><span class="material-icons">arrow_back</span>&nbsp;Volver atrás</button>
+      <div class="form-container">
+        <form method="POST" class="form-signin" th:object="${result}" th:action="@{/riskAndOpportunity/add}">
+          <h2 th:if="${id == null}" class="form-signin-heading">Crear un nuevo registro</h2>
+          <h2 th:if="${id != null}" class="form-signin-heading">Editar el registro</h2>
+          <input type="hidden" th:field="*{id}" id="id" class="form-control" placeholder="Id"/>
+          <input type="hidden" th:field="*{project}" id="project" class="form-control" placeholder="Project"/>
+          <input type="hidden" th:field="*{priority}" id="priority" class="form-control" placeholder="Priority"/>
+          <div class="form-group">
+            <input type="text" th:field="*{identifier}" id="identifier" class="form-control" placeholder="Identificador"
+                   autofocus="true">
+            <span class="has-error" th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}"></span>
+          </div>
+          <div class="form-group">
+            <select th:field="*{type}" class="form-control" placeholder="Tipo de registro">
+              <option value="0">Tipo de registro</option>
+              <option th:value="RISK" th:text="'Riesgo'"></option>
+              <option th:value="OPPORTUNITY" th:text="Oportunidad"></option>
+              <option th:value="PROBLEM" th:text="Problema"></option>
+            </select>
+            <span class="has-error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+          </div>
+          <div class="form-group">
+            <select th:field="*{category}" class="form-control" placeholder="Categoría">
+              <option value="0">Categoría</option>
+              <option th:value="TECHNOLOGICAL" th:text="Tecnológico"></option>
+              <option th:value="CONTRACTUAL" th:text="Contractual"></option>
+              <option th:value="MANAGING" th:text="'De Gestion'"></option>
+              <option th:value="PROCESS" th:text="'De Proceso'"></option>
+              <option th:value="TEMPLATE" th:text="Plantillas"></option>
+              <option th:value="OTHER" th:text="Otro"></option>
+            </select>
+            <span class="has-error" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+          </div>
+          <div class="form-group">
+            <input type="text" th:field="*{title}" id="title" class="form-control" placeholder="Título"
+                   autofocus="true">
+            <span class="has-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+          </div>
+          <div class="form-group">
+            <input type="text" th:field="*{description}" id="description" class="form-control" placeholder="Descripción"
+                   autofocus="true">
+            <span class="has-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+          </div>
+          <p class="form-date">Fecha de identificación:</p>
+          <div class="form-group">
+            <input type="date" th:field="*{identificationDate}" class="form-control" placeholder="Fecha de identificación (dd/mm/aaaa)">
+            <span class="has-error" th:if="${#fields.hasErrors('identificationDate')}" th:errors="*{identificationDate}"></span>
+          </div>
+          <div class="form-group">
+            <select th:field="*{probability}" class="form-control" placeholder="Probabilidad">
+              <option value="0">Probabilidad</option>
+              <option th:value="HIGH" th:text="'Alta'"></option>
+              <option th:value="MID" th:text="Media"></option>
+              <option th:value="LOW" th:text="Baja"></option>
+            </select>
+            <span class="has-error" th:if="${#fields.hasErrors('probability')}" th:errors="*{probability}"></span>
+          </div>
+          <div class="form-group">
+            <select th:field="*{impact}" class="form-control" placeholder="Impacto">
+              <option value="0">Impacto</option>
+              <option th:value="HIGH" th:text="'Alta'"></option>
+              <option th:value="MID" th:text="Media"></option>
+              <option th:value="LOW" th:text="Baja"></option>
+            </select>
+            <span class="has-error" th:if="${#fields.hasErrors('impact')}" th:errors="*{impact}"></span>
+          </div>
+          <div class="form-group">
+            <input type="text" th:field="*{threshold}" id="threshold" class="form-control" placeholder="Umbral"
+                   autofocus="true">
+            <span class="has-error" th:if="${#fields.hasErrors('threshold')}" th:errors="*{threshold}"></span>
+          </div>
+          <div class="form-group">
+            <input type="text" th:field="*{consequences}" id="consequences" class="form-control" placeholder="Consecuencias"
+                   autofocus="true">
+            <span class="has-error" th:if="${#fields.hasErrors('consequences')}" th:errors="*{consequences}"></span>
+          </div>
+          <div class="form-group">
+            <input type="text" th:field="*{actionPlan}" id="actionPlan" class="form-control" placeholder="Plan de acción"
+                   autofocus="true">
+            <span class="has-error" th:if="${#fields.hasErrors('actionPlan')}" th:errors="*{actionPlan}"></span>
+          </div>
+          <div class="form-group">
+            <select th:field="*{status}" class="form-control" placeholder="Estado">
+              <option value="0">Estado</option>
+              <option th:value="OPEN" th:text="'Abierto'"></option>
+              <option th:value="CLOSED" th:text="Cerrado"></option>
+            </select>
+            <span class="has-error" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+          </div>
+          <div class="form-group">
+            <select th:field="*{monitorization}" class="form-control" placeholder="Monitorización">
+              <option value="0">Monitorización</option>
+              <option th:value="DAILY" th:text="'Diario'"></option>
+              <option th:value="WEEKLY" th:text="Semanal"></option>
+              <option th:value="QUINCENAL" th:text="Quincenal"></option>
+              <option th:value="MONTHLY" th:text="Mensual"></option>
+            </select>
+            <span class="has-error" th:if="${#fields.hasErrors('monitorization')}" th:errors="*{monitorization}"></span>
+          </div>
+          <p class="form-date">Fecha de última revisión:</p>
+          <div class="form-group">
+            <input type="date" th:field="*{lastRevisionDate}" class="form-control" placeholder="Fecha de última revisión (dd/mm/aaaa)">
+            <span class="has-error" th:if="${#fields.hasErrors('lastRevisionDate')}" th:errors="*{lastRevisionDate}"></span>
+          </div>
+          <p class="form-date">Fecha de cierre:</p>
+          <div class="form-group">
+            <input type="date" th:field="*{closeDate}" class="form-control" placeholder="Fecha de cierre (dd/mm/aaaa)">
+            <span class="has-error" th:if="${#fields.hasErrors('closeDate')}" th:errors="*{closeDate}"></span>
+          </div>
+          <div class="form-group">
+            <input type="text" th:field="*{observations}" id="observations" class="form-control" placeholder="Observaciones"
+                   autofocus="true">
+            <span class="has-error" th:if="${#fields.hasErrors('observations')}" th:errors="*{observations}"></span>
+          </div>
+          <button class="button-submit" th:if="${id == null}" type="submit"><span class="material-icons">add</span>&nbsp;Crear</button>
+          <button class="button-submit" th:if="${id != null}" type="submit">Editar</button>
+        </form>
       </div>
     </div>
-  </div>
-  <button class="button-back" onclick="window.history.back()"><span class="material-icons">arrow_back</span>&nbsp;Volver atrás</button>
-  <div class="form-container">
-    <form method="POST" class="form-signin" th:object="${result}" th:action="@{/riskAndOpportunity/add}">
-      <h2 th:if="${id == null}" class="form-signin-heading">Crear un nuevo registro</h2>
-      <h2 th:if="${id != null}" class="form-signin-heading">Editar el registro</h2>
-      <input type="hidden" th:field="*{id}" id="id" class="form-control" placeholder="Id"/>
-      <input type="hidden" th:field="*{project}" id="project" class="form-control" placeholder="Project"/>
-      <input type="hidden" th:field="*{priority}" id="priority" class="form-control" placeholder="Priority"/>
-      <div class="form-group">
-        <input type="text" th:field="*{identifier}" id="identifier" class="form-control" placeholder="Identificador"
-               autofocus="true">
-        <span class="has-error" th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}"></span>
-      </div>
-      <div class="form-group">
-        <select th:field="*{type}" class="form-control" placeholder="Tipo de registro">
-          <option value="0">Tipo de registro</option>
-          <option th:value="RISK" th:text="'Riesgo'"></option>
-          <option th:value="OPPORTUNITY" th:text="Oportunidad"></option>
-          <option th:value="PROBLEM" th:text="Problema"></option>
-        </select>
-        <span class="has-error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
-      </div>
-      <div class="form-group">
-        <select th:field="*{category}" class="form-control" placeholder="Categoría">
-          <option value="0">Categoría</option>
-          <option th:value="TECHNOLOGICAL" th:text="Tecnológico"></option>
-          <option th:value="CONTRACTUAL" th:text="Contractual"></option>
-          <option th:value="MANAGING" th:text="'De Gestion'"></option>
-          <option th:value="PROCESS" th:text="'De Proceso'"></option>
-          <option th:value="TEMPLATE" th:text="Plantillas"></option>
-          <option th:value="OTHER" th:text="Otro"></option>
-        </select>
-        <span class="has-error" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
-      </div>
-      <div class="form-group">
-        <input type="text" th:field="*{title}" id="title" class="form-control" placeholder="Título"
-               autofocus="true">
-        <span class="has-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-      </div>
-      <div class="form-group">
-        <input type="text" th:field="*{description}" id="description" class="form-control" placeholder="Descripción"
-               autofocus="true">
-        <span class="has-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-      </div>
-      <p class="form-date">Fecha de identificación:</p>
-      <div class="form-group">
-        <input type="date" th:field="*{identificationDate}" class="form-control" placeholder="Fecha de identificación (dd/mm/aaaa)">
-        <span class="has-error" th:if="${#fields.hasErrors('identificationDate')}" th:errors="*{identificationDate}"></span>
-      </div>
-      <div class="form-group">
-        <select th:field="*{probability}" class="form-control" placeholder="Probabilidad">
-          <option value="0">Probabilidad</option>
-          <option th:value="HIGH" th:text="'Alta'"></option>
-          <option th:value="MID" th:text="Media"></option>
-          <option th:value="LOW" th:text="Baja"></option>
-        </select>
-        <span class="has-error" th:if="${#fields.hasErrors('probability')}" th:errors="*{probability}"></span>
-      </div>
-      <div class="form-group">
-        <select th:field="*{impact}" class="form-control" placeholder="Impacto">
-          <option value="0">Impacto</option>
-          <option th:value="HIGH" th:text="'Alta'"></option>
-          <option th:value="MID" th:text="Media"></option>
-          <option th:value="LOW" th:text="Baja"></option>
-        </select>
-        <span class="has-error" th:if="${#fields.hasErrors('impact')}" th:errors="*{impact}"></span>
-      </div>
-      <div class="form-group">
-        <input type="text" th:field="*{threshold}" id="threshold" class="form-control" placeholder="Umbral"
-               autofocus="true">
-        <span class="has-error" th:if="${#fields.hasErrors('threshold')}" th:errors="*{threshold}"></span>
-      </div>
-      <div class="form-group">
-        <input type="text" th:field="*{consequences}" id="consequences" class="form-control" placeholder="Consecuencias"
-               autofocus="true">
-        <span class="has-error" th:if="${#fields.hasErrors('consequences')}" th:errors="*{consequences}"></span>
-      </div>
-      <div class="form-group">
-        <input type="text" th:field="*{actionPlan}" id="actionPlan" class="form-control" placeholder="Plan de acción"
-               autofocus="true">
-        <span class="has-error" th:if="${#fields.hasErrors('actionPlan')}" th:errors="*{actionPlan}"></span>
-      </div>
-      <div class="form-group">
-        <select th:field="*{status}" class="form-control" placeholder="Estado">
-          <option value="0">Estado</option>
-          <option th:value="OPEN" th:text="'Abierto'"></option>
-          <option th:value="CLOSED" th:text="Cerrado"></option>
-        </select>
-        <span class="has-error" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
-      </div>
-      <div class="form-group">
-        <select th:field="*{monitorization}" class="form-control" placeholder="Monitorización">
-          <option value="0">Monitorización</option>
-          <option th:value="DAILY" th:text="'Diario'"></option>
-          <option th:value="WEEKLY" th:text="Semanal"></option>
-          <option th:value="QUINCENAL" th:text="Quincenal"></option>
-          <option th:value="MONTHLY" th:text="Mensual"></option>
-        </select>
-        <span class="has-error" th:if="${#fields.hasErrors('monitorization')}" th:errors="*{monitorization}"></span>
-      </div>
-      <p class="form-date">Fecha de última revisión:</p>
-      <div class="form-group">
-        <input type="date" th:field="*{lastRevisionDate}" class="form-control" placeholder="Fecha de última revisión (dd/mm/aaaa)">
-        <span class="has-error" th:if="${#fields.hasErrors('lastRevisionDate')}" th:errors="*{lastRevisionDate}"></span>
-      </div>
-      <p class="form-date">Fecha de cierre:</p>
-      <div class="form-group">
-        <input type="date" th:field="*{closeDate}" class="form-control" placeholder="Fecha de cierre (dd/mm/aaaa)">
-        <span class="has-error" th:if="${#fields.hasErrors('closeDate')}" th:errors="*{closeDate}"></span>
-      </div>
-      <div class="form-group">
-        <input type="text" th:field="*{observations}" id="observations" class="form-control" placeholder="Observaciones"
-               autofocus="true">
-        <span class="has-error" th:if="${#fields.hasErrors('observations')}" th:errors="*{observations}"></span>
-      </div>
-      <button class="button-submit" th:if="${id == null}" type="submit"><span class="material-icons">add</span>&nbsp;Crear</button>
-      <button class="button-submit" th:if="${id != null}" type="submit">Editar</button>
-    </form>
-  </div>
   <div class="footer">
     <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
   </div>
