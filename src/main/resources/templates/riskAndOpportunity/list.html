@@ -37,36 +37,38 @@
             </div>
         </div>
     </div>
-    <span class="has-error" th:text="${error}"></span>
-    <table class="list" style="width: 100%">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Identificador</th>
-            <th>Tipo</th>
-            <th>Categoría</th>
-            <th>Título</th>
-            <th>Prioridad</th>
-            <th>Fecha de última revisión</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="ro : ${results}">
-            <td><a class="list-see" th:href="@{/riskAndOpportunity/{id}(id=${ro.id})}">Ver</a></td>
-            <td th:text="${ro.identifier}">Identificador</td>
-            <td th:text="${ro.type}">Tipo</td>
-            <td th:text="${ro.category}">Categoría</td>
-            <td th:text="${ro.description}">Título</td>
-            <td th:text="${ro.priority}">Prioridad</td>            
-            <td th:text="${#dates.format(ro.lastRevisionDate, 'dd/MM/yyyy')}">Fecha de última revisión</td>
-            <td><a class="list-edit"th:href="@{/riskAndOpportunity/add/{id}(id=${ro.id})}">Editar</a></td>
-            <td><a class="list-remove"th:href="@{/riskAndOpportunity/delete/{id}(id=${ro.id})}">Eliminar</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <td><a class="button-create" href="/riskAndOpportunity/add">Crear nuevo registro</a></td>
+    <div class="content">
+        <span class="has-error" th:text="${error}"></span>
+        <table class="list" style="width: 100%">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Identificador</th>
+                <th>Tipo</th>
+                <th>Categoría</th>
+                <th>Título</th>
+                <th>Prioridad</th>
+                <th>Fecha de última revisión</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ro : ${results}">
+                <td><a class="list-see" th:href="@{/riskAndOpportunity/{id}(id=${ro.id})}">Ver</a></td>
+                <td th:text="${ro.identifier}">Identificador</td>
+                <td th:text="${ro.type}">Tipo</td>
+                <td th:text="${ro.category}">Categoría</td>
+                <td th:text="${ro.description}">Título</td>
+                <td th:text="${ro.priority}">Prioridad</td>
+                <td th:text="${#dates.format(ro.lastRevisionDate, 'dd/MM/yyyy')}">Fecha de última revisión</td>
+                <td><a class="list-edit"th:href="@{/riskAndOpportunity/add/{id}(id=${ro.id})}">Editar</a></td>
+                <td><a class="list-remove"th:href="@{/riskAndOpportunity/delete/{id}(id=${ro.id})}">Eliminar</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <td><a class="button-create" href="/riskAndOpportunity/add">Crear nuevo registro</a></td>
+    </div>
     <div class="footer">
         <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
     </div>

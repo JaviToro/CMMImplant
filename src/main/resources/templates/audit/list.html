@@ -37,34 +37,36 @@
             </div>
         </div>
     </div>
-    <span class="has-error" th:text="${error}"></span>
-    <table class="list" style="width: 100%">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Identificador</th>            
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Id Externo</th>
-            <th>Fecha de auditoría</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="res : ${results}">
-            <td><a class="list-see" th:href="@{/audit/{id}(id=${res.id})}">Ver</a></td>
-            <td th:text="${res.identifier}">Identificador</td>            
-            <td th:text="${res.type}">Tipo</td>
-            <td th:text="${res.status}">Estado</td>
-            <td th:text="${res.auditIdentifier}">Id externo</td>
-            <td th:text="${#dates.format(res.auditDate, 'dd/MM/yyyy')}">Fecha de auditoría</td>
-            <td><a class="list-edit"th:href="@{/audit/add/{id}(id=${res.id})}">Editar</a></td>
-            <td><a class="list-remove"th:href="@{/audit/delete/{id}(id=${res.id})}">Eliminar</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <td><a class="button-create" href="/audit/add">Crear nuevo registro</a></td>
+    <div class="content">
+        <span class="has-error" th:text="${error}"></span>
+        <table class="list" style="width: 100%">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Identificador</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Id Externo</th>
+                <th>Fecha de auditoría</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="res : ${results}">
+                <td><a class="list-see" th:href="@{/audit/{id}(id=${res.id})}">Ver</a></td>
+                <td th:text="${res.identifier}">Identificador</td>
+                <td th:text="${res.type}">Tipo</td>
+                <td th:text="${res.status}">Estado</td>
+                <td th:text="${res.auditIdentifier}">Id externo</td>
+                <td th:text="${#dates.format(res.auditDate, 'dd/MM/yyyy')}">Fecha de auditoría</td>
+                <td><a class="list-edit" th:href="@{/audit/add/{id}(id=${res.id})}">Editar</a></td>
+                <td><a class="list-remove" th:href="@{/audit/delete/{id}(id=${res.id})}">Eliminar</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <td><a class="button-create" href="/audit/add">Crear nuevo registro</a></td>
+    </div>
     <div class="footer">
         <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
     </div>
