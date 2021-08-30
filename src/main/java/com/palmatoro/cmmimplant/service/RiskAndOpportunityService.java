@@ -42,6 +42,7 @@ public class RiskAndOpportunityService {
     @Transactional
     public RiskAndOpportunity addNewRiskAndOpportunity(RiskAndOpportunity riskAndOpportunity){
         riskAndOpportunity.setProject(projectService.getProjectByPrincipal());
+        riskAndOpportunity.setPriority();
         return riskAndOpportunityRepository.save(riskAndOpportunity);
     }
 
@@ -66,7 +67,7 @@ public class RiskAndOpportunityService {
         riskAndOpportunity.setLastRevisionDate(lastRevisionDate);
         riskAndOpportunity.setCloseDate(closeDate);
         riskAndOpportunity.setObservations(observations);
-        //riskAndOpportunity.setPriority(priority);
+        riskAndOpportunity.setPriority();
 
         return riskAndOpportunityRepository.save(riskAndOpportunity);
     }
