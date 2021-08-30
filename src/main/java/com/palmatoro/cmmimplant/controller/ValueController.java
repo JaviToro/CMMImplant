@@ -38,13 +38,12 @@ public class ValueController {
     private UserService userService;
 
 
-    @GetMapping(path = "/list")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    @RequestMapping(value = {"/metric/{id}", "/metric{id}/error/{code}"}, method = RequestMethod.GET)
-    public String list(Model model,@PathVariable(value = "id", required = true) Integer metricId, @PathVariable(value = "code", required = false) Integer errorCode) {
+    @RequestMapping(value = {"/list", "/list/metric/{id}", "/list/metric{id}/error/{code}"}, method = RequestMethod.GET)
+    public String list(Model model, @PathVariable(value = "id", required = false) Integer metricId, @PathVariable(value = "code", required = false) Integer errorCode) {
 
         if (errorCode != null){
-            model.addAttribute("error", "Se ha producido un error");
+            model.addAttribute("error", "Se ha producido un error.");
         }
 
         List<Value> results = new ArrayList<Value>();
