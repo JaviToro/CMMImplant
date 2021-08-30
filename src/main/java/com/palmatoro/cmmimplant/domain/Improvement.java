@@ -54,7 +54,11 @@ public class Improvement {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date realImplementation;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date evaluationDate;
+    
     private Double score;
     private String observations;
 
