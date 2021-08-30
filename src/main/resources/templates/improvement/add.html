@@ -40,8 +40,8 @@
   <button class="button-back" onclick="window.history.back()"><span class="material-icons">arrow_back</span>&nbsp;Volver atrás</button>
   <div class="form-container">
     <form method="POST" class="form-signin" th:object="${result}" th:action="@{/improvement/add}">
-      <h2 th:if="${id == null}" class="form-signin-heading">Crear un nuevo proyecto</h2>
-      <h2 th:if="${id != null}" class="form-signin-heading">Editar el proyecto</h2>
+      <h2 th:if="${id == null}" class="form-signin-heading">Crear una nueva mejora</h2>
+      <h2 th:if="${id != null}" class="form-signin-heading">Editar la mejora</h2>
       <input type="hidden" th:field="*{id}" id="id" class="form-control" placeholder="Id"/>
       <input type="hidden" th:field="*{project}" id="project" class="form-control" placeholder="Project"/>
       <input type="hidden" th:field="*{priority}" id="priority" class="form-control" placeholder="Priority"/>
@@ -96,22 +96,27 @@
                autofocus="true">
         <span class="has-error" th:if="${#fields.hasErrors('realEffort')}" th:errors="*{realEffort}"></span>
       </div>
+      <p class="form-date">Fecha de recepción:</p>
       <div class="form-group">
         <input type="date" th:field="*{receptionDate}" class="form-control" placeholder="Fecha de recepción (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('receptionDate')}" th:errors="*{receptionDate}"></span>
       </div>
+      <p class="form-date">Fecha de aprobación:</p>
       <div class="form-group">
         <input type="date" th:field="*{approvalDate}" class="form-control" placeholder="Fecha de aprobación (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('approvalDate')}" th:errors="*{approvalDate}"></span>
       </div>
+      <p class="form-date">Fecha de implantación estimada:</p>
       <div class="form-group">
         <input type="date" th:field="*{estimatedImplementation}" class="form-control" placeholder="Implantación estimada (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('estimatedImplementation')}" th:errors="*{estimatedImplementation}"></span>
       </div>
+      <p class="form-date">Fecha de implantación real:</p>
       <div class="form-group">
         <input type="date" th:field="*{realImplementation}" class="form-control" placeholder="Implantación real (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('realImplementation')}" th:errors="*{realImplementation}"></span>
       </div>
+      <p class="form-date">Fecha de evaluación:</p>
       <div class="form-group">
         <input type="date" th:field="*{evaluationDate}" class="form-control" placeholder="Fecha de evaluación (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('evaluationDate')}" th:errors="*{evaluationDate}"></span>

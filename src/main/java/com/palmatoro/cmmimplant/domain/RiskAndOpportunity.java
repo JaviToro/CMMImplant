@@ -228,25 +228,7 @@ public class RiskAndOpportunity {
     }
 
     public void setPriority(Priority priority) {
-        if(this.getProbability()==RiskProbability.HIGH && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.INMEDIATLY);
-        }else if(this.getProbability()==RiskProbability.HIGH && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.HIGH);
-        }else if(this.getProbability()==RiskProbability.MID && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.HIGH);
-        }else if(this.getProbability()==RiskProbability.HIGH && this.getImpact()==Impact.LOW){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(this.getProbability()==RiskProbability.LOW && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(this.getProbability()==RiskProbability.MID && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.MID);
-        }else if(this.getProbability()==RiskProbability.MID && this.getImpact()==Impact.LOW){
-            this.setPriority(Priority.MIDLOW);
-        }else if(this.getProbability()==RiskProbability.LOW && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.MIDLOW);
-        }else{
-            this.setPriority(Priority.LOW);
-        }
+        this.priority = priority;
     }
 
     // Relationships ----------------------------------------
@@ -263,7 +245,7 @@ public class RiskAndOpportunity {
     // Constructors ----------------------------------------
 
     public RiskAndOpportunity(Integer id, String identifier, RiskType type, RiskCategory category, String title, String description, Date identificationDate, RiskProbability probability, Impact impact, String threshold, String consequences,
-        String actionPlan, Status status, RiskMonitorization monitorization, Date lastRevisionDate, Date closeDate, String observations, Priority priority){
+        String actionPlan, Status status, RiskMonitorization monitorization, Date lastRevisionDate, Date closeDate, String observations){
         this.id = id;
         this.identifier = identifier;
         this.type = type;
@@ -281,7 +263,26 @@ public class RiskAndOpportunity {
         this.lastRevisionDate = lastRevisionDate;
         this.closeDate = closeDate;
         this.observations = observations;
-        this.priority = priority;
+
+        if(probability==RiskProbability.HIGH && impact==Impact.HIGH){
+            this.setPriority(Priority.INMEDIATLY);
+        }else if(probability==RiskProbability.HIGH && impact==Impact.MID){
+            this.setPriority(Priority.HIGH);
+        }else if(probability==RiskProbability.MID && impact==Impact.HIGH){
+            this.setPriority(Priority.HIGH);
+        }else if(probability==RiskProbability.HIGH && impact==Impact.LOW){
+            this.setPriority(Priority.MIDHIGH);
+        }else if(probability==RiskProbability.LOW && impact==Impact.HIGH){
+            this.setPriority(Priority.MIDHIGH);
+        }else if(probability==RiskProbability.MID && impact==Impact.MID){
+            this.setPriority(Priority.MID);
+        }else if(probability==RiskProbability.MID && impact==Impact.LOW){
+            this.setPriority(Priority.MIDLOW);
+        }else if(probability==RiskProbability.LOW && impact==Impact.MID){
+            this.setPriority(Priority.MIDLOW);
+        }else{
+            this.setPriority(Priority.LOW);
+        }
     }
 
     public RiskAndOpportunity(){

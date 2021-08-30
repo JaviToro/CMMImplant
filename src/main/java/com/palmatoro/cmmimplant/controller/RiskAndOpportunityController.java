@@ -108,7 +108,7 @@ public class RiskAndOpportunityController {
         if (result.getId() != null) {
             riskAndOpportunityService.editRiskAndOpportunity(result.getId(), result.getIdentifier(), result.getType(), result.getCategory(), result.getTitle(),
              result.getDescription(), result.getIdentificationDate(), result.getProbability(), result.getImpact(), result.getThreshold(), result.getConsequences(),
-             result.getActionPlan(), result.getStatus(), result.getMonitorization(), result.getLastRevisionDate(), result.getCloseDate(), result.getObservations(), result.getPriority());
+             result.getActionPlan(), result.getStatus(), result.getMonitorization(), result.getLastRevisionDate(), result.getCloseDate(), result.getObservations());
         } else {
             riskAndOpportunityService.addNewRiskAndOpportunity(result);
         }
