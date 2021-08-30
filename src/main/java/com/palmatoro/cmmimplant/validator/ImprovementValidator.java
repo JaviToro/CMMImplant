@@ -7,6 +7,7 @@ import com.palmatoro.cmmimplant.service.ImprovementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -23,6 +24,9 @@ public class ImprovementValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Improvement result = (Improvement) o;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "impact", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "percentage", "NotEmpty");
 
         for(Improvement i: improvementService.getAllImprovements()){
             if(i.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){

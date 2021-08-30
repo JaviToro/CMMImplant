@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.Improvement;
 import com.palmatoro.cmmimplant.domain.User;
-import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.ImprovementService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.validator.ImprovementValidator;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/improvement")
