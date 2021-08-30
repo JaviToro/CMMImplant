@@ -56,10 +56,12 @@
         </select>
         <span class="has-error" th:if="${#fields.hasErrors('projectType')}" th:errors="*{projectType}"></span>
       </div>
+      <p class="form-date">Fecha de inicio:</p>
       <div class="form-group">
         <input type="date" th:field="*{startDate}" class="form-control" placeholder="Fecha de inicio (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span>
       </div>
+      <p class="form-date">Fecha de fin:</p>
       <div class="form-group">
         <input type="date" th:field="*{endDate}" class="form-control" placeholder="Fecha de fin (dd/mm/aaaa)">
         <span class="has-error" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
