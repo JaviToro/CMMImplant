@@ -227,8 +227,26 @@ public class RiskAndOpportunity {
         return priority;
     }
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
+    public void setPriority() {
+        if(this.probability==RiskProbability.HIGH && impact==Impact.HIGH){
+            this.priority=Priority.INMEDIATLY;
+        }else if(this.probability==RiskProbability.HIGH && impact==Impact.MID){
+            this.priority=Priority.HIGH;
+        }else if(this.probability==RiskProbability.MID && impact==Impact.HIGH){
+            this.priority=Priority.HIGH;
+        }else if(this.probability==RiskProbability.HIGH && impact==Impact.LOW){
+            this.priority=Priority.MIDHIGH;
+        }else if(this.probability==RiskProbability.LOW && impact==Impact.HIGH){
+            this.priority=Priority.MIDHIGH;
+        }else if(this.probability==RiskProbability.MID && impact==Impact.MID){
+            this.priority=Priority.MID;
+        }else if(this.probability==RiskProbability.MID && impact==Impact.LOW){
+            this.priority=Priority.MIDLOW;
+        }else if(this.probability==RiskProbability.LOW && impact==Impact.MID){
+            this.priority=Priority.MIDLOW;
+        }else{
+            this.priority=Priority.LOW;
+        }
     }
 
     // Relationships ----------------------------------------
@@ -263,26 +281,6 @@ public class RiskAndOpportunity {
         this.lastRevisionDate = lastRevisionDate;
         this.closeDate = closeDate;
         this.observations = observations;
-
-        if(probability==RiskProbability.HIGH && impact==Impact.HIGH){
-            this.setPriority(Priority.INMEDIATLY);
-        }else if(probability==RiskProbability.HIGH && impact==Impact.MID){
-            this.setPriority(Priority.HIGH);
-        }else if(probability==RiskProbability.MID && impact==Impact.HIGH){
-            this.setPriority(Priority.HIGH);
-        }else if(probability==RiskProbability.HIGH && impact==Impact.LOW){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(probability==RiskProbability.LOW && impact==Impact.HIGH){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(probability==RiskProbability.MID && impact==Impact.MID){
-            this.setPriority(Priority.MID);
-        }else if(probability==RiskProbability.MID && impact==Impact.LOW){
-            this.setPriority(Priority.MIDLOW);
-        }else if(probability==RiskProbability.LOW && impact==Impact.MID){
-            this.setPriority(Priority.MIDLOW);
-        }else{
-            this.setPriority(Priority.LOW);
-        }
     }
 
     public RiskAndOpportunity(){
