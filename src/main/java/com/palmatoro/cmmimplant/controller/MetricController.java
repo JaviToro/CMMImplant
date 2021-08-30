@@ -68,9 +68,12 @@ public class MetricController {
 
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
-    public @ResponseBody
-    Metric getMetricById(@PathVariable Integer id) throws ResourceNotFoundException {
-        return metricService.getMetricById(id);
+    public String getMetricById(Model model, @PathVariable(value = "id") Integer id) {
+
+        model.addAttribute("result", metricService.getMetricById(id));
+        model.addAttribute("values", metricService.getMetricById(id).getValues());
+
+        return "metric/view";
     }
 
     @RequestMapping(value = {"/add", "/add/{id}"}, method = RequestMethod.GET)    
