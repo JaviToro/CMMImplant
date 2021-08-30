@@ -80,19 +80,21 @@ public class ValueController {
         return "value/view";
     }
 
-    @RequestMapping(value = {"/add", "/add/{id}/metric/{metricId}", "/add/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/add", "/add/metric/{metricId}", "/add/{id}"}, method = RequestMethod.GET)
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
 
         List<Metric> metrics = new ArrayList<>();
-        metricService.getAllMetrics().forEach(metrics::add);
 
         if (id != null) {
             model.addAttribute("result", valueService.getValueById(id));
         } else {
             model.addAttribute("result", new Value());
             if (metricId != null) {
-                model.addAttribute("metricId", metricService.getMetricById(metricId));
+                model.addAttribute("metric", metricService.getMetricById(metricId));
+                metrics.add(metricService.getMetricById(metricId));
+            } else {
+                metricService.getAllMetrics().forEach(metrics::add);
             }
         }
 
