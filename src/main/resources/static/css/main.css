@@ -231,6 +231,8 @@ body {
 
   .list {
     text-align: center;
+    justify-content: center;
+    align-content: center;
     border-spacing: 0 30px;
     margin-bottom: 20px;
   }
