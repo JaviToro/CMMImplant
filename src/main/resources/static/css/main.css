@@ -29,6 +29,7 @@ body {
     justify-content: space-between;
     margin-bottom: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 3;
   }
 
   .navbar-button {
@@ -128,7 +129,6 @@ body {
     box-sizing: border-box;
     border: 2px solid #646464;
     border-radius: 4px;
-    z-index: -1;
   }
 
   .form-signin .form-control:focus {
@@ -136,7 +136,6 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     border: 0;
     border: 2px solid #376DBE;
-    z-index: -1;
   }
 
   .form-signin button {
