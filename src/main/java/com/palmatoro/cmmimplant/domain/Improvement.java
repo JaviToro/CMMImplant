@@ -1,13 +1,17 @@
 package com.palmatoro.cmmimplant.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Improvement {
@@ -34,9 +38,21 @@ public class Improvement {
     private Double percentage;
     private String estimatedEffort;
     private String realEffort;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date receptionDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date approvalDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date estimatedImplementation;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date realImplementation;
     private Date evaluationDate;
     private Double score;

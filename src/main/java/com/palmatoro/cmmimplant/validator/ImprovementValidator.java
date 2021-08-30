@@ -29,14 +29,21 @@ public class ImprovementValidator implements Validator {
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }
-        if(result.getEvaluationDate().before(result.getRealImplementation())){
-            errors.rejectValue("evaluationDate", "CloseDateBefore");
+        if(result.getEvaluationDate()!=null && result.getRealImplementation()!=null){
+            if(result.getEvaluationDate().before(result.getRealImplementation())){
+                errors.rejectValue("evaluationDate", "CloseDateBefore");
+            }
         }
-        if(result.getRealImplementation().before(result.getApprovalDate())){
-            errors.rejectValue("realImplementation", "CloseDateBefore");
+        
+        if(result.getRealImplementation()!=null && result.getApprovalDate()!=null){
+            if(result.getRealImplementation().before(result.getApprovalDate())){
+                errors.rejectValue("realImplementation", "CloseDateBefore");
+            }
         }
-        if(result.getRealImplementation().before(result.getReceptionDate())){
-            errors.rejectValue("realImplementation", "CloseDateBefore");
+        if(result.getRealImplementation()!=null && result.getReceptionDate()!=null){
+            if(result.getRealImplementation().before(result.getReceptionDate())){
+                errors.rejectValue("realImplementation", "CloseDateBefore");
+            }
         }
     }
 }
