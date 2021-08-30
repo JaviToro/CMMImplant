@@ -90,7 +90,7 @@
         <div class="form-group">
           <select th:field="*{responsable}" class="form-control" placeholder="Responsable">
             <option value="0">Elige un responsable</option>
-            <option th:each="pm : ${pms}" th:value="${pm.acronym}" th:text="${pm.acronym}"></option>
+            <option th:each="pm : ${pms}" th:value="${pm.id}" th:text="${pm.acronym}"></option>
           </select>
           <span class="has-error" th:if="${#fields.hasErrors('project')}" th:errors="*{project}"></span>
         </div>
