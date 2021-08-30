@@ -43,15 +43,17 @@
                     <a href="javascript: document.logoutForm.submit()" role="menuitem"> Cerrar sesión</a>
             </div>
         </div>
-        <div class="info-text">
-            <p th:text=${index_message}></p>
-            <p th:text=${description_message}></p>
-            <p th:text=${project_message}></p>
-            <p th:text=${conclusion_message}></p>
+        <div class="content">
+            <div class="info-text">
+                <p th:text=${index_message}></p>
+                <p th:text=${description_message}></p>
+                <p th:text=${project_message}></p>
+                <p th:text=${conclusion_message}></p>
+            </div>
+            <form name="logoutForm" th:action="@{/logout}" method="POST" th:hidden="true">
+                <input hidden type="submit" value="Cerrar sesión"/>
+            </form>
         </div>
-        <form name="logoutForm" th:action="@{/logout}" method="POST" th:hidden="true">
-            <input hidden type="submit" value="Cerrar sesión"/>
-        </form>
         <div class="footer">
             <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
         </div>
