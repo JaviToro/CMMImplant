@@ -41,36 +41,6 @@ public class ValueController {
     @Autowired
     private MetricService metricService;
 
-
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    @RequestMapping(value = {"/list", "/list/metric/{id}", "/list/metric{id}/error/{code}"}, method = RequestMethod.GET)
-    public String list(Model model, @PathVariable(value = "id", required = false) Integer metricId, @PathVariable(value = "code", required = false) Integer errorCode) {
-
-        if (errorCode != null) {
-            model.addAttribute("error", "Se ha producido un error.");
-        }
-
-        List<Value> results = new ArrayList<Value>();
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
-
-
-        if (isAdmin == true) {
-            results = (List<Value>) valueService.getAllValues();
-        } else {
-            Metric m = userService.getUserByUsername(authentication.getName()).getProject().getMetrics().get(metricId);
-            results = m.getValues();
-        }
-
-        model.addAttribute("results", results);
-        model.addAttribute("metricId", metricId);
-
-        return "value/list";
-    }
-
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
     public String getValueById(Model model, @PathVariable(value = "id") Integer id) {
@@ -80,7 +50,7 @@ public class ValueController {
         return "value/view";
     }
 
-    @RequestMapping(value = {"/add", "/add/metric/{metricId}", "/add/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/add/metric/{metricId}", "/add/{id}"}, method = RequestMethod.GET)
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
 
@@ -89,17 +59,12 @@ public class ValueController {
         if (id != null) {
             model.addAttribute("result", valueService.getValueById(id));
         } else {
-            model.addAttribute("result", new Value());
+            Value result = new Value();
             if (metricId != null) {
-                model.addAttribute("metric", metricService.getMetricById(metricId));
-                metrics.add(metricService.getMetricById(metricId));
-            } else {
-                metricService.getAllMetrics().forEach(metrics::add);
+                result.setMetric(metricService.getMetricById(metricId));
             }
+            model.addAttribute("result", result);
         }
-
-        model.addAttribute("metrics", metrics);
-
         return "value/add";
     }
 
@@ -119,12 +84,14 @@ public class ValueController {
             valueService.addNewValue(result);
         }
 
-        return "redirect:/value/list";
+        return "redirect:/metric/"+result.getMetric().getId().toString();
     }
 
     @RequestMapping("/delete/{id}")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String deleteById(@PathVariable(value = "id") Integer id) {
+
+        Integer metricId = valueService.getValueById(id).getMetric().getId();
 
         try {
             valueService.deleteValueById(id);
@@ -132,7 +99,7 @@ public class ValueController {
             return "redirect:/value/list/error/1";
         }
 
-        return "redirect:/value/list";
+        return "redirect:/metric/"+metricId;
 
     }
 }
