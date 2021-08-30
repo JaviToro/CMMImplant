@@ -59,7 +59,7 @@
                 <td th:text="${res.type}">Tipo</td>
                 <td th:text="${res.status}">Estado</td>
                 <td th:text="${res.analysisIdentifier}">Id externo</td>
-                <td th:text="${#dates.format(res.analysisDate, 'dd/MM/yyyy')}">Fecha de realización</td>
+                <td th:text="${#dates.format(res.date, 'dd/MM/yyyy')}">Fecha de realización</td>
                 <td><a class="list-edit" th:href="@{/analysis/add/{id}(id=${res.id})}">Editar</a></td>
                 <td><a class="list-remove" th:href="@{/analysis/delete/{id}(id=${res.id})}">Eliminar</a></td>
             </tr>
