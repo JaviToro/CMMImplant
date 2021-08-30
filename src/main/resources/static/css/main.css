@@ -136,6 +136,10 @@ body {
     margin-top: 10px;
   }
 
+  .form-date {
+    margin: 10px 0 0 0;
+  }
+
   .footer {
     position: fixed;
     left: 0;
