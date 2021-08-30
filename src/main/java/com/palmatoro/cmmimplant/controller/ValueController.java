@@ -73,12 +73,14 @@ public class ValueController {
 
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
-    public @ResponseBody
-    Value getValueById(@PathVariable Integer id) throws ResourceNotFoundException {
-        return valueService.getValueById(id);
+    public String getValueById(Model model, @PathVariable(value = "id") Integer id) {
+
+        model.addAttribute("result", valueService.getValueById(id));
+
+        return "value/view";
     }
 
-    @RequestMapping(value = {"/add", "/add/{metricId}", "/add/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/add", "/add/{id}/metric/{metricId}", "/add/{id}"}, method = RequestMethod.GET)
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
 
