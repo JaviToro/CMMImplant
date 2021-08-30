@@ -25,7 +25,7 @@ public class ReusableObjectValidator implements Validator {
         ReusableObject result = (ReusableObject) o;
 
         for(ReusableObject ro: reusableObjectService.getAllReusableObjects()){
-            if(ro.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(ro.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }
