@@ -25,7 +25,7 @@ public class AdaptationValidator implements Validator {
         Adaptation result = (Adaptation) o;
 
         for(Adaptation a: adaptationService.getAllAdaptations()){
-            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }

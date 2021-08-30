@@ -87,7 +87,7 @@ public class AdaptationController {
 
     @PostMapping("/add")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") Adaptation result, BindingResult bindingResult) {
+    public String addNew(@ModelAttribute("result") Adaptation result, BindingResult bindingResult) {
         adaptationValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {
