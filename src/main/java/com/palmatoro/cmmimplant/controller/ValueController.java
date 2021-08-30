@@ -6,6 +6,7 @@ import java.util.List;
 import com.palmatoro.cmmimplant.domain.Metric;
 import com.palmatoro.cmmimplant.domain.Value;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
+import com.palmatoro.cmmimplant.service.MetricService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.service.ValueService;
 import com.palmatoro.cmmimplant.validator.ValueValidator;
@@ -37,12 +38,15 @@ public class ValueController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MetricService metricService;
+
 
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @RequestMapping(value = {"/list", "/list/metric/{id}", "/list/metric{id}/error/{code}"}, method = RequestMethod.GET)
     public String list(Model model, @PathVariable(value = "id", required = false) Integer metricId, @PathVariable(value = "code", required = false) Integer errorCode) {
 
-        if (errorCode != null){
+        if (errorCode != null) {
             model.addAttribute("error", "Se ha producido un error.");
         }
 
@@ -51,12 +55,12 @@ public class ValueController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         boolean isAdmin = authentication.getAuthorities().stream()
-          .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
-        
-        
-        if(isAdmin==true){
+                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
+
+
+        if (isAdmin == true) {
             results = (List<Value>) valueService.getAllValues();
-        }else{
+        } else {
             Metric m = userService.getUserByUsername(authentication.getName()).getProject().getMetrics().get(metricId);
             results = m.getValues();
         }
@@ -74,24 +78,31 @@ public class ValueController {
         return valueService.getValueById(id);
     }
 
-    @RequestMapping(value = {"/add/{metricId}", "/add/{id}"}, method = RequestMethod.GET)    
+    @RequestMapping(value = {"/add", "/add/{metricId}", "/add/{id}"}, method = RequestMethod.GET)
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
+
+        List<Metric> metrics = new ArrayList<>();
+        metricService.getAllMetrics().forEach(metrics::add);
 
         if (id != null) {
             model.addAttribute("result", valueService.getValueById(id));
         } else {
             model.addAttribute("result", new Value());
-            model.addAttribute("metricId", metricId);
+            if (metricId != null) {
+                model.addAttribute("metricId", metricService.getMetricById(metricId));
+            }
         }
+
+        model.addAttribute("metrics", metrics);
 
         return "value/add";
     }
 
-    @RequestMapping(value = {"/add/{metricId}", "/add/{id}"}, method = RequestMethod.POST)  
+    @RequestMapping(value = {"/add", "/add/{metricId}", "/add/{id}"}, method = RequestMethod.POST)
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") Value result, BindingResult bindingResult,
-    @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
+    public String addNew(@ModelAttribute("result") Value result, BindingResult bindingResult,
+                         @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
         valueValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -101,7 +112,7 @@ public class ValueController {
         if (result.getId() != null) {
             valueService.editValue(result.getId(), result.getIdentifier(), result.getMoment(), result.getAmount());
         } else {
-            valueService.addNewValue(result, metricId);
+            valueService.addNewValue(result);
         }
 
         return "redirect:/value/list";

@@ -24,8 +24,8 @@ public class ValueValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Value result = (Value) o;
 
-        for(Value v: valueService.getAllValues()){
-            if(v.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+        for (Value v : valueService.getAllValues()) {
+            if (v.getIdentifier().equals(result.getIdentifier()) && result.getId() == null) {
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }
