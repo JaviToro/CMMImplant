@@ -73,11 +73,13 @@ public class ReusableObjectController {
         return "reusableObject/list";
     }
 
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
-    public @ResponseBody
-    ReusableObject getReusableObjectById(@PathVariable Integer id) throws ResourceNotFoundException {
-        return reusableObjectService.getReusableObjectById(id);
+    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
+    public String getResultById(Model model, @PathVariable(value = "id") Integer id) {
+
+        model.addAttribute("result", reusableObjectService.getReusableObjectById(id));
+
+        return "reusableObject/view";
     }
 
     @RequestMapping(value = {"/add", "/add/{id}"}, method = RequestMethod.GET)    

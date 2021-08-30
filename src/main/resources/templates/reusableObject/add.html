@@ -65,10 +65,10 @@
                  autofocus="true">
           <span class="has-error" th:if="${#fields.hasErrors('objectType')}" th:errors="*{objectType}"></span>
         </div>
-        <p class="form-date">Fecha de recepción:</p>
+        <p class="form-date">Fecha de registro:</p>
         <div class="form-group">
           <input type="date" th:field="*{receptionDate}" class="form-control"
-                 placeholder="Fecha de recepción (dd/mm/aaaa)">
+                 placeholder="Fecha de registro (dd/mm/aaaa)">
           <span class="has-error" th:if="${#fields.hasErrors('receptionDate')}" th:errors="*{receptionDate}"></span>
         </div>
         <div class="form-group">

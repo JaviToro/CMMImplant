@@ -57,7 +57,7 @@
                 <td th:text="${res.identifier}">Identificador</td>
                 <td th:text="${res.title}">Título</td>
                 <td th:text="${res.objectType}">Tipo</td>
-                <td th:text="${#dates.format(res.receptionDate, 'dd/MM/yyyy')}">Fecha de recepción</td>
+                <td th:text="${#dates.format(res.receptionDate, 'dd/MM/yyyy')}">Fecha de registro</td>
                 <td><a class="list-edit" th:href="@{/reusableObject/add/{id}(id=${res.id})}">Editar</a></td>
                 <td><a class="list-remove" th:href="@{/reusableObject/delete/{id}(id=${res.id})}">Eliminar</a></td>
             </tr>
