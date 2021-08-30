@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Crear nuevo proyecto</title>
+    <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+  <div class="navbar">
+    <div class="navbar-left">
+      <div class="navbar-logo">
+        <p>CMMImplant</p>
+      </div>
+      <div class="navbar-button">
+        <span class="material-icons">home</span>
+        <a href="/index">Inicio</a>
+      </div>
+      <div class="navbar-button">
+        <span class="material-icons">track_changes</span>
+        <a href="/tracking">Seguimiento</a>
+      </div>
+      <div class="navbar-button">
+        <span class="material-icons">search</span>
+        <a href="/revision">Revisión</a>
+      </div>
+      <div class="navbar-button-active">
+        <span class="material-icons">work</span>
+        <a href="/project/all">Proyecto</a>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-register">
+        <span class="material-icons">person_add</span>
+        <a href="/user/registration">Registrarse</a>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <button class="button-back" onclick="window.history.back()"><span class="material-icons">arrow_back</span>&nbsp;Volver atrás</button>
+    <div class="form-container">
+      <form method="POST" class="form-signin" th:object="${result}" th:action="@{/lessonLearnt/add}">
+        <h2 th:if="${id == null}" class="form-signin-heading">Crear una nueva lección aprendida</h2>
+        <h2 th:if="${id != null}" class="form-signin-heading">Editar la leccion aprendida</h2>
+        <input type="hidden" th:field="*{id}" id="id" class="form-control" placeholder="Id"/>
+        <input type="hidden" th:field="*{project}" id="project" class="form-control" placeholder="Project"/>
+        <div class="form-group">
+          <input type="text" th:field="*{identifier}" id="identifier" class="form-control" placeholder="Identificador"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" th:field="*{title}" id="title" class="form-control" placeholder="Título"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" th:field="*{description}" id="description" class="form-control" placeholder="Descripción"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        </div>
+        <p class="form-date">Fecha de recepción:</p>
+        <div class="form-group">
+          <input type="date" th:field="*{receptionDate}" class="form-control"
+                 placeholder="Fecha de recepción (dd/mm/aaaa)">
+          <span class="has-error" th:if="${#fields.hasErrors('receptionDate')}" th:errors="*{receptionDate}"></span>
+        </div>
+        <p class="form-date">Fecha de comunicación:</p>
+        <div class="form-group">
+          <input type="date" th:field="*{communicationDate}" class="form-control"
+                 placeholder="Fecha de comunicación (dd/mm/aaaa)">
+          <span class="has-error" th:if="${#fields.hasErrors('communicationDate')}" th:errors="*{communicationDate}"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" th:field="*{link}" id="observations" class="form-control"
+                 placeholder="Enlace"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" th:field="*{observations}" id="observations" class="form-control"
+                 placeholder="Observaciones"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('observations')}" th:errors="*{observations}"></span>
+        </div>
+        <button class="button-submit" th:if="${id == null}" type="submit"><span class="material-icons">add</span>&nbsp;Crear
+        </button>
+        <button class="button-submit" th:if="${id != null}" type="submit">Editar</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer">
+    <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="/js/main.js"></script>
+
+  </body>
+</html>

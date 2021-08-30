@@ -25,12 +25,14 @@ public class LessonLearntValidator implements Validator {
         LessonLearnt result = (LessonLearnt) o;
 
         for(LessonLearnt ll: lessonLearntService.getAllLessonLearnts()){
-            if(ll.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(ll.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }
-        if(result.getCommunicationDate().before(result.getReceptionDate())){
-            errors.rejectValue("communicationDate", "CommunicationDateBefore");
+        if(result.getCommunicationDate()!=null && result.getReceptionDate()!=null){
+            if(result.getCommunicationDate().before(result.getReceptionDate())){
+                errors.rejectValue("communicationDate", "CommunicationDateBefore");
+            }
         }
     }
 }
