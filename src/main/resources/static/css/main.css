@@ -255,3 +255,32 @@ body {
     padding: 6px 20px;
     border-radius: 8px;
   }
+
+  .show-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .show-container-row {
+    display: flex;
+    flex-direction: row;
+    font-size: 18px;
+
+  }
+
+  .show-container-row p {
+    margin: 10px 0px;
+  }
+
+  .show-container-row-title {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .show-container-title {
+    display: flex;
+    font-size: 24px;
+    font-weight: 600;
+  }

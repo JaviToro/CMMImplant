@@ -37,15 +37,24 @@
         </div>
     </div>
 </div>
-<h3>Datos del proyecto</h3>
-<p>Nombre:</p>
-<p th:text="${project.name}"></p>
-<p>Tipo de proyecto:</p>
-<p th:text="${project.projectType}"></p>
-<p>Fecha de inicio:</p>
-<p th:text="${project.startDate}"></p>
-<p>Fecha de fin:</p>
-<p th:text="${project.endDate}"></p>
+<button class="button-back" onclick="window.history.back()"><span class="material-icons">arrow_back</span>&nbsp;Volver atrás</button>
+<div class="show-container">
+    <p class="show-container-title">Datos del proyecto</p>
+    <div class="show-container-info">
+        <div class="show-container-row">
+            <p class="show-container-row-title">Nombre:</p>&nbsp;<p th:text="${project.name}"></p>
+        </div>
+        <div class="show-container-row">
+            <p class="show-container-row-title">Tipo de proyecto:</p>&nbsp;<p th:text="${project.projectType}"></p>
+        </div>
+        <div class="show-container-row">
+            <p class="show-container-row-title">Fecha de inicio:</p>&nbsp;<p th:text="${project.startDate}"></p>
+        </div>
+        <div class="show-container-row">
+            <p class="show-container-row-title">Fecha de fin:</p>&nbsp;<p th:text="${project.endDate}"></p>
+        </div>
+    </div>
+</div>
 <div class="footer">
     <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
 </div>
