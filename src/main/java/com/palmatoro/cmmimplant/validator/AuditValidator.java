@@ -25,7 +25,7 @@ public class AuditValidator implements Validator {
         Audit result = (Audit) o;
 
         for(Audit a: auditService.getAllAudits()){
-            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }

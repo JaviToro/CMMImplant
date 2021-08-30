@@ -111,10 +111,12 @@ public class UserService {
 
     @Transactional
     public List<User> getAllUsersByProjectId(Integer projectId){
-        List<User> result = (List<User>) this.getAllUsers();
-        for(User u: result){
-            if(u.getProject().getId() != projectId){
-                result.remove(u);
+        List<User> temp = new ArrayList<User>();
+        List<User> result = new ArrayList<User>();
+        this.getAllUsers().forEach(temp::add);
+        for(User u: temp){
+            if(u.getProject().getId() == projectId){
+                result.add(u);
             }
         }
         return result;
