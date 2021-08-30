@@ -228,21 +228,21 @@ public class RiskAndOpportunity {
     }
 
     public void setPriority() {
-        if(this.probability==RiskProbability.HIGH && impact==Impact.HIGH){
+        if(this.probability==RiskProbability.HIGH && this.impact==Impact.HIGH){
             this.priority=Priority.INMEDIATLY;
-        }else if(this.probability==RiskProbability.HIGH && impact==Impact.MID){
+        }else if(this.probability==RiskProbability.HIGH && this.impact==Impact.MID){
             this.priority=Priority.HIGH;
-        }else if(this.probability==RiskProbability.MID && impact==Impact.HIGH){
+        }else if(this.probability==RiskProbability.MID && this.impact==Impact.HIGH){
             this.priority=Priority.HIGH;
-        }else if(this.probability==RiskProbability.HIGH && impact==Impact.LOW){
+        }else if(this.probability==RiskProbability.HIGH && this.impact==Impact.LOW){
             this.priority=Priority.MIDHIGH;
-        }else if(this.probability==RiskProbability.LOW && impact==Impact.HIGH){
+        }else if(this.probability==RiskProbability.LOW && this.impact==Impact.HIGH){
             this.priority=Priority.MIDHIGH;
-        }else if(this.probability==RiskProbability.MID && impact==Impact.MID){
+        }else if(this.probability==RiskProbability.MID && this.impact==Impact.MID){
             this.priority=Priority.MID;
-        }else if(this.probability==RiskProbability.MID && impact==Impact.LOW){
+        }else if(this.probability==RiskProbability.MID && this.impact==Impact.LOW){
             this.priority=Priority.MIDLOW;
-        }else if(this.probability==RiskProbability.LOW && impact==Impact.MID){
+        }else if(this.probability==RiskProbability.LOW && this.impact==Impact.MID){
             this.priority=Priority.MIDLOW;
         }else{
             this.priority=Priority.LOW;

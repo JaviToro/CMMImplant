@@ -39,6 +39,7 @@ public class ImprovementService {
     @Transactional
     public Improvement addNewImprovement(Improvement improvement){
         improvement.setProject(projectService.getProjectByPrincipal());
+        improvement.setPriority();
         return improvementRepository.save(improvement);
     }
 
@@ -62,6 +63,7 @@ public class ImprovementService {
         improvement.setScore(score);
         improvement.setObservations(observations);
         improvement.setResponsable(responsable);
+        improvement.setPriority();
 
         return improvementRepository.save(improvement);
     }
