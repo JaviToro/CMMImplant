@@ -74,12 +74,12 @@ public class UserController {
         return result;
     }
 
-    @Secured("ROLE_ANONYMOUS")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/registration")
     public String registration(Model model) {
-        if (securityService.isAuthenticated()) {
-            return "redirect:/index";
-        }
+        // if (securityService.isAuthenticated()) {
+        //     return "redirect:/index";
+        // }
 
         List<Project> projects = projectService.getAllProjectsAsList();
         model.addAttribute("userForm", new User());
@@ -89,7 +89,7 @@ public class UserController {
         return "user/registration";
     }
 
-    @Secured("ROLE_ANONYMOUS")
+    @Secured("ROLE_ADMIN")
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);

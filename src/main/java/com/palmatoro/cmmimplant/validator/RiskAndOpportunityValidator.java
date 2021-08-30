@@ -29,8 +29,11 @@ public class RiskAndOpportunityValidator implements Validator {
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }
-        if(result.getCloseDate().before(result.getIdentificationDate())){
+        if(result.getCloseDate()!=null && result.getIdentificationDate()!=null){
+            if(result.getCloseDate().before(result.getIdentificationDate())){
             errors.rejectValue("closeDate", "CloseDateBefore");
+            }
         }
+        
     }
 }

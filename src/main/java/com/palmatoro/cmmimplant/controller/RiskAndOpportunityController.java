@@ -88,7 +88,7 @@ public class RiskAndOpportunityController {
 
     @PostMapping("/add")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") RiskAndOpportunity result, BindingResult bindingResult) {
+    public String addNew(@ModelAttribute("result") RiskAndOpportunity result, BindingResult bindingResult) {
         riskAndOpportunityValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {
