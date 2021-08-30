@@ -42,7 +42,7 @@
                 atrás
             </button>
             <div class="show-container">
-                <p class="show-container-title">Datos de la auditoría</p>
+                <p class="show-container-title">Datos del análisis</p>
                 <div class="show-container-info">
                     <div class="show-container-row">
                         <p class="show-container-row-title">Identificador:</p>&nbsp;<p th:text="${result.identifier}"></p>
@@ -51,28 +51,22 @@
                         <p class="show-container-row-title">Tipo:</p>&nbsp;<p th:text="${result.type}"></p>
                     </div>
                     <div class="show-container-row">
-                        <p class="show-container-row-title">Identificador externo:</p>&nbsp;<p th:text="${result.auditIdentifier}"></p>
+                        <p class="show-container-row-title">Identificador externo:</p>&nbsp;<p th:text="${result.analysisIdentifier}"></p>
                     </div>
                     <div class="show-container-row">
-                        <p class="show-container-row-title">Auditor:</p>&nbsp;<p th:text="${result.auditor.acronym}"></p>
-                    </div>
-                    <div class="show-container-row">
-                        <p class="show-container-row-title">Auditado:</p>&nbsp;<p th:text="${result.audited.acronym}"></p>
-                    </div>
-                    <div class="show-container-row">
-                        <p class="show-container-row-title">Fecha de auditoría:</p>&nbsp;<p th:text="${result.auditDate}"></p>
+                        <p class="show-container-row-title">Responsable:</p>&nbsp;<p th:text="${result.responsable.acronym}"></p>
                     </div>
                     <div class="show-container-row">
                         <p class="show-container-row-title">Estado:</p>&nbsp;<p th:text="${result.status}"></p>
                     </div>
                     <div class="show-container-row">
-                        <p class="show-container-row-title">Errores iniciales:</p>&nbsp;<p th:text="${result.initialErrors}"></p>
-                    </div>
-                    <div class="show-container-row">
-                        <p class="show-container-row-title">Errores actuales:</p>&nbsp;<p th:text="${result.actualErrors}"></p>
-                    </div>
-                    <div class="show-container-row">
                         <p class="show-container-row-title">Ubicación:</p>&nbsp;<p th:text="${result.direction}"></p>
+                    </div>
+                    <div class="show-container-row">
+                        <p class="show-container-row-title">Fecha del análisis:</p>&nbsp;<p th:text="${result.date}"></p>
+                    </div>
+                    <div class="show-container-row">
+                        <p class="show-container-row-title">Fecha de evaluación:</p>&nbsp;<p th:text="${result.evaluationDate}"></p>
                     </div>
                     <div class="show-container-row">
                         <p class="show-container-row-title">Observaciones:</p>&nbsp;<p th:text="${result.observations}"></p>
