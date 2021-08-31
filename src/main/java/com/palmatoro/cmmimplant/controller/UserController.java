@@ -132,7 +132,7 @@ public class UserController {
 
         userService.addNewUser(user);
 
-        return "redirect:/index";
+        return "redirect:/user/list";
     }
 
     @GetMapping("/login")
