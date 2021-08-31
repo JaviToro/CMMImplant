@@ -1,20 +1,12 @@
 package com.palmatoro.cmmimplant.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.palmatoro.cmmimplant.domain.Metric;
 import com.palmatoro.cmmimplant.domain.Value;
-import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.MetricService;
-import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.service.ValueService;
 import com.palmatoro.cmmimplant.validator.ValueValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/value")
@@ -35,8 +26,8 @@ public class ValueController {
     @Autowired
     private ValueValidator valueValidator;
 
-    @Autowired
-    private UserService userService;
+    // @Autowired
+    // private UserService userService;
 
     @Autowired
     private MetricService metricService;
@@ -54,7 +45,7 @@ public class ValueController {
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
 
-        List<Metric> metrics = new ArrayList<>();
+        //List<Metric> metrics = new ArrayList<>();
 
         if (id != null) {
             model.addAttribute("result", valueService.getValueById(id));
