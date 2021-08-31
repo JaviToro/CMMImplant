@@ -92,7 +92,7 @@
         </div>
         <div class="form-group">
           <select th:field="*{status}" class="form-control" placeholder="Estado">
-            <option value="0">Estado</option>
+            <option value="">Estado</option>
             <option th:value="RECEIVED" th:text="Recibida"></option>
             <option th:value="APPROVED" th:text="Aprobada"></option>
             <option th:value="DENIED" th:text="Denegada"></option>
@@ -104,7 +104,7 @@
         </div>
         <div class="form-group">
           <select th:field="*{impact}" class="form-control" placeholder="Impacto">
-            <option value="0">Impacto</option>
+            <option value="">Impacto</option>
             <option th:value="HIGH" th:text="'Alta'"></option>
             <option th:value="MID" th:text="Media"></option>
             <option th:value="LOW" th:text="Baja"></option>
@@ -118,7 +118,7 @@
         </div>
         <div class="form-group">
           <select th:field="*{responsable}" class="form-control" placeholder="Responsable">
-            <option value="0">Elige un responsable</option>
+            <option value="">Elige un responsable</option>
             <option th:each="pm : ${pms}" th:value="${pm.id}" th:text="${pm.acronym}"></option>
           </select>
           <span class="has-error" th:if="${#fields.hasErrors('responsable')}" th:errors="*{responsable}"></span>
