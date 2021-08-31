@@ -7,6 +7,7 @@ import com.palmatoro.cmmimplant.service.RiskAndOpportunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -24,13 +25,19 @@ public class RiskAndOpportunityValidator implements Validator {
     public void validate(Object o, Errors errors) {
         RiskAndOpportunity result = (RiskAndOpportunity) o;
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "impact", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "probability", "NotEmpty");
+
         for(RiskAndOpportunity ro: riskAndOpportunityService.getAllRiskAndOpportunitys()){
-            if(ro.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(ro.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }
-        if(result.getCloseDate().before(result.getIdentificationDate())){
+        if(result.getCloseDate()!=null && result.getIdentificationDate()!=null){
+            if(result.getCloseDate().before(result.getIdentificationDate())){
             errors.rejectValue("closeDate", "CloseDateBefore");
+            }
         }
+        
     }
 }

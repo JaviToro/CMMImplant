@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Crear nueva adaptación</title>
+    <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="navbar-left">
+          <div class="navbar-logo">
+              <p>CMMImplant</p>
+          </div>
+          <div class="navbar-button">
+              <span class="material-icons">home</span>
+              <a href="/index">Inicio</a>
+          </div>
+          <div class="subnav">
+              <span class="material-icons">track_changes</span>
+              <button class="subnavbtn">Seguimiento <i class="fa fa-caret-down>"></i></button>
+              <div class="subnav-content">
+                  <a href="/riskAndOpportunity/list">Riesgos y oportunidades</a>
+                  <a href="/improvement/list">Mejoras</a>
+                  <a href="/lessonLearnt/list">Lecciones aprendidas</a>
+                  <a href="/alert/list">Alertas</a>
+              </div>
+          </div>
+          <div class="subnav">
+              <span class="material-icons">search</span>
+              <button class="subnavbtn">Revisión <i class="fa fa-caret-down>"></i></button>
+              <div class="subnav-content">
+                  <a href="/analysis/list">Análisis</a>
+                  <a href="/audit/list">Auditoría</a>
+                  <a href="/metric/list">Métrica</a>
+              </div>
+          </div>
+          <div class="subnav-active">
+              <span class="material-icons">work</span>
+                  <button class="subnavbtn">Proyecto <i class="fa fa-caret-down>"></i></button>
+              <div class="subnav-content">
+                  <a href="/project/current" sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_PM')">Mi proyecto</a>
+                  <a href="/adaptation/list">Adaptaciones</a>
+                  <a href="/document/list">Documentos</a>
+                  <a href="/reusableObject/list">Objetos reutilizables</a>
+              </div>
+          </div>
+          <div class="subnav" sec:authorize="hasRole('ROLE_ADMIN')">
+              <span class="material-icons">settings</span>
+              <button class="subnavbtn">Administración <i class="fa fa-caret-down>"></i></button>
+              <div class="subnav-content">
+                  <a href="/project/all">Proyectos</a>
+                  <a href="/user/list">Usuarios</a>
+              </div>
+          </div>
+      </div>
+      <div class="navbar-right" sec:authorize="isAnonymous()">
+          <div class="navbar-register">
+              <span class="material-icons">person</span>
+              <a href="/user/login">Iniciar sesión</a>
+          </div>
+      </div>
+      <div class="navbar-register" sec:authorize="isAuthenticated()">
+              <span class="material-icons">person</span>
+              <a href="javascript: document.logoutForm.submit()" role="menuitem"> Cerrar sesión</a>
+      </div>
+  </div>
+  <div class="content">
+    <button class="button-back" onclick="window.history.back()"><span class="material-icons">arrow_back</span>&nbsp;Volver atrás</button>
+    <div class="form-container">
+      <form method="POST" class="form-signin" th:object="${result}" th:action="@{/adaptation/add}">
+        <h2 th:if="${id == null}" class="form-signin-heading">Crear una nueva adaptación</h2>
+        <h2 th:if="${id != null}" class="form-signin-heading">Editar la adaptación</h2>
+        <input type="hidden" th:field="*{id}" id="id" class="form-control" placeholder="Id"/>
+        <input type="hidden" th:field="*{project}" id="project" class="form-control" placeholder="Project"/>
+        <div class="form-group">
+          <input type="text" th:field="*{identifier}" id="identifier" class="form-control" placeholder="Identificador"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" th:field="*{arrangement}" id="arrangement" class="form-control" placeholder="Adaptacion"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('arrangement')}" th:errors="*{arrangement}"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" th:field="*{practiceArea}" id="area" class="form-control" placeholder="Areas de practica"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('practiceArea')}" th:errors="*{practiceArea}"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" th:field="*{observations}" id="observations" class="form-control"
+                 placeholder="Observaciones"
+                 autofocus="true">
+          <span class="has-error" th:if="${#fields.hasErrors('observations')}" th:errors="*{observations}"></span>
+        </div>
+        <button class="button-submit" th:if="${id == null}" type="submit"><span class="material-icons">add</span>&nbsp;Crear
+        </button>
+        <button class="button-submit" th:if="${id != null}" type="submit">Editar</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer">
+    <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="/js/main.js"></script>
+
+  </body>
+</html>

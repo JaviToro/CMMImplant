@@ -3,46 +3,97 @@ body {
   margin: 0;
 }
 
+.content {
+  padding-top: 7em;
+  padding-bottom: 7em;
+}
+
 .info-text {
   font-size: 18px;
   text-align: justify;
   margin: 3.5% 12%;
 }
 
-/* Add the background color to the navbar */
 .navbar {
-    color: #B85600;
     display: flex;
-    flex-direction: row;
-    background-color: #FFAB60;
-    overflow: hidden;
-    font-weight: 600;
+    float: left;
     align-items: center;
     justify-content: space-between;
+    color: #B85600;
+    background-color: #FFAB60;
+    width: 100%;
+    top: 0;
+    font-weight: 600;
     margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    z-index: 3;
   }
 
   .navbar-button {
     color: #B85600;
     display: flex;
+    align-items: center;
+    padding: 0px 14px;
+  }
+
+  .subnav {
+    display: flex;
+    overflow: hidden;
+    float: left;
+    color: #B85600;
     flex-direction: row;
     align-items: center;
     padding: 0px 14px;
+  }
+
+  .subnav-active {
+    display: flex;
+    overflow: hidden;
+    float: left;
+    color: white;
+    background-color: #B85600;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 14px;
+  }
+
+  .subnav .subnavbtn {
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    color: #B85600;
+    padding: 30px 4px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+
+  .subnav-active .subnavbtn {
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 30px 4px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
   }
   
   .navbar-button-active {
     color: white;
     background-color: #B85600;
     display: flex;
-    flex-direction: row;
     align-items: center;
     padding: 0px 14px;
   }
-  
 
-  /* Style the links inside the navigation bar */
   .navbar a {
-    float: left;
+    display: flex;
     color: inherit;
     text-align: center;
     text-decoration: none;
@@ -50,8 +101,7 @@ body {
     align-items: center;
     padding: 30px 4px;
   }
-  
-  /* Add a color to the active/current link */
+
   .navbar a.active {
     background-color: #B85600;
     color: white;
@@ -71,6 +121,7 @@ body {
 
   .navbar-register {
     display: flex;
+    float: right;
     align-items: center;
     margin: 0;
     color: #FFFFFF;
@@ -89,6 +140,35 @@ body {
     padding-right: 60px;
     font-size: 24px;
     font-weight: 800;
+  }
+
+  .subnav-content {
+    display: none;
+    position: relative;
+    color: #FFFFFF;
+    background-color: #B85600;
+    width: 100%;
+  }
+
+  .subnav-content a {
+    color: inherit;
+    text-decoration: none;
+    padding: 30px 10px;
+  }
+
+  .subnav-content a:hover {
+    display: block;
+    position: relative;
+    background-color: #376DBE;
+    color: #FFFFFF;
+  }
+
+  .subnav:hover .subnav-content {
+    display: flex;
+  }
+
+  .subnav-active:hover .subnav-content {
+    display: flex;
   }
 
   .form-container {
@@ -134,6 +214,10 @@ body {
 
   .form-group {
     margin-top: 10px;
+  }
+
+  .form-date {
+    margin: 10px 0 0 0;
   }
 
   .footer {
@@ -217,6 +301,8 @@ body {
 
   .list {
     text-align: center;
+    justify-content: center;
+    align-content: center;
     border-spacing: 0 30px;
     margin-bottom: 20px;
   }
@@ -254,4 +340,33 @@ body {
     font-size: 18px;
     padding: 6px 20px;
     border-radius: 8px;
+  }
+
+  .show-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .show-container-row {
+    display: flex;
+    flex-direction: row;
+    font-size: 18px;
+
+  }
+
+  .show-container-row p {
+    margin: 10px 0px;
+  }
+
+  .show-container-row-title {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .show-container-title {
+    display: flex;
+    font-size: 24px;
+    font-weight: 600;
   }

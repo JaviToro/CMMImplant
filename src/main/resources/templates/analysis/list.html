@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>Lista de proyectos</title>
+        <title>Lista de análisis</title>
         <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -17,54 +17,85 @@
                 <span class="material-icons">home</span>
                 <a href="/index">Inicio</a>
             </div>
-            <div class="navbar-button">
+            <div class="subnav">
                 <span class="material-icons">track_changes</span>
-                <a href="/tracking">Seguimiento</a>
+                <button class="subnavbtn">Seguimiento <i class="fa fa-caret-down>"></i></button>
+                <div class="subnav-content">
+                    <a href="/riskAndOpportunity/list">Riesgos y oportunidades</a>
+                    <a href="/improvement/list">Mejoras</a>
+                    <a href="/lessonLearnt/list">Lecciones aprendidas</a>
+                    <a href="/alert/list">Alertas</a>
+                </div>
             </div>
-            <div class="navbar-button">
+            <div class="subnav-active">
                 <span class="material-icons">search</span>
-                <a href="/revision">Revisión</a>
+                <button class="subnavbtn">Revisión <i class="fa fa-caret-down>"></i></button>
+                <div class="subnav-content">
+                    <a href="/analysis/list">Análisis</a>
+                    <a href="/audit/list">Auditoría</a>
+                    <a href="/metric/list">Métrica</a>
+                </div>
             </div>
-            <div class="navbar-button-active">
+            <div class="subnav">
                 <span class="material-icons">work</span>
-                <a href="/project/all">Proyecto</a>
+                <button class="subnavbtn">Proyecto <i class="fa fa-caret-down>"></i></button>
+                <div class="subnav-content">
+                    <a href="/project/current" sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_PM')">Mi proyecto</a>
+                    <a href="/adaptation/list">Adaptaciones</a>
+                    <a href="/document/list">Documentos</a>
+                    <a href="/reusableObject/list">Objetos reutilizables</a>
+                </div>
+            </div>
+            <div class="subnav" sec:authorize="hasRole('ROLE_ADMIN')">
+                <span class="material-icons">settings</span>
+                <button class="subnavbtn">Administración <i class="fa fa-caret-down>"></i></button>
+                <div class="subnav-content">
+                    <a href="/project/all">Proyectos</a>
+                    <a href="/user/list">Usuarios</a>
+                </div>
             </div>
         </div>
-        <div class="navbar-right">
+        <div class="navbar-right" sec:authorize="isAnonymous()">
             <div class="navbar-register">
                 <span class="material-icons">person</span>
                 <a href="/user/login">Iniciar sesión</a>
             </div>
         </div>
+        <div class="navbar-register" sec:authorize="isAuthenticated()">
+            <span class="material-icons">person</span>
+            <a href="javascript: document.logoutForm.submit()" role="menuitem"> Cerrar sesión</a>
+        </div>
     </div>
-    <span class="has-error" th:text="${error}"></span>
-    <table class="list" style="width: 100%">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Identificador</th>            
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Id Externo</th>
-            <th>Fecha de realización</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="res : ${results}">
-            <td><a class="list-see" th:href="@{/analysis/{id}(id=${res.id})}">Ver</a></td>
-            <td th:text="${res.identifier}">Identificador</td>            
-            <td th:text="${res.type}">Tipo</td>
-            <td th:text="${res.status}">Estado</td>
-            <td th:text="${res.analysisIdentifier}">Id externo</td>
-            <td th:text="${#dates.format(res.analysisDate, 'dd/MM/yyyy')}">Fecha de realización</td>
-            <td><a class="list-edit"th:href="@{/analysis/add/{id}(id=${res.id})}">Editar</a></td>
-            <td><a class="list-remove"th:href="@{/analysis/delete/{id}(id=${res.id})}">Eliminar</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <td><a class="button-create" href="/analysis/add">Crear nuevo registro</a></td>
+    <div class="content">
+        <span class="has-error" th:text="${error}"></span>
+        <table class="list" style="width: 100%">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Identificador</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Id Externo</th>
+                <th>Fecha de realización</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="res : ${results}">
+                <td><a class="list-see" th:href="@{/analysis/{id}(id=${res.id})}">Ver</a></td>
+                <td th:text="${res.identifier}">Identificador</td>
+                <td th:text="${res.type}">Tipo</td>
+                <td th:text="${res.status}">Estado</td>
+                <td th:text="${res.analysisIdentifier}">Id externo</td>
+                <td th:text="${#dates.format(res.date, 'dd/MM/yyyy')}">Fecha de realización</td>
+                <td><a class="list-edit" th:href="@{/analysis/add/{id}(id=${res.id})}">Editar</a></td>
+                <td><a class="list-remove" th:href="@{/analysis/delete/{id}(id=${res.id})}">Eliminar</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <td><a class="button-create" href="/analysis/add">Crear nuevo análisis</a></td>
+    </div>
     <div class="footer">
         <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
     </div>

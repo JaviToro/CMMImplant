@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.Adaptation;
-import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.AdaptationService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.validator.AdaptationValidator;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/adaptation")
@@ -65,11 +63,13 @@ public class AdaptationController {
         return "adaptation/list";
     }
 
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
-    public @ResponseBody
-    Adaptation getAdaptationById(@PathVariable Integer id) throws ResourceNotFoundException {
-        return adaptationService.getAdaptationById(id);
+    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
+    public String getResultById(Model model, @PathVariable(value = "id") Integer id) {
+
+        model.addAttribute("result", adaptationService.getAdaptationById(id));
+
+        return "adaptation/view";
     }
 
     @RequestMapping(value = {"/add", "/add/{id}"}, method = RequestMethod.GET)    
@@ -87,7 +87,7 @@ public class AdaptationController {
 
     @PostMapping("/add")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") Adaptation result, BindingResult bindingResult) {
+    public String addNew(@ModelAttribute("result") Adaptation result, BindingResult bindingResult) {
         adaptationValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {

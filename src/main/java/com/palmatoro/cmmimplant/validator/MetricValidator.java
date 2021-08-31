@@ -25,11 +25,8 @@ public class MetricValidator implements Validator {
         Metric result = (Metric) o;
 
         for(Metric m: metricService.getAllMetrics()){
-            if(m.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(m.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
-            }
-            if(m.getName().equals(result.getName()) && result.getId()!=null){
-                errors.rejectValue("name", "DuplicatedName");
             }
         }
     }

@@ -32,6 +32,11 @@ public class ValueService {
     }
 
     @Transactional
+    public Value addNewValue(Value value){
+        return valueRepository.save(value);
+    }
+
+    @Transactional
     public Value addNewValue(Value value, int metricId){
         value.setMetric(metricService.getMetricById(metricId));
         return valueRepository.save(value);

@@ -1,22 +1,26 @@
 package com.palmatoro.cmmimplant.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity;
-import com.palmatoro.cmmimplant.repository.RiskAndOpportunityRepository;
 import com.palmatoro.cmmimplant.service.RiskAndOpportunityService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.validator.RiskAndOpportunityValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +39,11 @@ public class RiskAndOpportunityController {
 
     @Autowired
     private UserService userService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+    }
 
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @RequestMapping(value = {"/list", "/list/error/{code}"}, method = RequestMethod.GET)
@@ -89,7 +98,7 @@ public class RiskAndOpportunityController {
 
     @PostMapping("/add")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") RiskAndOpportunity result, BindingResult bindingResult) {
+    public String addNew(@ModelAttribute("result") RiskAndOpportunity result, BindingResult bindingResult) {
         riskAndOpportunityValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -99,7 +108,7 @@ public class RiskAndOpportunityController {
         if (result.getId() != null) {
             riskAndOpportunityService.editRiskAndOpportunity(result.getId(), result.getIdentifier(), result.getType(), result.getCategory(), result.getTitle(),
              result.getDescription(), result.getIdentificationDate(), result.getProbability(), result.getImpact(), result.getThreshold(), result.getConsequences(),
-             result.getActionPlan(), result.getStatus(), result.getMonitorization(), result.getLastRevisionDate(), result.getCloseDate(), result.getObservations(), result.getPriority());
+             result.getActionPlan(), result.getStatus(), result.getMonitorization(), result.getLastRevisionDate(), result.getCloseDate(), result.getObservations());
         } else {
             riskAndOpportunityService.addNewRiskAndOpportunity(result);
         }

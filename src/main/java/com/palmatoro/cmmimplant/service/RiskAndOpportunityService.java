@@ -3,7 +3,6 @@ package com.palmatoro.cmmimplant.service;
 import java.util.Date;
 
 import com.palmatoro.cmmimplant.domain.Impact;
-import com.palmatoro.cmmimplant.domain.Priority;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity.RiskCategory;
 import com.palmatoro.cmmimplant.domain.RiskAndOpportunity.RiskMonitorization;
@@ -43,12 +42,13 @@ public class RiskAndOpportunityService {
     @Transactional
     public RiskAndOpportunity addNewRiskAndOpportunity(RiskAndOpportunity riskAndOpportunity){
         riskAndOpportunity.setProject(projectService.getProjectByPrincipal());
+        riskAndOpportunity.setPriority();
         return riskAndOpportunityRepository.save(riskAndOpportunity);
     }
 
     @Transactional
     public RiskAndOpportunity editRiskAndOpportunity(Integer id, String identifier, RiskType type, RiskCategory category, String title, String description, Date identificationDate, RiskProbability probability, 
-    Impact impact, String threshold, String consequences, String actionPlan, Status status, RiskMonitorization monitorization, Date lastRevisionDate, Date closeDate, String observations, Priority priority){
+    Impact impact, String threshold, String consequences, String actionPlan, Status status, RiskMonitorization monitorization, Date lastRevisionDate, Date closeDate, String observations){
         RiskAndOpportunity riskAndOpportunity = riskAndOpportunityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No riskAndOpportunity found on ID: " + id));
 
         riskAndOpportunity.setIdentifier(identifier);
@@ -67,7 +67,7 @@ public class RiskAndOpportunityService {
         riskAndOpportunity.setLastRevisionDate(lastRevisionDate);
         riskAndOpportunity.setCloseDate(closeDate);
         riskAndOpportunity.setObservations(observations);
-        riskAndOpportunity.setPriority(priority);
+        riskAndOpportunity.setPriority();
 
         return riskAndOpportunityRepository.save(riskAndOpportunity);
     }

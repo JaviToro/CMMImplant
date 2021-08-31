@@ -1,29 +1,32 @@
 package com.palmatoro.cmmimplant.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.Audit;
 import com.palmatoro.cmmimplant.domain.User;
-import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.AuditService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.validator.AuditValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/audit")
@@ -37,7 +40,11 @@ public class AuditController {
 
     @Autowired
     private UserService userService;
-
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+    }
 
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @RequestMapping(value = {"/list", "/list/error/{code}"}, method = RequestMethod.GET)
@@ -66,11 +73,13 @@ public class AuditController {
         return "audit/list";
     }
 
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
-    public @ResponseBody
-    Audit getAuditById(@PathVariable Integer id) throws ResourceNotFoundException {
-        return auditService.getAuditById(id);
+    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
+    public String getResultById(Model model, @PathVariable(value = "id") Integer id) {
+
+        model.addAttribute("result", auditService.getAuditById(id));
+
+        return "audit/view";
     }
 
     @RequestMapping(value = {"/add", "/add/{id}"}, method = RequestMethod.GET)    
@@ -79,16 +88,16 @@ public class AuditController {
 
         User principal = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
-        List<User> pms = this.userService.getAllPM(principal.getProject().getId());
+        //List<User> pms = this.userService.getAllPM(principal.getProject().getId());
         List<User> users = this.userService.getAllUsersByProjectId(principal.getProject().getId());
 
         if (id != null) {
             model.addAttribute("result", auditService.getAuditById(id));
-            model.addAttribute("pms", pms);
+            //model.addAttribute("pms", pms);
             model.addAttribute("users", users);
         } else {
             model.addAttribute("result", new Audit());
-            model.addAttribute("pms", pms);
+            //model.addAttribute("pms", pms);
             model.addAttribute("users", users);
         }
 
@@ -97,7 +106,7 @@ public class AuditController {
 
     @PostMapping("/add")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") Audit result, BindingResult bindingResult) {
+    public String addNew(@ModelAttribute("result") Audit result, BindingResult bindingResult) {
         auditValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {

@@ -1,13 +1,17 @@
 package com.palmatoro.cmmimplant.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class RiskAndOpportunity {
@@ -50,7 +54,11 @@ public class RiskAndOpportunity {
     private RiskCategory category;
     private String title;
     private String description;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date identificationDate;
+
     private RiskProbability probability;
     private Impact impact;
     private String threshold;
@@ -58,8 +66,15 @@ public class RiskAndOpportunity {
     private String actionPlan;
     private Status status;
     private RiskMonitorization monitorization;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date lastRevisionDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date closeDate;
+    
     private String observations;
     private Priority priority;
 
@@ -212,25 +227,25 @@ public class RiskAndOpportunity {
         return priority;
     }
 
-    public void setPriority(Priority priority) {
-        if(this.getProbability()==RiskProbability.HIGH && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.INMEDIATLY);
-        }else if(this.getProbability()==RiskProbability.HIGH && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.HIGH);
-        }else if(this.getProbability()==RiskProbability.MID && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.HIGH);
-        }else if(this.getProbability()==RiskProbability.HIGH && this.getImpact()==Impact.LOW){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(this.getProbability()==RiskProbability.LOW && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(this.getProbability()==RiskProbability.MID && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.MID);
-        }else if(this.getProbability()==RiskProbability.MID && this.getImpact()==Impact.LOW){
-            this.setPriority(Priority.MIDLOW);
-        }else if(this.getProbability()==RiskProbability.LOW && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.MIDLOW);
+    public void setPriority() {
+        if(this.probability==RiskProbability.HIGH && this.impact==Impact.HIGH){
+            this.priority=Priority.INMEDIATLY;
+        }else if(this.probability==RiskProbability.HIGH && this.impact==Impact.MID){
+            this.priority=Priority.HIGH;
+        }else if(this.probability==RiskProbability.MID && this.impact==Impact.HIGH){
+            this.priority=Priority.HIGH;
+        }else if(this.probability==RiskProbability.HIGH && this.impact==Impact.LOW){
+            this.priority=Priority.MIDHIGH;
+        }else if(this.probability==RiskProbability.LOW && this.impact==Impact.HIGH){
+            this.priority=Priority.MIDHIGH;
+        }else if(this.probability==RiskProbability.MID && this.impact==Impact.MID){
+            this.priority=Priority.MID;
+        }else if(this.probability==RiskProbability.MID && this.impact==Impact.LOW){
+            this.priority=Priority.MIDLOW;
+        }else if(this.probability==RiskProbability.LOW && this.impact==Impact.MID){
+            this.priority=Priority.MIDLOW;
         }else{
-            this.setPriority(Priority.LOW);
+            this.priority=Priority.LOW;
         }
     }
 
@@ -248,7 +263,7 @@ public class RiskAndOpportunity {
     // Constructors ----------------------------------------
 
     public RiskAndOpportunity(Integer id, String identifier, RiskType type, RiskCategory category, String title, String description, Date identificationDate, RiskProbability probability, Impact impact, String threshold, String consequences,
-        String actionPlan, Status status, RiskMonitorization monitorization, Date lastRevisionDate, Date closeDate, String observations, Priority priority){
+        String actionPlan, Status status, RiskMonitorization monitorization, Date lastRevisionDate, Date closeDate, String observations){
         this.id = id;
         this.identifier = identifier;
         this.type = type;
@@ -266,7 +281,6 @@ public class RiskAndOpportunity {
         this.lastRevisionDate = lastRevisionDate;
         this.closeDate = closeDate;
         this.observations = observations;
-        this.priority = priority;
     }
 
     public RiskAndOpportunity(){

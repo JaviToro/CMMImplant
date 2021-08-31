@@ -1,13 +1,17 @@
 package com.palmatoro.cmmimplant.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Improvement {
@@ -34,11 +38,27 @@ public class Improvement {
     private Double percentage;
     private String estimatedEffort;
     private String realEffort;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date receptionDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date approvalDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date estimatedImplementation;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date realImplementation;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date evaluationDate;
+    
     private Double score;
     private String observations;
 
@@ -188,25 +208,25 @@ public class Improvement {
         return priority;
     }
 
-    public void setPriority(Priority priority) {
-        if(this.getPercentage()>=75.0 && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.INMEDIATLY);
-        }else if(this.getPercentage()>=75.0 && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.HIGH);
-        }else if(this.getPercentage()<75.0 && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.HIGH);
-        }else if(this.getPercentage()>=75.0 && this.getImpact()==Impact.LOW){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(this.getPercentage()<=50.0 && this.getImpact()==Impact.HIGH){
-            this.setPriority(Priority.MIDHIGH);
-        }else if(this.getPercentage()<75.0 && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.MID);
-        }else if(this.getPercentage()<75.0 && this.getImpact()==Impact.LOW){
-            this.setPriority(Priority.MIDLOW);
-        }else if(this.getPercentage()<=50.0 && this.getImpact()==Impact.MID){
-            this.setPriority(Priority.MIDLOW);
+    public void setPriority() {
+        if(this.percentage>=75.0 && this.impact==Impact.HIGH){
+            this.priority=Priority.INMEDIATLY;
+        }else if(this.percentage>=75.0 && this.impact==Impact.MID){
+            this.priority=Priority.HIGH;
+        }else if(this.percentage<75.0 && this.impact==Impact.HIGH){
+            this.priority=Priority.HIGH;
+        }else if(this.percentage>=75.0 && this.impact==Impact.LOW){
+            this.priority=Priority.MIDHIGH;
+        }else if(this.percentage<=50.0 && this.impact==Impact.HIGH){
+            this.priority=Priority.MIDHIGH;
+        }else if(this.percentage<75.0 && this.impact==Impact.MID){
+            this.priority=Priority.MID;
+        }else if(this.percentage<75.0 && this.impact==Impact.LOW){
+            this.priority=Priority.MIDLOW;
+        }else if(this.percentage<=50.0 && this.impact==Impact.MID){
+            this.priority=Priority.MIDLOW;
         }else{
-            this.setPriority(Priority.LOW);
+            this.priority=Priority.LOW;
         }
     }
 
@@ -249,7 +269,7 @@ public class Improvement {
             this.realImplementation = realImplementation;
             this.evaluationDate = evaluationDate;
             this.score = score;
-            this.observations = observations;
+            this.observations = observations;            
     }
 
     public Improvement() {

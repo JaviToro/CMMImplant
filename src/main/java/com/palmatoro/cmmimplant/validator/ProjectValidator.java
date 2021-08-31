@@ -30,8 +30,10 @@ public class ProjectValidator implements Validator {
             errors.rejectValue("name", "DuplicatedProjectName");
         }
 
-        if(project.getEndDate().before(project.getStartDate())){
-            errors.rejectValue("endDate", "CloseDateBefore");
+        if(project.getEndDate()!=null && project.getStartDate()!=null){
+            if(project.getEndDate().before(project.getStartDate())){
+                errors.rejectValue("endDate", "CloseDateBefore");
+            }
         }
     }
 }

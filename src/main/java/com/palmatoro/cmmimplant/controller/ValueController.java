@@ -6,6 +6,7 @@ import java.util.List;
 import com.palmatoro.cmmimplant.domain.Metric;
 import com.palmatoro.cmmimplant.domain.Value;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
+import com.palmatoro.cmmimplant.service.MetricService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.service.ValueService;
 import com.palmatoro.cmmimplant.validator.ValueValidator;
@@ -37,62 +38,40 @@ public class ValueController {
     @Autowired
     private UserService userService;
 
-
-    @GetMapping(path = "/list")
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    @RequestMapping(value = {"/metric/{id}", "/metric{id}/error/{code}"}, method = RequestMethod.GET)
-    public String list(Model model,@PathVariable(value = "id", required = true) Integer metricId, @PathVariable(value = "code", required = false) Integer errorCode) {
-
-        if (errorCode != null){
-            model.addAttribute("error", "Se ha producido un error");
-        }
-
-        List<Value> results = new ArrayList<Value>();
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        boolean isAdmin = authentication.getAuthorities().stream()
-          .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
-        
-        
-        if(isAdmin==true){
-            results = (List<Value>) valueService.getAllValues();
-        }else{
-            Metric m = userService.getUserByUsername(authentication.getName()).getProject().getMetrics().get(metricId);
-            results = m.getValues();
-        }
-
-        model.addAttribute("results", results);
-        model.addAttribute("metricId", metricId);
-
-        return "value/list";
-    }
+    @Autowired
+    private MetricService metricService;
 
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
-    public @ResponseBody
-    Value getValueById(@PathVariable Integer id) throws ResourceNotFoundException {
-        return valueService.getValueById(id);
+    public String getValueById(Model model, @PathVariable(value = "id") Integer id) {
+
+        model.addAttribute("result", valueService.getValueById(id));
+
+        return "value/view";
     }
 
-    @RequestMapping(value = {"/add/{metricId}", "/add/{id}"}, method = RequestMethod.GET)    
+    @RequestMapping(value = {"/add/metric/{metricId}", "/add/{id}"}, method = RequestMethod.GET)
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String addNew(Model model, @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
+
+        List<Metric> metrics = new ArrayList<>();
 
         if (id != null) {
             model.addAttribute("result", valueService.getValueById(id));
         } else {
-            model.addAttribute("result", new Value());
-            model.addAttribute("metricId", metricId);
+            Value result = new Value();
+            if (metricId != null) {
+                result.setMetric(metricService.getMetricById(metricId));
+            }
+            model.addAttribute("result", result);
         }
-
         return "value/add";
     }
 
-    @RequestMapping(value = {"/add/{metricId}", "/add/{id}"}, method = RequestMethod.POST)  
+    @RequestMapping(value = {"/add", "/add/{metricId}", "/add/{id}"}, method = RequestMethod.POST)
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") Value result, BindingResult bindingResult,
-    @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
+    public String addNew(@ModelAttribute("result") Value result, BindingResult bindingResult,
+                         @PathVariable(value = "metricId", required = false) Integer metricId, @PathVariable(value = "id", required = false) Integer id) {
         valueValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -102,15 +81,17 @@ public class ValueController {
         if (result.getId() != null) {
             valueService.editValue(result.getId(), result.getIdentifier(), result.getMoment(), result.getAmount());
         } else {
-            valueService.addNewValue(result, metricId);
+            valueService.addNewValue(result);
         }
 
-        return "redirect:/value/list";
+        return "redirect:/metric/"+result.getMetric().getId().toString();
     }
 
     @RequestMapping("/delete/{id}")
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     public String deleteById(@PathVariable(value = "id") Integer id) {
+
+        Integer metricId = valueService.getValueById(id).getMetric().getId();
 
         try {
             valueService.deleteValueById(id);
@@ -118,7 +99,7 @@ public class ValueController {
             return "redirect:/value/list/error/1";
         }
 
-        return "redirect:/value/list";
+        return "redirect:/metric/"+metricId;
 
     }
 }

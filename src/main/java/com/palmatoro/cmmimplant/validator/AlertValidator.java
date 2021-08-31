@@ -25,7 +25,7 @@ public class AlertValidator implements Validator {
         Alert result = (Alert) o;
 
         for(Alert a: alertService.getAllAlerts()){
-            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
             }
         }

@@ -1,29 +1,32 @@
 package com.palmatoro.cmmimplant.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.palmatoro.cmmimplant.domain.Alert;
-import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
 import com.palmatoro.cmmimplant.service.AlertService;
 import com.palmatoro.cmmimplant.service.UserService;
 import com.palmatoro.cmmimplant.validator.AlertValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/alert")
@@ -38,6 +41,10 @@ public class AlertController {
     @Autowired
     private UserService userService;
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+    }
 
     @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @RequestMapping(value = {"/list", "/list/error/{code}"}, method = RequestMethod.GET)
@@ -66,11 +73,13 @@ public class AlertController {
         return "alert/list";
     }
 
-    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
     @GetMapping("/{id}")
-    public @ResponseBody
-    Alert getAlertById(@PathVariable Integer id) throws ResourceNotFoundException {
-        return alertService.getAlertById(id);
+    @Secured({"ROLE_USER", "ROLE_PM", "ROLE_ADMIN"})
+    public String getResultById(Model model, @PathVariable(value = "id") Integer id) {
+
+        model.addAttribute("result", alertService.getAlertById(id));
+
+        return "alert/view";
     }
 
     @RequestMapping(value = {"/add", "/add/{id}"}, method = RequestMethod.GET)    
@@ -88,7 +97,7 @@ public class AlertController {
 
     @PostMapping("/add")
     @Secured({"ROLE_PM", "ROLE_ADMIN"})
-    public String addNew(@ModelAttribute("projectForm") Alert result, BindingResult bindingResult) {
+    public String addNew(@ModelAttribute("result") Alert result, BindingResult bindingResult) {
         alertValidator.validate(result, bindingResult);
 
         if (bindingResult.hasErrors()) {

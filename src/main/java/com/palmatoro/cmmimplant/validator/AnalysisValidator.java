@@ -25,16 +25,15 @@ public class AnalysisValidator implements Validator {
         Analysis result = (Analysis) o;
 
         for(Analysis a: analysisService.getAllAnalysiss()){
-            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()!=null){
+            if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
                 errors.rejectValue("identifier", "DuplicatedIdentifier");
-            }
-            if(a.getAnalysisIdentifier().equals(result.getAnalysisIdentifier()) && result.getId()!=null){
-                errors.rejectValue("analysisIdentifier", "DuplicatedIdentifier");
             }
         }
 
-        if(result.getEvaluationDate().before(result.getDate())){
-            errors.rejectValue("evaluationDate", "CloseDateBefore");
+        if(result.getEvaluationDate()!=null && result.getDate()!=null){
+            if(result.getEvaluationDate().before(result.getDate())){
+                errors.rejectValue("evaluationDate", "CloseDateBefore");
+            }
         }
     }
 }
