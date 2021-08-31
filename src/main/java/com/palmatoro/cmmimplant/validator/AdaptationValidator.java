@@ -7,6 +7,7 @@ import com.palmatoro.cmmimplant.service.AdaptationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -23,6 +24,10 @@ public class AdaptationValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Adaptation result = (Adaptation) o;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "identifier", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "practiceArea", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "arrangement", "NotEmpty");
 
         for(Adaptation a: adaptationService.getAllAdaptations()){
             if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
