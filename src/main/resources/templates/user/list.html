@@ -61,11 +61,11 @@
                 <td th:text="${res.email}">Email</td>
                 <td th:text="${res.username}">Usuario</td>
                 <td th:text="${res.project.name}">Proyecto</td>
-                <td><a class="list-remove" th:href="@{/reusableObject/delete/{id}(id=${res.id})}">Eliminar</a></td>
+                <td><a class="list-remove" th:href="@{/user/delete/{id}(id=${res.id})}">Eliminar</a></td>
             </tr>
             </tbody>
         </table>
-        <td><a class="button-create" href="/registration">Crear nuevo usuario</a></td>
+        <td><a class="button-create" href="/user/registration">Crear nuevo usuario</a></td>
     </div>
     <div class="footer">
         <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
