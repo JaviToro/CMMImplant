@@ -26,7 +26,7 @@ public class ProjectValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "projectType", "NotEmpty");
-        if (projectService.getProjectByName(project.getName()) != null) {
+        if (projectService.getProjectByName(project.getName()) != null && project.getId()==0) {
             errors.rejectValue("name", "DuplicatedProjectName");
         }
 
