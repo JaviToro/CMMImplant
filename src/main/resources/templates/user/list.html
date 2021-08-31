@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lista de proyectos</title>
+        <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <div class="navbar-logo">
+                <p>CMMImplant</p>
+            </div>
+            <div class="navbar-button">
+                <span class="material-icons">home</span>
+                <a href="/index">Inicio</a>
+            </div>
+            <div class="navbar-button">
+                <span class="material-icons">track_changes</span>
+                <a href="/tracking">Seguimiento</a>
+            </div>
+            <div class="navbar-button">
+                <span class="material-icons">search</span>
+                <a href="/revision">Revisión</a>
+            </div>
+            <div class="navbar-button-active">
+                <span class="material-icons">work</span>
+                <a href="/project/all">Proyecto</a>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <div class="navbar-register">
+                <span class="material-icons">person</span>
+                <a href="/user/login">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <span class="has-error" th:text="${error}"></span>
+        <table class="list" style="width: 100%">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Acrónimo</th>
+                <th>Rol</th>
+                <th>Email</th>
+                <th>Usuario</th>
+                <th>Project</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="res : ${results}">
+                <td th:text="${res.name}">Nombre</td>
+                <td th:text="${res.surname}">Apellidos</td>
+                <td th:text="${res.acronym}">Acrónimo</td>
+                <td th:text="${res.userRole}">Rol</td>
+                <td th:text="${res.email}">Email</td>
+                <td th:text="${res.username}">Usuario</td>
+                <td th:text="${res.project.name}">Proyecto</td>
+                <td><a class="list-remove" th:href="@{/reusableObject/delete/{id}(id=${res.id})}">Eliminar</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <td><a class="button-create" href="/registration">Crear nuevo usuario</a></td>
+    </div>
+    <div class="footer">
+        <p>CMMImplant &copy; 2020-2021 Pablo Palma y Javi Toro</p>
+    </div>
+    </body>
+</html>

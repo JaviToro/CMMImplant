@@ -1,24 +1,32 @@
 package com.palmatoro.cmmimplant.controller;
 
 import java.security.Principal;
-
+import java.util.ArrayList;
 import java.util.List;
 
-import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.domain.Project;
+import com.palmatoro.cmmimplant.domain.User;
 import com.palmatoro.cmmimplant.exception.ResourceNotFoundException;
+import com.palmatoro.cmmimplant.service.ProjectService;
 import com.palmatoro.cmmimplant.service.SecurityServiceImpl;
 import com.palmatoro.cmmimplant.service.UserService;
-import com.palmatoro.cmmimplant.service.ProjectService;
-
 import com.palmatoro.cmmimplant.validator.UserValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/user")
@@ -54,16 +62,41 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @Secured({"ROLE_ADMIN"})
+    @RequestMapping(value = {"/list", "/list/error/{code}"}, method = RequestMethod.GET)
+    public String list(Model model, @PathVariable(value = "code", required = false) Integer errorCode) {
+
+        if (errorCode != null){
+            model.addAttribute("error", "Se ha producido un error");
+        }
+        
+        List<User> results = new ArrayList<User>();
+
+        userService.getAllUsers().forEach(results::add);
+
+        model.addAttribute("results", results);
+
+        return "user/list";
+    }
+
     @Secured("ROLE_PM")
     @PostMapping(path = "/add")
     public @ResponseBody User addNewUser(@RequestBody User user) {
         return userService.addNewUser(user);
     }
 
-    @Secured("ROLE_PM")
-    @DeleteMapping("/delete/{id}")
-    public @ResponseBody void deleteUserById(@PathVariable Integer id) {
-        userService.deleteUserById(id);
+    @RequestMapping("/delete/{id}")
+    @Secured({"ROLE_ADMIN"})
+    public String deleteById(@PathVariable(value = "id") Integer id) {
+
+        try {
+            userService.deleteUserById(id);
+        } catch (Exception e) {
+            return "redirect:/user/list/error/1";
+        }
+
+        return "redirect:/user/list";
+
     }
 
     @RequestMapping(value = "/username", method = RequestMethod.GET)
