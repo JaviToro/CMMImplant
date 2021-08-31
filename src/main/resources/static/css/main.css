@@ -17,6 +17,7 @@ body {
 .navbar {
     display: flex;
     float: left;
+    position: fixed;
     align-items: center;
     justify-content: space-between;
     color: #B85600;
@@ -213,6 +214,8 @@ body {
   }
 
   .form-group {
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
   }
 

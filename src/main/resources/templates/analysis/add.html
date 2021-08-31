@@ -32,8 +32,8 @@
         <button class="subnavbtn">Revisión <i class="fa fa-caret-down>"></i></button>
         <div class="subnav-content">
           <a href="/analysis/list">Análisis</a>
-          <a href="/audit/list">Auditoría</a>
-          <a href="/metric/list">Métrica</a>
+          <a href="/audit/list">Auditorías</a>
+          <a href="/metric/list">Métricas</a>
         </div>
       </div>
       <div class="subnav">
@@ -81,7 +81,7 @@
         </div>
         <div class="form-group">
           <select th:field="*{type}" class="form-control" placeholder="Tipo de analisis">
-            <option value="0">Tipo de análisis</option>
+            <option value="">Tipo de análisis</option>
             <option th:value="CAUSAL" th:text="'De Causa'"></option>
             <option th:value="DECISION" th:text="'De Decision'"></option>            
           </select>
@@ -94,14 +94,14 @@
         </div>
         <div class="form-group">
           <select th:field="*{responsable}" class="form-control" placeholder="Responsable">
-            <option value="0">Elige un responsable</option>
+            <option value="">Elige un responsable</option>
             <option th:each="pm : ${pms}" th:value="${pm.id}" th:text="${pm.acronym}"></option>
           </select>
           <span class="has-error" th:if="${#fields.hasErrors('responsable')}" th:errors="*{responsable}"></span>
         </div>
         <div class="form-group">
           <select th:field="*{status}" class="form-control" placeholder="Estado">
-            <option value="0">Estado</option>
+            <option value="">Estado</option>
             <option th:value="OPEN" th:text="Abierto"></option>
             <option th:value="FINISHED" th:text="Finalizado"></option>
             <option th:value="EVALUATED" th:text="Evaluado"></option>

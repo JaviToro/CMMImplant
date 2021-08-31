@@ -25,8 +25,15 @@ public class ImprovementValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Improvement result = (Improvement) o;
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "identifier", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "NotEmpty");
+        ValidationUtils.rejectIfEmpty(errors, "status", "NotEmpty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "impact", "NotEmpty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "percentage", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "estimatedEffort", "NotEmpty");
+        ValidationUtils.rejectIfEmpty(errors, "receptionDate", "NotEmpty");
+        ValidationUtils.rejectIfEmpty(errors, "estimatedImplementation", "NotEmpty");
 
         for(Improvement i: improvementService.getAllImprovements()){
             if(i.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){

@@ -32,8 +32,8 @@
         <button class="subnavbtn">Revisión <i class="fa fa-caret-down>"></i></button>
         <div class="subnav-content">
           <a href="/analysis/list">Análisis</a>
-          <a href="/audit/list">Auditoría</a>
-          <a href="/metric/list">Métrica</a>
+          <a href="/audit/list">Auditorías</a>
+          <a href="/metric/list">Métricas</a>
         </div>
       </div>
       <div class="subnav">
@@ -81,7 +81,7 @@
         </div>
         <div class="form-group">
           <select th:field="*{type}" class="form-control" placeholder="Tipo de auditoria">
-            <option value="0">Tipo de auditoría</option>
+            <option value="">Tipo de auditoría</option>
             <option th:value="PROJECT" th:text="'De Proyecto'"></option>
             <option th:value="PEER_REVIEW" th:text="'Por Pares'"></option>
             <option th:value="CONFIGURATION" th:text="'De Configuracion'"></option>
@@ -101,21 +101,21 @@
         </div>
         <div class="form-group">
           <select th:field="*{auditor}" class="form-control" placeholder="Auditor">
-            <option value="0">Elige un auditor</option>
+            <option value="">Elige un auditor</option>
             <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.acronym}"></option>
           </select>
           <span class="has-error" th:if="${#fields.hasErrors('auditor')}" th:errors="*{auditor}"></span>
         </div>
         <div class="form-group">
           <select th:field="*{audited}" class="form-control" placeholder="Auditado">
-            <option value="0">Elige un auditado</option>
+            <option value="">Elige un auditado</option>
             <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.acronym}"></option>
           </select>
           <span class="has-error" th:if="${#fields.hasErrors('audited')}" th:errors="*{audited}"></span>
         </div>
         <div class="form-group">
           <select th:field="*{status}" class="form-control" placeholder="Estado">
-            <option value="0">Estado</option>
+            <option value="">Estado</option>
             <option th:value="OPEN" th:text="Abierta"></option>
             <option th:value="CLOSED" th:text="Cerrada"></option>
           </select>

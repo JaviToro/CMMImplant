@@ -7,6 +7,7 @@ import com.palmatoro.cmmimplant.service.LessonLearntService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -23,6 +24,11 @@ public class LessonLearntValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         LessonLearnt result = (LessonLearnt) o;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "identifier", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "NotEmpty");
+        ValidationUtils.rejectIfEmpty(errors, "receptionDate", "NotEmpty");
 
         for(LessonLearnt ll: lessonLearntService.getAllLessonLearnts()){
             if(ll.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){

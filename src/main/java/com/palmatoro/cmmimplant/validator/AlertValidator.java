@@ -7,6 +7,7 @@ import com.palmatoro.cmmimplant.service.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -23,6 +24,10 @@ public class AlertValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Alert result = (Alert) o;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "identifier", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "area", "NotEmpty");
+        ValidationUtils.rejectIfEmpty(errors, "date", "NotEmpty");
 
         for(Alert a: alertService.getAllAlerts()){
             if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
