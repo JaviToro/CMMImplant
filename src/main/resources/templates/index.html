@@ -23,37 +23,37 @@
                     <span class="material-icons">track_changes</span>
                     <button class="subnavbtn">Seguimiento <i class="fa fa-caret-down>"></i></button>
                     <div class="subnav-content">
-                        <a href="#company">Riesgos y oportunidades</a>
-                        <a href="#team">Mejoras</a>
-                        <a href="#careers">Lecciones aprendidas</a>
-                        <a href="#careers">Alertas</a>
+                        <a href="/riskAndOpportunity/list">Riesgos y oportunidades</a>
+                        <a href="/improvement/list">Mejoras</a>
+                        <a href="/lessonLearnt/list">Lecciones aprendidas</a>
+                        <a href="/alert/list">Alertas</a>
                     </div>
                 </div>
                 <div class="subnav">
                     <span class="material-icons">search</span>
                     <button class="subnavbtn">Revisión <i class="fa fa-caret-down>"></i></button>
                     <div class="subnav-content">
-                        <a href="#company">Análisis</a>
-                        <a href="#team">Auditoría</a>
-                        <a href="#careers">Métrica</a>
+                        <a href="/analysis/list">Análisis</a>
+                        <a href="/audit/list">Auditoría</a>
+                        <a href="/metric/list">Métrica</a>
                     </div>
                 </div>
                 <div class="subnav">
                     <span class="material-icons">work</span>
                         <button class="subnavbtn">Proyecto <i class="fa fa-caret-down>"></i></button>
                     <div class="subnav-content">
-                        <a href="#company">Mi proyecto</a>
-                        <a href="#company">Adaptaciones</a>
-                        <a href="#team">Documentos</a>
-                        <a href="#careers">Objetos reutilizables</a>
+                        <a href="/project/current" sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_PM')">Mi proyecto</a>
+                        <a href="/adaptation/list">Adaptaciones</a>
+                        <a href="/document/list">Documentos</a>
+                        <a href="/reusableObject/list">Objetos reutilizables</a>
                     </div>
                 </div>
-                <div class="subnav">
+                <div class="subnav" sec:authorize="hasRole('ROLE_ADMIN')">
                     <span class="material-icons">settings</span>
                     <button class="subnavbtn">Administración <i class="fa fa-caret-down>"></i></button>
                     <div class="subnav-content">
-                        <a href="#company">Proyectos</a>
-                        <a href="#company">Usuarios</a>
+                        <a href="/project/all">Proyectos</a>
+                        <a href="/user/list">Usuarios</a>
                     </div>
                 </div>
             </div>
