@@ -2,10 +2,8 @@ package com.palmatoro.cmmimplant.validator;
 
 import com.palmatoro.cmmimplant.domain.Improvement;
 import com.palmatoro.cmmimplant.domain.User;
-import com.palmatoro.cmmimplant.domain.Improvement.ImprovementStatus;
 import com.palmatoro.cmmimplant.service.ImprovementService;
 
-import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
