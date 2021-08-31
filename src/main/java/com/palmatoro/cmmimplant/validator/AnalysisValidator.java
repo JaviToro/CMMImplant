@@ -7,6 +7,7 @@ import com.palmatoro.cmmimplant.service.AnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -23,6 +24,13 @@ public class AnalysisValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Analysis result = (Analysis) o;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "identifier", "NotEmpty");
+        ValidationUtils.rejectIfEmpty(errors, "type", "NotEmpty");        
+        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "analysisIdentifier", "NotEmpty");
+        ValidationUtils.rejectIfEmpty(errors, "status", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "direction", "NotEmpty");
+        ValidationUtils.rejectIfEmpty(errors, "date", "NotEmpty");
 
         for(Analysis a: analysisService.getAllAnalysiss()){
             if(a.getIdentifier().equals(result.getIdentifier()) && result.getId()==null){
