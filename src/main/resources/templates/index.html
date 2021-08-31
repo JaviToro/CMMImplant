@@ -19,17 +19,42 @@
                     <span class="material-icons">home</span>
                     <a href="/index">Inicio</a>
                 </div>
-                <div class="navbar-button">
+                <div class="subnav">
                     <span class="material-icons">track_changes</span>
-                    <a href="/tracking">Seguimiento</a>
+                    <button class="subnavbtn">Seguimiento <i class="fa fa-caret-down>"></i></button>
+                    <div class="subnav-content">
+                        <a href="#company">Riesgos y oportunidades</a>
+                        <a href="#team">Mejoras</a>
+                        <a href="#careers">Lecciones aprendidas</a>
+                        <a href="#careers">Alertas</a>
+                    </div>
                 </div>
-                <div class="navbar-button">
+                <div class="subnav">
                     <span class="material-icons">search</span>
-                    <a href="/revision">Revisión</a>
+                    <button class="subnavbtn">Revisión <i class="fa fa-caret-down>"></i></button>
+                    <div class="subnav-content">
+                        <a href="#company">Análisis</a>
+                        <a href="#team">Auditoría</a>
+                        <a href="#careers">Métrica</a>
+                    </div>
                 </div>
-                <div class="navbar-button">
+                <div class="subnav">
                     <span class="material-icons">work</span>
-                    <a href="/project/all">Proyecto</a>
+                        <button class="subnavbtn">Proyecto <i class="fa fa-caret-down>"></i></button>
+                    <div class="subnav-content">
+                        <a href="#company">Mi proyecto</a>
+                        <a href="#company">Adaptaciones</a>
+                        <a href="#team">Documentos</a>
+                        <a href="#careers">Objetos reutilizables</a>
+                    </div>
+                </div>
+                <div class="subnav">
+                    <span class="material-icons">settings</span>
+                    <button class="subnavbtn">Administración <i class="fa fa-caret-down>"></i></button>
+                    <div class="subnav-content">
+                        <a href="#company">Proyectos</a>
+                        <a href="#company">Usuarios</a>
+                    </div>
                 </div>
             </div>
             <div class="navbar-right" sec:authorize="isAnonymous()">
